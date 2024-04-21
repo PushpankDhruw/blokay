@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,11 +23,21 @@ ChartJS.register(
   Legend
 );
 
-const colors = ["#6249ff", "#ff4848", "#65a30d", "#4f46e5", "#c026d3"];
+const colors = [
+  "#ea5d0c",
+  "#1e78d1",
+  "#50c677",
+  "#c92b94",
+  "#4f46e5",
+  "#c026d3",
+];
 function AppLine({ data, title = "" }) {
+  const [hover, setHover] = useState(false);
+
   const dataLine = {
     labels: data.labels,
     datasets: data.datasets.map((row, index) => ({
+      pointBorderColor: colors[index],
       label: row.label,
       data: row.vals,
       borderColor: colors[index],
@@ -36,6 +46,10 @@ function AppLine({ data, title = "" }) {
   };
 
   const options = {
+    hoverBorderWidth: "3",
+    pointRadius: [0],
+    pointHoverRadius: [5],
+    // pointRadius: pointRadius,
     elements: {
       line: {
         tension: 0.4,
@@ -53,9 +67,18 @@ function AppLine({ data, title = "" }) {
     },
   };
 
+  const optionsHover = {
+    ...options,
+    pointRadius: [3],
+  };
+
   return (
-    <div className="">
-      <Line options={options} data={dataLine} />
+    <div
+      className=""
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <Line options={hover ? optionsHover : options} data={dataLine} />
     </div>
   );
 }
