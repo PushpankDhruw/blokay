@@ -1,5 +1,5 @@
 <a href="https://blokay.com">
-  <img alt="Create dashboards and backoffices in seconds" src="https://github.com/judare/blokay/assets/13822089/98cba5cf-00da-4ea3-bcc2-e1a1d62eb654">
+  <img alt="Create dashboards and backoffices in seconds" src="https://github.com/blokay-llc/blokay/assets/13822089/ff3b3bf2-6b5e-45bc-b81c-75cbcf96d906">
 </a>
 
 <br/>
