@@ -15,7 +15,9 @@ export default function Menu({
     <div className="">
       <div className="border bg-white font-light border-stone-300  rounded-lg text-sm shadow py-2  text-stone-800">
         <div>
-          <img src="/logo.svg" className="px-2 py-5" />
+          <a href="/dashboard">
+            <img src="/logo.svg" className="px-2 py-5" />
+          </a>
         </div>
         <div className="px-2">
           <AppInput

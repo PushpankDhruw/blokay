@@ -4,8 +4,8 @@ import Editor from "@monaco-editor/react";
 import { AppButton } from "@/app/components/DS/Index";
 import { updateNeuron } from "@/app/services/brain";
 
-export default function EditorApp({ neuron, reload }) {
-  const editorRef = useRef(null);
+export default function EditorApp({ neuron, reload }: any) {
+  const editorRef: any = useRef(null);
   const [form, setForm] = useState({ synapse: neuron?.synapse });
   const [diagnostics, setDiagnostics] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function EditorApp({ neuron, reload }) {
     setForm({ ...form, synapse: code });
   }
 
-  function handleMount(editor) {
+  function handleMount(editor: any) {
     editorRef.current = editor;
     editorRef.current.onDidChangeModelContent(handleChange);
   }
@@ -36,7 +36,7 @@ export default function EditorApp({ neuron, reload }) {
       });
   };
 
-  function setEditorTheme(monaco) {
+  function setEditorTheme(monaco: any) {
     monaco.editor.defineTheme("onedark", {
       base: "vs-dark",
       inherit: true,
@@ -73,7 +73,7 @@ export default function EditorApp({ neuron, reload }) {
         <>
           {diagnostics.length > 0 && (
             <div>
-              {diagnostics.map((d, k) => (
+              {diagnostics.map((d: any, k: number) => (
                 <div
                   key={k}
                   className="bg-gray-900 text-red-600 text-sm mb-3 rounded-lg py-1 px-3"

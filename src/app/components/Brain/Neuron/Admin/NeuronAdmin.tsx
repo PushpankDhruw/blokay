@@ -5,7 +5,7 @@ import NeuronChat from "./NeuronChat";
 import NeuronGeneral from "./NeuronGeneral";
 import { getNeuronAdmin } from "@/app/services/brain";
 
-const NeuronAdmin = ({ neuron, changeColorModal, reload }) => {
+const NeuronAdmin = ({ neuron, changeColorModal, reload }: any) => {
   const [view, setView] = useState("chat");
   const [neuronAdmin, setNeuronAdmin] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const NeuronAdmin = ({ neuron, changeColorModal, reload }) => {
       });
   };
 
-  const setViewPage = (view) => {
+  const setViewPage = (view: string) => {
     fetchNeuron();
     setView(view);
     changeColorModal(view == "code" ? "#21252b" : "#fff");

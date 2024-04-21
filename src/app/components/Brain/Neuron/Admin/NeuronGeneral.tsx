@@ -10,8 +10,8 @@ import {
 } from "@/app/components/DS/Index";
 import { updateNeuron } from "@/app/services/brain";
 
-const NeuronGeneral = ({ neuron, reload }) => {
-  const modalDeleteRef = useRef();
+const NeuronGeneral = ({ neuron, reload }: any) => {
+  const modalDeleteRef: any = useRef();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     ...neuron,
@@ -66,7 +66,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
         value={form.key}
         label="Identificador"
         className="mb-3"
-        onChange={(val) => {
+        onChange={(val: string) => {
           setForm({ ...form, description: val });
         }}
       />
@@ -75,7 +75,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
         type="textarea"
         value={form.description}
         label="Description"
-        onChange={(val) => {
+        onChange={(val: string) => {
           setForm({ ...form, description: val });
         }}
       />
@@ -102,7 +102,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
                   type="text"
                   value={fields[index].name}
                   label="Name"
-                  onChange={(val) => {
+                  onChange={(val: string) => {
                     let f = fields.slice(0);
                     f[index].name = val;
                     setFields(f);
@@ -113,7 +113,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
                 <AppSelect
                   value={fields[index].type}
                   label="Type"
-                  onChange={(val) => {
+                  onChange={(val: string) => {
                     let f = fields.slice(0);
                     f[index].type = val;
                     setFields(f);
@@ -133,7 +133,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
                   type="text"
                   value={fields[index].label}
                   label="Label"
-                  onChange={(val) => {
+                  onChange={(val: string) => {
                     let f = fields.slice(0);
                     f[index].label = val;
                     setFields(f);
@@ -145,7 +145,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
                   type="text"
                   value={fields[index].isRequired}
                   label="¿obligatorio?"
-                  onChange={(val) => {
+                  onChange={() => {
                     let f = fields.slice(0);
                     f[index].isRequired = !!!f[index].isRequired;
                     setFields(f);
@@ -160,7 +160,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
           type="text"
           value={form.filters.button}
           label="Texto del botòn"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({
               ...form,
               filters: {
@@ -208,7 +208,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
               text="Si, eliminar"
               onClick={() => {
                 modalDeleteRef.current.hideModal();
-                deleteFromLayout(neuron);
+                // deleteFromLayout(neuron);
               }}
               variant="primary"
               className="w-full"
@@ -225,7 +225,7 @@ const NeuronGeneral = ({ neuron, reload }) => {
           value={form.textDeleteNeuron}
           label="Escribe (si, eliminar)"
           className="mb-3"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, textDeleteNeuron: val });
           }}
         />
