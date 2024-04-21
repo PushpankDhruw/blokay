@@ -35,7 +35,7 @@ export default function Header({ view, save }) {
     <div className="flex justify-between items-center  mb-16">
       <div className="flex gap-3 items-center">
         <a className="" href="/dashboard">
-          <div className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-stone-50">
+          <div className="size-8 p-1 cursor-pointer border-2 border-stone-50 hover:border-stone-300 rounded-full bg-white">
             <AppIcon icon="left" className="fill-stone-900 size-full" />
           </div>
         </a>
