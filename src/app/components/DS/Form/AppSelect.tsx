@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import "./form.css";
 
-function genRandomString(length) {
+function genRandomString(length: number): string {
   var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var charLength = chars.length;
   var result = "";
@@ -18,7 +19,7 @@ export default function AppSelect({
   children,
   error,
   ...extraProps
-}) {
+}: any) {
   const id = genRandomString(10);
 
   return (

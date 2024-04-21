@@ -1,8 +1,8 @@
 import React from "react";
-import { AppIcon } from "./Index.jsx";
+import { AppIcon } from "./Index";
 
-const AppBox = function ({ title, icon, onClick }) {
-  const handleClick = (e) => {
+const AppBox = function ({ title, icon, onClick }: any) {
+  const handleClick = (e: any) => {
     onClick && onClick(e);
   };
   return (

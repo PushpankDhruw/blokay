@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { AppIcon } from "../Index.jsx";
+import { AppIcon } from "../Index";
 import "./form.css";
 
 export default function AppCheckbox({
@@ -8,7 +8,7 @@ export default function AppCheckbox({
   value,
   placeholder,
   ...extraProps
-}) {
+}: any) {
   return (
     <div className=" ">
       <label className="rounded-lg bg-gray-50 border-2 border-gray-100 px-2 items-center py-1 flex gap-2  select-none">
@@ -17,7 +17,7 @@ export default function AppCheckbox({
           onChange={(e) => {
             extraProps.onChange && extraProps.onChange(!value);
           }}
-          value={!!value}
+          value={value == true ? "true" : undefined}
           className="hidden"
         />
         <div

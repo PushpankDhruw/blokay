@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AppIcon } from "../Index";
 import "./form.css";
 
-function genRandomString(length) {
+function genRandomString(length: number): string {
   var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var charLength = chars.length;
   var result = "";
@@ -16,11 +16,11 @@ function genRandomString(length) {
 export default function AppInput({
   label,
   value,
-  placeholder,
-  icon,
-  error,
+  placeholder = null,
+  icon = null,
+  error = null,
   ...extraProps
-}) {
+}: any) {
   const [activeLabel, setActiveLabel] = useState(false);
   const [id] = useState(genRandomString(10));
 

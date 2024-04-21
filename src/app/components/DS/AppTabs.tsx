@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import { AppIcon } from "./Index.jsx";
-const AppTabs = ({ tabs, defaultTab = 0 }) => {
+import { AppIcon } from "./Index";
+const AppTabs = ({ tabs, defaultTab = 0 }: any) => {
   const [selectedTab, setSelectedTab] = useState(defaultTab);
 
   return (
     <div>
       <div className="flex items-center gap-3 bg-gray-100 rounded-lg p-2 overflow-x-scroll">
-        {tabs.map((t, index) => (
+        {tabs.map((t: any, index: number) => (
           <div
             onClick={() => {
               setSelectedTab(index);
@@ -23,7 +23,7 @@ const AppTabs = ({ tabs, defaultTab = 0 }) => {
               <AppIcon
                 className="w-6 h-6"
                 icon={t.icon}
-                style={index === selectedTab ? { fill: "white" } : null}
+                style={index === selectedTab ? { fill: "white" } : {}}
               />
             ) : null}
 

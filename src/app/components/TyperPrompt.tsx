@@ -2,7 +2,12 @@
 
 import { AppLoader } from "./DS/Index";
 
-export default function TyperPrompt({ loading, onChange, value, onGenerate }) {
+export default function TyperPrompt({
+  loading,
+  onChange,
+  value,
+  onGenerate,
+}: any) {
   return (
     <div className="bg-slate-200 p-2 mt-6 rounded-3xl overflow-hidde   bottom-0 relative  flex justify-between mx-auto">
       <textarea
@@ -12,7 +17,7 @@ export default function TyperPrompt({ loading, onChange, value, onGenerate }) {
         onChange={(e) => {
           onChange(e.target.value);
         }}
-        onInput={(e) => {
+        onInput={(e: any) => {
           e.target.style.height = "auto";
           e.target.style.height = e.target.scrollHeight + "px";
         }}

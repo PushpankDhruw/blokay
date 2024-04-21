@@ -1,7 +1,7 @@
 import React from "react";
 import "./Index.css";
 
-const AppLoader = ({ size, color, className }) => {
+const AppLoader = ({ size, color = "", className = "" }) => {
   const loaderStyle = {
     width: size === "sm" ? "1rem" : "80px",
     height: size === "sm" ? "1rem" : "80px",

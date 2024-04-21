@@ -2,15 +2,15 @@
 import { useState, useEffect, useRef } from "react";
 import { AppIcon, AppModal, AppButton } from "@/app/components/DS/Index";
 
-export default function Header({ view, save }) {
-  const modalRef = useRef();
+export default function Header({ view, save }: any) {
+  const modalRef: any = useRef();
   const [title, setTitle] = useState("Untitled view");
 
   useEffect(() => {
     setTitle(view?.name);
   }, [view]);
 
-  const clickShare = (neuron) => {
+  const clickShare = (neuron: any) => {
     modalRef.current.showModal();
   };
 
@@ -81,13 +81,13 @@ export default function Header({ view, save }) {
           <div className="flex items-center justify-between">
             <AppButton
               text="Copiar link"
-              onClick={() => handleClickCreateNew()}
+              // onClick={() => handleClickCreateNew()}
               variant="primary"
               size="md"
             />
             <AppButton
               text="Cerrar"
-              onClick={() => handleClickCreateNew()}
+              // onClick={() => handleClickCreateNew()}
               variant="secondary"
               size="md"
             />

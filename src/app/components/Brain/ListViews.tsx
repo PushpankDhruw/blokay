@@ -9,9 +9,9 @@ import {
 } from "@/app/components/DS/Index";
 
 function ListViews({}) {
-  const modalRef = useRef();
+  const modalRef: any = useRef();
   const [views, setViews] = useState([]);
-  const [form, setForm] = useState({ search: "" });
+  const [form, setForm]: any = useState({ search: "" });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -42,8 +42,8 @@ function ListViews({}) {
   };
 
   const viewsComputed = () => {
-    const s = form.search.toLowerCase();
-    return views.filter((view) => {
+    const s: string = form.search.toLowerCase();
+    return views.filter((view: any) => {
       return view.name.toLowerCase().includes(s);
     });
   };
@@ -56,7 +56,7 @@ function ListViews({}) {
           <AppInput
             type="view"
             value={form.search}
-            onChange={(val) => {
+            onChange={(val: string) => {
               setForm({ ...form, search: val });
             }}
             label="Buscar vista"
@@ -71,9 +71,9 @@ function ListViews({}) {
       </div>
       <div className="">
         {loading && <AppLoader size="md" className="mx-auto" />}
-        {!loading > 0 && (
+        {!loading && (
           <div className="flex flex-wrap items-center gap-5">
-            {viewsComputed().map((view) => (
+            {viewsComputed().map((view: any) => (
               <a
                 href={"/dashboard/view/" + view.slug}
                 key={view.id}
@@ -104,7 +104,7 @@ function ListViews({}) {
         <AppInput
           type="text"
           value={form.name}
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, name: val });
           }}
           label={"Nombre"}

@@ -1,4 +1,4 @@
-export default function Icon({ icon, className, style = null }) {
+export default function Icon({ icon, className, style = {} }: any) {
   return (
     <svg viewBox="0 0 24 24" className={`icon ${className}`} style={style}>
       {icon === "home" ? (

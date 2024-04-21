@@ -1,7 +1,7 @@
 "use client";
 import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { createPortal } from "react-dom";
-import { AppIcon } from "./Index.jsx";
+import { AppIcon } from "./Index";
 
 let container = typeof document != "undefined" ? document.body : null;
 function Modal(
@@ -14,12 +14,12 @@ function Modal(
     clickBack,
     children,
     footer,
-  },
-  ref
+  }: any,
+  ref: any
 ) {
   const [showing, setShowing] = useState(false);
   const [bgColor, setBackgroundColor] = useState("#fff");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const showModal = () => {
     setShowing(true);
@@ -28,18 +28,18 @@ function Modal(
   const hideModal = () => {
     console.log("hide");
     setShowing(false);
-    setError(null);
+    setError("");
   };
 
   const clear = () => {
-    setError(null);
+    setError("");
   };
 
-  const putError = (error) => {
+  const putError = (error: string) => {
     setError(error);
   };
 
-  const changeColorModal = (color) => {
+  const changeColorModal = (color: string) => {
     setBackgroundColor(color);
   };
 

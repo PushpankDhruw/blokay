@@ -1,6 +1,6 @@
-import { AppLoader, AppIcon } from "../Index.jsx";
+import { AppLoader, AppIcon } from "../Index";
 
-const AppButton = function (props) {
+const AppButton = function (props: any) {
   const {
     disabled = false,
     size,
@@ -61,7 +61,7 @@ const AppButton = function (props) {
   };
 
   const propsComputed = () => {
-    const propsObj = { type: props.type || "button" };
+    const propsObj: any = { type: props.type || "button" };
     if (href) propsObj.href = href;
     if (to) propsObj.to = to; // Assuming you are using React Router
     return propsObj;

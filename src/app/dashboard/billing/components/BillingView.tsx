@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
+import { AppInput, AppButton } from "@/app/components/DS/Index";
 import { fetchLogin } from "@/app/services/users";
 
 export default function LoginForm() {
-  const [form, setForm] = useState({});
+  const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
 
   const login = () => {
@@ -16,7 +16,7 @@ export default function LoginForm() {
           if (typeof window != "undefined") {
             window.localStorage.setItem("token", result.User.token);
             window.localStorage.setItem("user", JSON.stringify(result.User));
-            window.location = "/dashboard";
+            window.location.href = "/dashboard";
           }
         }
       })
@@ -35,7 +35,7 @@ export default function LoginForm() {
           type="text"
           value={form.creditCardNumber}
           label="Tarjeta de crédito"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, creditCardNumber: val });
           }}
         />
@@ -44,7 +44,7 @@ export default function LoginForm() {
           type="text"
           value={form.creditCardPlaceHolder}
           label="Nombre en la tarjeta de crédito"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, creditCardPlaceHolder: val });
           }}
         />
@@ -55,7 +55,7 @@ export default function LoginForm() {
               type="text"
               value={form.creditCardYear}
               label="Año"
-              onChange={(val) => {
+              onChange={(val: string) => {
                 setForm({ ...form, creditCardYear: val });
               }}
             />
@@ -65,7 +65,7 @@ export default function LoginForm() {
               type="text"
               value={form.creditCardExpiryMonth}
               label="Mes"
-              onChange={(val) => {
+              onChange={(val: string) => {
                 setForm({ ...form, creditCardExpiryMonth: val });
               }}
             />
@@ -75,7 +75,7 @@ export default function LoginForm() {
               type="text"
               value={form.creditCardCVV}
               label="CVV"
-              onChange={(val) => {
+              onChange={(val: string) => {
                 setForm({ ...form, creditCardCVV: val });
               }}
             />

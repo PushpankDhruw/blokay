@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { AppIcon, AppLoader } from "../Index.jsx";
+import { AppIcon, AppLoader } from "../Index";
+import { postMultimedia } from "@/app/services/_base";
 
 const AppFile = ({
   label,
@@ -12,10 +13,10 @@ const AppFile = ({
   onError,
   onDone,
   onChangeFiles,
-}) => {
+}: any) => {
   const [loading, setLoading] = useState(false);
   const [prev, setPrev] = useState("");
-  const [filelist, setFileList] = useState([]);
+  const [filelist, setFileList]: any = useState([]);
   const [id] = useState((Math.random() + 1).toString(36).substring(7));
 
   const ext = () => {
@@ -31,35 +32,33 @@ const AppFile = ({
     return file;
   };
 
-  // const resend = (endpoint) => {
-  //   return sendFile(filelist, endpoint);
-  // };
-
   const onChange = () => {
-    let el = document.getElementById(id);
+    let el: any = document.getElementById(id);
     setFileList(el.files);
   };
 
-  const sendFile = (pics, endpoint) => {
+  const sendFile = (pics: any[], endpoint: string) => {
     let formData = new FormData();
     formData.append("file", pics[0]);
-    return postMultimedia(endpoint, formData, { token: window.token_web });
+    return postMultimedia(endpoint, formData, {
+      // token: typeof window != "undefined" ? window.token_web : "",
+    });
   };
 
-  const uploadPhoto = (pics) => {
+  const uploadPhoto = (pics: any) => {
     setLoading(true);
     let formData = new FormData();
     formData.append("file", pics[0]);
 
     return sendFile(pics, endpoint)
-      .then((result) => {
+      .then((result: any) => {
         onDone && onDone(result);
         if (result.data.Resource) {
           setPrev(result.data.Resource.preview);
           onChangeFiles && onChangeFiles(result.data.Resource);
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         onError && onError(err);
       })
       .finally(() => {
@@ -85,7 +84,7 @@ const AppFile = ({
           style={{ width: "50px", height: "50px" }}
         />
       );
-    } else if (ext === "pdf") {
+    } else if (ext() === "pdf") {
       return (
         <AppIcon
           icon="pdf"
