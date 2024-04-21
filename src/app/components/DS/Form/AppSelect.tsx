@@ -26,7 +26,7 @@ export default function AppSelect({
     <div className="relative ">
       <label
         htmlFor={id}
-        className={`font-medium absolute top-1 left-4 appearance-none	 font-bold text-gray-500 
+        className={` absolute left-4 appearance-none	  text-gray-500 
           top-2 text-xs font-light`}
         style={{ transitionDuration: "0.3s" }}
       >

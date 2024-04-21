@@ -24,6 +24,7 @@ const Neuron = ({
   const [neuron, setNeuron]: any = useState(null);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors]: any = useState({});
 
   const getNeuron = ({ neuronId, neuronKey }: any) => {
     if (!neuronId && !neuronKey) return;
@@ -50,8 +51,20 @@ const Neuron = ({
   };
 
   const execNeuron = (n: any) => {
+    const errorsTmp: any = {};
+    for (let field of n.filters?.fields) {
+      if (!form[field.name] && field.isRequired) {
+        errorsTmp[field.name] = "El campo es requerido";
+      }
+    }
+    if (Object.values(errorsTmp).length > 0) {
+      setErrors(errorsTmp);
+      return;
+    }
+
     if (loading) return;
     setLoading(true);
+    setErrors({});
 
     brainExec({
       neuronId: n.id,
@@ -159,6 +172,7 @@ const Neuron = ({
                                 <AppInput
                                   type={row.type}
                                   value={form[row.name]}
+                                  error={errors[row.name]}
                                   onChange={(val: string) => {
                                     setForm({ ...form, [row.name]: val });
                                   }}
