@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import moment from "moment";
 // import speakeasy from "speakeasy";
 
-export default (sequelize, DataTypes) => {
+export default (sequelize: any, DataTypes: any) => {
   const User = sequelize.define(
     "User",
     {
@@ -13,9 +13,10 @@ export default (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-        set(password) {
+        set(password: string) {
+          let objThis: any = this;
           let pass = bcrypt.hashSync(password, 10);
-          this.setDataValue("password", pass);
+          objThis.setDataValue("password", pass);
         },
       },
       blockedAt: {
@@ -26,11 +27,13 @@ export default (sequelize, DataTypes) => {
       mfa: {
         type: DataTypes.TEXT,
         get() {
-          const json = this.getDataValue("mfa");
+          let objThis: any = this;
+          const json = objThis.getDataValue("mfa");
           return JSON.parse(json || "{}");
         },
-        set(value) {
-          this.setDataValue("mfa", JSON.stringify(value));
+        set(value: any) {
+          let objThis: any = this;
+          objThis.setDataValue("mfa", JSON.stringify(value));
         },
       },
     },
@@ -40,7 +43,7 @@ export default (sequelize, DataTypes) => {
     }
   );
 
-  User.associate = function (models) {
+  User.associate = function (models: any) {
     // models.User.belongsTo(models.Business);
     // models.User.belongsTo(models.Commerce);
     // models.User.belongsTo(models.Country);
@@ -50,7 +53,7 @@ export default (sequelize, DataTypes) => {
    *Check Permission
    *@return new token
    */
-  User.prototype.can = async function (permission) {
+  User.prototype.can = async function (permission: string) {
     let db = sequelize.models;
 
     let queryBuilder = {
@@ -94,7 +97,7 @@ export default (sequelize, DataTypes) => {
       },
     };
     return (await db.RolPermission.findAll(queryBuilder)).map(
-      (permission) => permission.RolPrivilege.key
+      (permission: any) => permission.RolPrivilege.key
     );
   };
 
@@ -102,11 +105,11 @@ export default (sequelize, DataTypes) => {
    *Find user by her id
    *@return corresponfing user
    */
-  User.findById = async function (id) {
+  User.findById = async function (id: string) {
     return await User.findByPk(id);
   };
 
-  User.findByToken = async function (token) {
+  User.findByToken = async function (token: string) {
     let session = await sequelize.models.Session.findOne({
       include: [
         {
@@ -124,7 +127,7 @@ export default (sequelize, DataTypes) => {
    *Find user by her username
    *@return corresponfing user
    */
-  User.findByEmail = async function (email) {
+  User.findByEmail = async function (email: string) {
     let queryBuilder = {
       where: {
         email,
@@ -134,7 +137,7 @@ export default (sequelize, DataTypes) => {
     return user;
   };
 
-  User.findByCellphone = async function (cellphone) {
+  User.findByCellphone = async function (cellphone: string) {
     let queryBuilder = {
       where: {
         cellphone,
@@ -147,7 +150,7 @@ export default (sequelize, DataTypes) => {
    *Compare two passwords
    *@return if they correspond or not
    */
-  User.prototype.matchPassword = async function (password) {
+  User.prototype.matchPassword = async function (password: string) {
     return await bcrypt.compare(password, this.password);
   };
   /**
@@ -172,7 +175,7 @@ export default (sequelize, DataTypes) => {
    *Verify if the codes are the same
    *@return true or false
    */
-  User.prototype.checkTwoFactor = async function (code) {
+  User.prototype.checkTwoFactor = async function (code: string) {
     return this.twoFactorCode == code;
   };
   /**
@@ -218,7 +221,7 @@ export default (sequelize, DataTypes) => {
    *Verify if the codes are the same
    *@return true or false
    */
-  User.prototype.checkRestoreToken = async function (code) {
+  User.prototype.checkRestoreToken = async function (code: string) {
     return this.restoreToken == code;
   };
   /**
@@ -255,7 +258,7 @@ export default (sequelize, DataTypes) => {
         active: 1,
       },
     };
-    await Session.update(
+    await sequelize.models.Session.update(
       {
         active: 0,
         closeMotive: "user.changePassword",
@@ -264,8 +267,8 @@ export default (sequelize, DataTypes) => {
     );
   };
 
-  User.exists = async function (cellphone, docNumber) {
-    let queryBuilder = {
+  User.exists = async function (cellphone: string, docNumber: string) {
+    let queryBuilder: any = {
       paranoid: false,
       where: {
         cellphone,
@@ -284,15 +287,15 @@ export default (sequelize, DataTypes) => {
     return user;
   };
 
-  User.prototype.validateOtp = function (token) {
-    return speakeasy.totp.verify({
-      secret: this.hashMFA,
-      encoding: "base32",
-      token,
-    });
+  User.prototype.validateOtp = function (token: string) {
+    // return speakeasy.totp.verify({
+    //   secret: this.hashMFA,
+    //   encoding: "base32",
+    //   token,
+    // });
   };
 
-  User.prototype.loginData = async function (session) {
+  User.prototype.loginData = async function (session: any) {
     // let business = await this.getBusiness();
     // let parent = business?.parentId ? await business.getParent() : null;
 

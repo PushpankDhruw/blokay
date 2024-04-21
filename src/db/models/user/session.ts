@@ -1,6 +1,6 @@
-import { inet_ntoa, inet_aton } from "../../helpers/ip.js";
+import { inet_ntoa, inet_aton } from "../../helpers/ip";
 
-export default (sequelize, DataTypes) => {
+export default (sequelize: any, DataTypes: any) => {
   const Session = sequelize.define(
     "Session",
     {
@@ -13,11 +13,13 @@ export default (sequelize, DataTypes) => {
       ipAddress: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        get() {
-          return inet_ntoa(this.getDataValue("ipAddress"));
+        get(): string {
+          let objThis: any = this;
+          return inet_ntoa(objThis.getDataValue("ipAddress"));
         },
-        set(valueToBeSet) {
-          this.setDataValue("ipAddress", inet_aton(valueToBeSet));
+        set(valueToBeSet: string): void {
+          let objThis: any = this;
+          objThis.setDataValue("ipAddress", inet_aton(valueToBeSet));
         },
       },
       name: { type: DataTypes.STRING, allowNull: true },
@@ -32,11 +34,11 @@ export default (sequelize, DataTypes) => {
     }
   );
 
-  Session.associate = function (models) {
+  Session.associate = function (models: any) {
     models.Session.belongsTo(models.User);
   };
 
-  Session.findByToken = async function (token) {
+  Session.findByToken = async function (token: string) {
     let queryBuilder = {
       include: [
         {
@@ -54,7 +56,7 @@ export default (sequelize, DataTypes) => {
     return session;
   };
 
-  Session.createToken = function (length) {
+  Session.createToken = function (length: number) {
     let result = "";
     let characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -65,13 +67,9 @@ export default (sequelize, DataTypes) => {
     return result;
   };
 
-  /**
-   *Create new session in db
-   *@return new session
-   */
   Session.createSession = async function (
-    user,
-    ip,
+    user: any,
+    ip: string,
     agent = "",
     deviceId = null
   ) {
@@ -88,10 +86,6 @@ export default (sequelize, DataTypes) => {
     let session = await Session.create(data);
     return session;
   };
-  /**
-   *Clean the colums RestoreToken and RestoreTokenExpiration
-   *@return true or false
-   */
 
   return Session;
 };

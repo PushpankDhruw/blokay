@@ -1,4 +1,4 @@
-const model = (sequelize, DataTypes) => {
+const model = (sequelize: any, DataTypes: any) => {
   const NeuronGroup = sequelize.define(
     "NeuronGroup",
     {

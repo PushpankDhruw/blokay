@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-const model = (sequelize, DataTypes) => {
+const model = (sequelize: any, DataTypes: any) => {
   const Datasource = sequelize.define(
     "Datasource",
     {
@@ -11,20 +11,24 @@ const model = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
         get() {
-          let json = this.getDataValue("config");
+          let objThis: any = this;
+
+          let json = objThis.getDataValue("config");
           json = json || "{}";
           try {
             return JSON.parse(json);
           } catch (err) {
             console.error(
-              "neuron config error parse: " + this.getDataValue("id"),
+              "neuron config error parse: " + objThis.getDataValue("id"),
               err
             );
             return {};
           }
         },
-        set(value) {
-          this.setDataValue("config", JSON.stringify(value));
+        set(value: any) {
+          let objThis: any = this;
+
+          objThis.setDataValue("config", JSON.stringify(value));
         },
       },
 
@@ -32,20 +36,22 @@ const model = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
         get() {
-          let json = this.getDataValue("structure");
+          let objThis: any = this;
+          let json = objThis.getDataValue("structure");
           json = json || "{}";
           try {
             return JSON.parse(json);
           } catch (err) {
             console.error(
-              "neuron structure error parse: " + this.getDataValue("id"),
+              "neuron structure error parse: " + objThis.getDataValue("id"),
               err
             );
             return {};
           }
         },
-        set(value) {
-          this.setDataValue("structure", JSON.stringify(value));
+        set(value: any) {
+          let objThis: any = this;
+          objThis.setDataValue("structure", JSON.stringify(value));
         },
       },
     },
@@ -55,8 +61,9 @@ const model = (sequelize, DataTypes) => {
     }
   );
 
-  Datasource.prototype.getDb = async function (conn) {
-    let tables = {};
+  Datasource.prototype.getDb = async function (conn: any) {
+    let SequelizeObj: any = Sequelize;
+    let tables: any = {};
     let sql = `select \`TABLE_NAME\` as "table",
     \`COLUMN_NAME\` as "column", 
     DATA_TYPE as \`type\`, 
@@ -69,11 +76,11 @@ const model = (sequelize, DataTypes) => {
     group by COLUMN_NAME, TABLE_NAME
     order by COLUMNS.ORDINAL_POSITION ASC`;
     let result = await conn.query(sql, {
-      type: Sequelize.QueryTypes.SELECT,
+      type: SequelizeObj.QueryTypes.SELECT,
       raw: true,
     });
 
-    result.map((r) => {
+    result.map((r: any) => {
       if (!tables[r.table]) {
         tables[r.table] = { columns: [], name: r.table };
       }

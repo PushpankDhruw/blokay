@@ -3,12 +3,12 @@ import Sequelize from "sequelize";
 import _QueryExecution from "./models/_query_executions";
 import Neuron from "./models/brain/neuron";
 import NeuronGroup from "./models/brain/neuron-group";
-import View from "./models/brain/view.js";
-import Session from "./models/user/session.js";
-import User from "./models/user/user.js";
-import Datasource from "./models/brain/datasource.js";
+import View from "./models/brain/view";
+import Session from "./models/user/session";
+import User from "./models/user/user";
+import Datasource from "./models/brain/datasource";
 
-function Models() {
+function Models(this: any) {
   this.models = {
     Datasource,
     _QueryExecution,
@@ -40,7 +40,8 @@ function Models() {
   };
 
   this.connect = function () {
-    this.sequelize = new Sequelize(
+    let SequelizeObj: any = Sequelize;
+    this.sequelize = new SequelizeObj(
       process.env.DATABASE_NAME,
       process.env.DATABASE_USERNAME,
       process.env.DATABASE_PASSWORD,
@@ -58,12 +59,10 @@ function Models() {
           collate: "utf8_general_ci",
         },
         timezone: "-05:00",
-        dialect: "mysql",
-        logging: false,
         dialectModule: require("mysql2"),
         operatorsAliases: this.operatorsAliases,
         benchmark: true,
-        logging: (str, time) => {
+        logging: (str: string, time: number) => {
           if (time > 2000) {
             this._QueryExecution.create({
               sql: str,

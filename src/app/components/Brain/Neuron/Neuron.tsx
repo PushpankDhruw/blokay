@@ -52,14 +52,17 @@ const Neuron = ({
 
   const execNeuron = (n: any) => {
     const errorsTmp: any = {};
-    for (let field of n.filters?.fields) {
-      if (!form[field.name] && field.isRequired) {
-        errorsTmp[field.name] = "El campo es requerido";
+
+    if (n.filters?.fields) {
+      for (let field of n.filters?.fields) {
+        if (!form[field.name] && field.isRequired) {
+          errorsTmp[field.name] = "El campo es requerido";
+        }
       }
-    }
-    if (Object.values(errorsTmp).length > 0) {
-      setErrors(errorsTmp);
-      return;
+      if (Object.values(errorsTmp).length > 0) {
+        setErrors(errorsTmp);
+        return;
+      }
     }
 
     if (loading) return;

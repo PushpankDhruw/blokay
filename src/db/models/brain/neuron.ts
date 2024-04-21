@@ -1,4 +1,4 @@
-const model = (sequelize, DataTypes) => {
+const model = (sequelize: any, DataTypes: any) => {
   const Neuron = sequelize.define(
     "Neuron",
     {
@@ -18,20 +18,22 @@ const model = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
         get() {
-          let json = this.getDataValue("filters");
+          let objThis: any = this;
+          let json = objThis.getDataValue("filters");
           json = json || "{}";
           try {
             return JSON.parse(json);
           } catch (err) {
             console.error(
-              "neuron filters error parse: " + this.getDataValue("id"),
+              "neuron filters error parse: " + objThis.getDataValue("id"),
               err
             );
             return {};
           }
         },
-        set(value) {
-          this.setDataValue("filters", JSON.stringify(value));
+        set(value: any) {
+          let objThis: any = this;
+          objThis.setDataValue("filters", JSON.stringify(value));
         },
       },
 
@@ -39,20 +41,24 @@ const model = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
         get() {
-          let json = this.getDataValue("history");
+          let objThis: any = this;
+
+          let json = objThis.getDataValue("history");
           json = json || "[]";
           try {
             return JSON.parse(json);
           } catch (err) {
             console.error(
-              "neuron history error parse: " + this.getDataValue("id"),
+              "neuron history error parse: " + objThis.getDataValue("id"),
               err
             );
             return {};
           }
         },
-        set(value) {
-          this.setDataValue("history", JSON.stringify(value));
+        set(value: any) {
+          let objThis: any = this;
+
+          objThis.setDataValue("history", JSON.stringify(value));
         },
       },
 
@@ -65,7 +71,7 @@ const model = (sequelize, DataTypes) => {
     }
   );
 
-  Neuron.associate = function (models) {
+  Neuron.associate = function (models: any) {
     // models.Neuron.belongsTo(models.NeuronGroup);
     // models.Neuron.hasMany(models.Neuron);
     // models.Neuron.belongsTo(models.RolPrivilege);
