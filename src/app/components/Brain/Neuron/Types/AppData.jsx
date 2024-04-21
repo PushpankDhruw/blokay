@@ -211,25 +211,22 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
         <div className="mb-5">
           <div>
             <div className="justify-end flex items-center gap-3">
-              {onBack && !autoExecuted && (
-                <div
-                  className="flex gap-3 items-center mr-auto"
-                  onClick={() => onBack()}
-                >
+              <div className="flex gap-3 items-center mr-auto">
+                {onBack && !autoExecuted && (
                   <div
-                    className="size-8 p-1 cursor-pointer border-2 border-stone-100 hover:border-stone-300 rounded-full bg-white"
-                    onClick={() => {
-                      setPage(page - 1);
-                    }}
+                    className="size-8 p-1 cursor-pointer border-2 border-stone-100 hover:border-stone-300 rounded-full bg-white shrink-0"
+                    onClick={onBack}
                   >
                     <AppIcon
                       icon="left"
                       className="fill-stone-800 w-full h-full"
                     />
                   </div>
-                  <div>{neuronName}</div>
-                </div>
-              )}
+                )}
+
+                <div>{neuronName}</div>
+              </div>
+
               {data?.data?.length > 10 && (
                 <div className="ml-auto lg:w-1/3">
                   <AppInput

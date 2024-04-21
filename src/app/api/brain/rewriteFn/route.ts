@@ -43,21 +43,21 @@ export async function POST(req: any) {
   );
 
   let js = transpileModule(result);
-  console.log(js.code);
-
-  let description = await openai.descriptionFn(result);
 
   if (result) {
-    neuron = await neuron.update({
+    let toUpdate: any = {
       synapse: result,
       executable: js.code,
-      description,
       history: [
         ...neuron.history,
         { type: "user", message: data.prompt },
         { type: "system", message: "Ok" },
       ],
-    });
+    };
+    if (!neuron.description) {
+      toUpdate.description = await openai.descriptionFn(result);
+    }
+    neuron = await neuron.update(toUpdate);
   }
 
   return NextResponse.json({

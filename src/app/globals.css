@@ -290,7 +290,7 @@ div.highway-barrier .highway-lane > div:hover {
 }
 
 .table {
-  @apply bg-stone-100 p-4 z-0 flex flex-col relative justify-between gap-4 overflow-auto rounded-2xl shadow w-full;
+  @apply bg-white p-4 z-0 flex flex-col relative justify-between gap-4 overflow-auto rounded-2xl shadow w-full;
 }
 .table table {
   @apply w-full text-gray-800;

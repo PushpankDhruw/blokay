@@ -14,7 +14,7 @@ const NeuronResponse = ({
       <div className="  h-full overflow-y-auto p-5 ">
         {response?.type == "table" && (
           <AppData
-            neuronName={neuron?.name}
+            neuronName={neuron?.description}
             data={response.content}
             onReload={onReload}
             onBack={onBack}
