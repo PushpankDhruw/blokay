@@ -10,7 +10,7 @@ import { money } from "@/app/helpers/functions";
 import Neuron from "../Neuron";
 // import { useSelector } from "react-redux";
 
-function AppData({ data, onReload, onBack, autoExecuted }) {
+function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
   const modalRef = useRef();
   const [sort, setSort] = useState(null);
   const [filters, setFilters] = useState({ search: "" });
@@ -217,7 +217,7 @@ function AppData({ data, onReload, onBack, autoExecuted }) {
                   onClick={() => onBack()}
                 >
                   <div
-                    className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-stone-50"
+                    className="size-8 p-1 cursor-pointer border-2 border-stone-100 hover:border-stone-300 rounded-full bg-white"
                     onClick={() => {
                       setPage(page - 1);
                     }}
@@ -227,7 +227,7 @@ function AppData({ data, onReload, onBack, autoExecuted }) {
                       className="fill-stone-800 w-full h-full"
                     />
                   </div>
-                  <div>Volver</div>
+                  <div>{neuronName}</div>
                 </div>
               )}
               {data?.data?.length > 10 && (

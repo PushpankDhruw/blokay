@@ -2,31 +2,34 @@
 import AppData from "./Types/AppData";
 import AppLine from "./Types/AppLine";
 
-const NeuronResponse = ({ response, onReload, onBack, autoExecuted }) => {
+const NeuronResponse = ({
+  neuron,
+  response,
+  onReload,
+  onBack,
+  autoExecuted,
+}) => {
   return (
     <>
-      {response?.type == "table" && (
-        <AppData
-          data={response.content}
-          onReload={() => {
-            onReload();
-          }}
-          onBack={() => {
-            onBack(null);
-          }}
-          autoExecuted={autoExecuted}
-        />
-      )}
+      <div className="  h-full overflow-y-auto p-5 ">
+        {response?.type == "table" && (
+          <AppData
+            neuronName={neuron?.name}
+            data={response.content}
+            onReload={onReload}
+            onBack={onBack}
+            autoExecuted={autoExecuted}
+          />
+        )}
 
-      {response?.type == "line" && (
-        <AppLine
-          title={neuron.description}
-          data={response.content}
-          onReload={() => {
-            onReload();
-          }}
-        />
-      )}
+        {response?.type == "line" && (
+          <AppLine
+            title={neuron.description}
+            data={response.content}
+            onReload={onReload}
+          />
+        )}
+      </div>
     </>
   );
 };

@@ -82,23 +82,28 @@ const NeuronChat = ({ neuron, reload }) => {
       )}
 
       {historyChat.length == 0 && neuron?.id && (
-        <div className="font-light border-2 mx-10 mb-10 bg-stone-100 mt-10 border-stone-200 rounded-xl px-5 py-10 ">
-          <div>
+        <div
+          className="font-light border mx-10 mb-10  mt-10 border-transparent rounded-xl px-5 py-10 "
+          style={{
+            backgroundImage: " linear-gradient(45deg, #f4def6, #d7ecf8)",
+          }}
+        >
+          <div className="text-sm">
             Puedes solicitar directamente a nuestra inteligencia artificial que
             construya los bloques por ti, esta es capaz de hacer conexiones con
             bases de datos, editar valores, conectar APIS:
           </div>
           <ul className="font-bold pl-5 mt-5 flex flex-col gap-3">
             <li className="flex gap-1 items-center">
-              <AppIcon icon="right" className="size-5 fill-stone-600" />
+              <AppIcon icon="right" className="size-5 fill-black" />
               <div>Crear reporte de usuarios inactivos</div>
             </li>
             <li className="flex gap-1 items-center">
-              <AppIcon icon="right" className="size-5 fill-stone-600" />
+              <AppIcon icon="right" className="size-5 fill-black" />
               <div>Crear gráfica de ventas</div>
             </li>
             <li className="flex gap-1 items-center">
-              <AppIcon icon="right" className="size-5 fill-stone-600" />
+              <AppIcon icon="right" className="size-5 fill-black" />
               <div>
                 Conecta el API de la pokedex de internet y muestra los
                 resultados en una tabla

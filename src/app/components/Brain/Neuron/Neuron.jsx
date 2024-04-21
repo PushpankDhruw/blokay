@@ -7,9 +7,10 @@ import {
   AppSelect,
   AppLoader,
 } from "@/app/components/DS/Index";
-import AppData from "./Types/AppData";
-import AppLine from "./Types/AppLine";
+// import AppData from "./Types/AppData";
+// import AppLine from "./Types/AppLine";
 import NeuronEdit from "./Admin/NeuronEdit";
+import NeuronResponse from "./NeuronResponse";
 
 const Neuron = ({
   neuronId,
@@ -186,30 +187,17 @@ const Neuron = ({
               )}
 
             {response && (
-              <div className="  h-full overflow-y-auto p-5 ">
-                {response?.type == "table" && (
-                  <AppData
-                    data={response.content}
-                    onReload={() => {
-                      execNeuron(neuron);
-                    }}
-                    onBack={() => {
-                      setResponse(null);
-                    }}
-                    autoExecuted={neuron.filters.autoExec}
-                  />
-                )}
-
-                {response?.type == "line" && (
-                  <AppLine
-                    title={neuron.description}
-                    data={response.content}
-                    onReload={() => {
-                      execNeuron(neuron);
-                    }}
-                  />
-                )}
-              </div>
+              <NeuronResponse
+                response={response}
+                neuron={neuron}
+                onReload={() => {
+                  execNeuron(neuron);
+                }}
+                autoExecuted={neuron.filters.autoExec}
+                onBack={() => {
+                  setResponse(null);
+                }}
+              />
             )}
           </div>
         )}
