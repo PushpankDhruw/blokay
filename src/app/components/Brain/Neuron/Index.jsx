@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux"; // Asegúrate de importar el hook useSelector si estás utilizando Redux
-import { postRequest } from "@/common/api.service.js"; // Asegúrate de importar tu servicio de API
+import { postRequest } from "@/common/api.service"; // Asegúrate de importar tu servicio de API
 import AppNeuron from "./Neuron"; // Asegúrate de importar el componente AppNeuron
 
 function NeuronShow({ neuronId, form, showHeader, autoExecute }) {

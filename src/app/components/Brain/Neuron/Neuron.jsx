@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { brainGet, brainExec } from "@/app/services/brain.js";
+import { brainGet, brainExec } from "@/app/services/brain";
 import {
   AppButton,
   AppInput,

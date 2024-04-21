@@ -67,12 +67,12 @@ export const getOS = () => {
 };
 
 export const postRequest = async function (
-  endpoint,
-  data,
-  user,
-  extraOpts = {}
+  endpoint: string,
+  data: any,
+  user: any = null,
+  extraOpts: any = {}
 ) {
-  let opts = {
+  let opts: any = {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -120,8 +120,12 @@ export const postRequest = async function (
   return content;
 };
 
-export const postMultimedia = async function (endpoint, form, user) {
-  let opts = {
+export const postMultimedia = async function (
+  endpoint: string,
+  form: any,
+  user: any
+) {
+  let opts: any = {
     method: "POST",
     headers: {},
     body: form,
@@ -139,8 +143,12 @@ export const postMultimedia = async function (endpoint, form, user) {
   return content;
 };
 
-export const postFile = async function (endpoint, data, user) {
-  let opts = {
+export const postFile = async function (
+  endpoint: string,
+  data: any,
+  user: any
+) {
+  let opts: any = {
     method: "POST",
     headers: {
       Accept: "application/json",

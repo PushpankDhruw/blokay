@@ -1,11 +1,9 @@
 import fetch from "node-fetch";
 
 export default class OpenAI {
-  constructor() {
-    this.secreKey = process.env.OPENAI_KEY;
-  }
+  private secretKey = process.env.OPENAI_KEY;
 
-  async fetchOpenAI(prompt) {
+  async fetchOpenAI(prompt: string) {
     const endpoint = "https://api.openai.com/v1/chat/completions";
 
     try {
@@ -13,7 +11,7 @@ export default class OpenAI {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${this.secreKey}`,
+          Authorization: `Bearer ${this.secretKey}`,
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -22,7 +20,7 @@ export default class OpenAI {
         }),
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
 
       let res = data.choices?.[0]?.message?.content || "";
 
@@ -33,12 +31,12 @@ export default class OpenAI {
   }
 
   async getFn(
-    description,
-    currentFn,
-    userPrompt,
-    filters,
-    dbStructure,
-    neurons
+    description: string,
+    currentFn: string,
+    userPrompt: string,
+    filters: any[],
+    dbStructure: any,
+    neurons: any[]
   ) {
     let filtersPrompt = `/* use this filters \n
     ${filters
@@ -54,8 +52,8 @@ export default class OpenAI {
     Database schemas
       ${dbStructure.tables
         .map(
-          (table) =>
-            `${table.name} (${table.columns.map((c) => c.name).join(",")})`
+          (table: any) =>
+            `${table.name} (${table.columns.map((c: any) => c.name).join(",")})`
         )
         .join("\n")} \n*/`;
 
@@ -64,7 +62,9 @@ export default class OpenAI {
         ${neurons
           .map((n) => {
             let fields = n.filters?.fields || [];
-            let formStr = `(form: ${fields.map((f) => f.name).join(", ")})`;
+            let formStr = `(form: ${fields
+              .map((f: any) => f.name)
+              .join(", ")})`;
 
             return `${n.key} ${fields.length > 0 ? formStr : ""} `;
           })
@@ -164,15 +164,15 @@ export default class OpenAI {
 
     // if it's markdown, extract code
     if (code.includes("```")) {
-      code = result.match(/```js(.*)```/)[1];
-      code = s.match(/```typescript(.*)```/)[1];
-      code = result.match(/```javascript(.*)```/)[1];
+      code = code.match(/```js(.*)```/)[1];
+      code = code.match(/```typescript(.*)```/)[1];
+      code = code.match(/```javascript(.*)```/)[1];
     }
 
     return code;
   }
 
-  async descriptionFn(currentFn) {
+  async descriptionFn(currentFn: string) {
     let description = await this.fetchOpenAI(`
       /*
       I want to you describe the function \`fn\`

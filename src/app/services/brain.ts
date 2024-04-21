@@ -1,6 +1,6 @@
-import { postRequest } from "./_base.js";
+import { postRequest } from "./_base";
 
-let token = null;
+let token: string | null = null;
 if (typeof window != "undefined") {
   token = window.localStorage.getItem("token");
 }
@@ -15,7 +15,7 @@ export const brainGet = async function ({ neuronId = null, neuronKey = null }) {
   return result.data;
 };
 
-export const viewGet = async function (slug) {
+export const viewGet = async function (slug: string) {
   let data = {
     slug,
   };
@@ -25,7 +25,7 @@ export const viewGet = async function (slug) {
   return result.data;
 };
 
-export const saveView = async function (form) {
+export const saveView = async function (form: any) {
   let data = {
     ...form,
   };
@@ -35,7 +35,7 @@ export const saveView = async function (form) {
   return result.data;
 };
 
-export const addView = async function (form) {
+export const addView = async function (form: any) {
   let data = {
     ...form,
   };
@@ -45,7 +45,7 @@ export const addView = async function (form) {
   return result.data;
 };
 
-export const newNeuron = async function (form) {
+export const newNeuron = async function (form: any) {
   let data = {
     ...form,
   };
@@ -55,7 +55,7 @@ export const newNeuron = async function (form) {
   return result.data.Neuron;
 };
 
-export const updateNeuron = async function (form) {
+export const updateNeuron = async function (form: any) {
   let data = {
     ...form,
   };
@@ -65,7 +65,7 @@ export const updateNeuron = async function (form) {
   return result.data.Result;
 };
 
-export const rewriteFn = async function (form) {
+export const rewriteFn = async function (form: any) {
   let data = {
     ...form,
   };
@@ -75,7 +75,7 @@ export const rewriteFn = async function (form) {
   return result.data.Result;
 };
 
-export const getNeuronAdmin = async function (neuronId) {
+export const getNeuronAdmin = async function (neuronId: number) {
   let data = {
     neuronId,
   };
@@ -93,7 +93,7 @@ export const viewList = async function () {
   return result.data;
 };
 
-export const brainList = async function (group) {
+export const brainList = async function (group: any) {
   let data = {
     group,
   };
@@ -103,7 +103,7 @@ export const brainList = async function (group) {
   return result.data;
 };
 
-export const brainExec = async function (form) {
+export const brainExec = async function (form: any) {
   let data = {
     ...form,
   };

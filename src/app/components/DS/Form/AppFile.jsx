@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { AppIcon, AppLoader } from "../Index.jsx";
-// import { postMultimedia } from "services/_base.js";
 
 const AppFile = ({
   label,

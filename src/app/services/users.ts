@@ -1,6 +1,6 @@
-import { postRequest } from "./_base.js";
+import { postRequest } from "./_base";
 
-export const fetchLogin = async function (username, password) {
+export const fetchLogin = async function (username: string, password: string) {
   let data = {
     username,
     password,
