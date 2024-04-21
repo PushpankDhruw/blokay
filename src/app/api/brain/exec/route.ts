@@ -4,9 +4,9 @@ import Models from "@/db/index";
 import { getConnection } from "@/db/connection";
 let db = new Models();
 
-const { Neuron, User, Datasource } = db;
+const { Neuron, User, Datasource }: any = db;
 
-export async function POST(req) {
+export const POST = async (req: any) => {
   const body = await req.json();
 
   let { neuronId, format, form } = body.data;
@@ -33,24 +33,24 @@ export async function POST(req) {
     response: {},
     files: req.files,
     form: form,
-    query: async (sql, replacements = {}) => {
+    query: async (sql: string, replacements = {}) => {
       const conn = await getConnection(db, datasource, "read");
       return await conn.query(sql, { replacements, type: "SELECT" });
     },
 
-    fetch: async (endpoint, opts = {}) => {
+    fetch: async (endpoint: string, opts = {}) => {
       let response = await fetch(endpoint, opts);
       return await response.json();
     },
-    insert: async (sql, replacements = {}) => {
+    insert: async (sql: string, replacements = {}) => {
       const conn = await getConnection(db, datasource, "write");
       return await conn.query(sql, { replacements, type: "INSERT" });
     },
-    update: async (sql, replacements = {}) => {
+    update: async (sql: string, replacements = {}) => {
       const conn = await getConnection(db, datasource, "write");
       return await conn.query(sql, { replacements, type: "UPDATE" });
     },
-    value: async (sql, replacements = {}) => {
+    value: async (sql: string, replacements = {}) => {
       const conn = await getConnection(db, datasource, "read");
       let rows = await conn.query(sql, { replacements, type: "SELECT" });
       if (rows && rows.length > 0) {
@@ -59,14 +59,14 @@ export async function POST(req) {
       }
       return rows;
     },
-    error: (message) => {
+    error: (message: string) => {
       return { type: "error", content: { message } };
     },
-    message: (message) => {
+    message: (message: string) => {
       return { type: "message", content: { message } };
     },
 
-    table: (result) => {
+    table: (result: any[]) => {
       if (!result || !result.length)
         return { type: "table", content: { data: [], header: [] } };
       let header = Object.keys(
@@ -75,13 +75,13 @@ export async function POST(req) {
       result = result.map((r) => header.map((h) => r[h] || ""));
       return { type: "table", content: { data: result, header } };
     },
-    chartLine: (result) => {
+    chartLine: (result: any[]) => {
       if (!result || !result.length) return { datasets: [], labels: [] };
 
       let labelKey = Object.keys(result[0])[0];
       let labels = result.map((row) => row[labelKey]);
       let dataSetsLength = Object.values(result[0]).length - 1;
-      let datasets = [...new Array(dataSetsLength)].map(() => ({
+      let datasets: any = [...new Array(dataSetsLength)].map(() => ({
         label: "",
         vals: [],
       }));
@@ -90,10 +90,11 @@ export async function POST(req) {
         let keys = Object.keys(row);
 
         for (let k in vals) {
-          if (k == 0) continue;
-          let val = vals[k];
-          datasets[k - 1].label = keys[k];
-          datasets[k - 1].vals.push(val);
+          let kIndex = parseInt(k);
+          if (kIndex == 0) continue;
+          let val = vals[kIndex];
+          datasets[kIndex - 1].label = keys[k];
+          datasets[kIndex - 1].vals.push(val);
         }
       }
       return { type: "line", content: { datasets: datasets, labels } };
@@ -151,4 +152,4 @@ export async function POST(req) {
       htmlHeader: responseNeuron.htmlHeader,
     },
   });
-}
+};

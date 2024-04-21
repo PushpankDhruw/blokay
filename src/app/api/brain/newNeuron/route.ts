@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { Neuron, User } = db;
+const { Neuron, User }: any = db;
 
-function stringtoKey(str) {
+function stringtoKey(str: string) {
   str = str.replace(/^\s+|\s+$/g, ""); // trim
   str = str.toLowerCase();
 
@@ -20,7 +20,7 @@ function stringtoKey(str) {
   return str;
 }
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
   const data = body.data;
 

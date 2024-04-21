@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { View, User } = db;
+const { View, User }: any = db;
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
 
   let user = await User.findByToken(body._token);
@@ -15,7 +15,7 @@ export async function POST(req) {
     },
   });
 
-  const list = result.map((n) => ({
+  const list = result.map((n: any) => ({
     id: n.id,
     name: n.name,
     icon: n.icon,

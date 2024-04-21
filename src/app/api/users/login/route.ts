@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { User, Session } = db;
+const { User, Session }: any = db;
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
 
   let { username, password } = body.data;

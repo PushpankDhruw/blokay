@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { View, User } = db;
+const { View, User }: any = db;
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
   const data = body.data;
   let user = await User.findByToken(body._token);
@@ -16,7 +16,7 @@ export async function POST(req) {
     },
   });
 
-  const toUpdate = {};
+  const toUpdate: any = {};
   if (data.layout) {
     toUpdate.layout = data.layout;
   }

@@ -86,6 +86,8 @@ export default function EditorApp({ neuron, reload }) {
 
           <Editor
             options={{
+              insertSpaces: true,
+              tabSize: 4,
               fontSize: 14,
               minimap: {
                 enabled: false,

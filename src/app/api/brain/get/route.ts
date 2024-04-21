@@ -3,20 +3,29 @@ import Models from "@/db/index";
 
 let db = new Models();
 
-const { Neuron, User } = db;
+const { Neuron, User }: any = db;
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
 
-  let user = await User.findByToken(body._token);
-  let { neuronId } = body.data;
+  let { neuronId, neuronKey } = body.data;
 
-  const neuron = await Neuron.findOne({
+  let user = await User.findByToken(body._token);
+
+  let queryBuilder: any = {
     where: {
-      id: neuronId,
       businessId: user.businessId,
     },
-  });
+  };
+  if (neuronId) {
+    queryBuilder.where.id = neuronId;
+  }
+
+  if (neuronKey) {
+    queryBuilder.where.key = neuronKey;
+  }
+
+  const neuron = await Neuron.findOne(queryBuilder);
 
   return NextResponse.json({
     data: {
@@ -26,8 +35,6 @@ export async function POST(req) {
         key: neuron.key,
         description: neuron.description,
         filters: neuron.filters,
-        synapse: neuron.synapse,
-        history: neuron.history,
       },
     },
   });

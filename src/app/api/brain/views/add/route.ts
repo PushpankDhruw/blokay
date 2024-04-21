@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { View, User } = db;
+const { View, User }: any = db;
 
-function string_to_slug(str) {
+function string_to_slug(str: string) {
   str = str.replace(/^\s+|\s+$/g, ""); // trim
   str = str.toLowerCase();
 
@@ -23,7 +23,7 @@ function string_to_slug(str) {
   return str;
 }
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
   const data = body.data;
 

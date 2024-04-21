@@ -2,28 +2,29 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { User } = db;
+const { Neuron, User }: any = db;
 
-export async function POST(req) {
+export async function POST(req: any) {
   const body = await req.json();
-
   let user = await User.findByToken(body._token);
 
-  const result = await User.findAll({
+  const result = await Neuron.findAll({
     where: {
       businessId: user.businessId,
     },
   });
 
-  const list = result.map((n) => ({
+  const list = result.map((n: any) => ({
     id: n.id,
-    name: n.name,
-    username: n.username,
+    key: n.key,
+    description: n.description,
+    icon: n.icon,
+    parentId: n.parentId,
   }));
 
   return NextResponse.json({
     data: {
-      Users: list,
+      Neurons: list,
     },
   });
 }
