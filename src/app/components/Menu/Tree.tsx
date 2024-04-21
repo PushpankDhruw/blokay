@@ -8,8 +8,8 @@ import {
 } from "@minoru/react-dnd-treeview";
 import { DndProvider } from "react-dnd";
 
-const createTreeList = (neurons) => {
-  let arr = neurons.slice(0).map((n) => {
+const createTreeList = (neurons: any[]) => {
+  let arr = neurons.slice(0).map((n: any) => {
     return {
       id: n.id,
       parent: n.parentId || "default",
@@ -22,7 +22,7 @@ const createTreeList = (neurons) => {
   return [
     {
       id: "default",
-      parent: null,
+      parent: "",
       droppable: false,
       text: "Blocks",
       data: {},
@@ -31,14 +31,14 @@ const createTreeList = (neurons) => {
   ];
 };
 
-const TreeMenu = ({ onClickNeuron, view, search, neurons, editMode }) => {
+const TreeMenu = ({ onClickNeuron, view, search, neurons, editMode }: any) => {
   const [treeData, setTreeData] = useState(createTreeList(neurons));
 
   useEffect(() => {
     setTreeData(createTreeList(neurons));
   }, [neurons]);
 
-  const handleDrop = (newTreeData) => {
+  const handleDrop = (newTreeData: any[]) => {
     setTreeData(newTreeData);
   };
 
@@ -49,9 +49,9 @@ const TreeMenu = ({ onClickNeuron, view, search, neurons, editMode }) => {
   //     });
   //   };
 
-  const inLayout = (n) => {
+  const inLayout = (n: any) => {
     if (!view?.layout?.length) return false;
-    return view.layout.find((l) => l.i == n.id);
+    return view.layout.find((l: any) => l.i == n.id);
   };
 
   return (
@@ -66,7 +66,7 @@ const TreeMenu = ({ onClickNeuron, view, search, neurons, editMode }) => {
                 }}
                 tree={treeData}
                 enableAnimateExpand={true}
-                rootId={null}
+                rootId={""}
                 onDrop={handleDrop}
                 render={(node, { depth, isOpen, onToggle, hasChild }) => (
                   <div className="node" style={{ marginLeft: depth * 15 }}>
@@ -79,11 +79,10 @@ const TreeMenu = ({ onClickNeuron, view, search, neurons, editMode }) => {
                           onClickNeuron(node);
                         }
                       }}
-                      width={6}
                       onDragStart={(e) => {
                         // console.log(node.id);
                         if (node.data?.key) {
-                          e.dataTransfer.setData("text/plain", node?.id);
+                          e.dataTransfer.setData("text/plain", "" + node?.id);
                         }
                       }}
                     >

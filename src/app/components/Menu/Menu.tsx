@@ -22,7 +22,7 @@ export default function Menu({
             type="text"
             value={search}
             label="Search action"
-            onChange={(s) => {
+            onChange={(s: string) => {
               setSearch(s);
             }}
           />
