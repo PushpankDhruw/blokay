@@ -1,18 +1,18 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { AppModal } from "@/app/components/DS/Index";
+import GridLayout from "react-grid-layout";
+import "/node_modules/react-grid-layout/css/styles.css";
 import {
   viewGet,
   saveView as saveViewApi,
   brainList,
 } from "@/app/services/brain";
+import { AppModal } from "@/app/components/DS/Index";
 import Header from "@/app/components/Header";
+import Menu from "@/app/components/Menu/Menu";
 import AddToView from "./AddToView";
 import Neuron from "../Neuron/Neuron";
 import NeuronAdmin from "../Neuron/Admin/NeuronAdmin";
-import GridLayout from "react-grid-layout";
-import Menu from "@/app/components/Menu/Menu";
-import "/node_modules/react-grid-layout/css/styles.css";
 
 const ViewBrain = ({ slug }: any) => {
   const modalRef: any = useRef();

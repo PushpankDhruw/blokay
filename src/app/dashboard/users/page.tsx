@@ -1,4 +1,4 @@
-import ListViews from "@/app/components/Brain/ListViews";
+import ListUsers from "./components/ListUsers";
 import Menu from "@/app/components/Menu/Menu";
 export default function User() {
   return (
@@ -10,7 +10,7 @@ export default function User() {
           </div>
           <div className="col-span-9 px-10">
             <div className="relative pb-10">
-              <ListViews />
+              <ListUsers />
             </div>
           </div>
         </div>
