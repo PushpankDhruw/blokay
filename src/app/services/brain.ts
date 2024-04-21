@@ -93,7 +93,7 @@ export const viewList = async function () {
   return result.data;
 };
 
-export const brainList = async function (group: any) {
+export const brainList = async function (group: any = null) {
   let data = {
     group,
   };

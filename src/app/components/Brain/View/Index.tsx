@@ -14,17 +14,17 @@ import GridLayout from "react-grid-layout";
 import Menu from "@/app/components/Menu/Menu";
 import "/node_modules/react-grid-layout/css/styles.css";
 
-const ViewBrain = ({ slug }) => {
-  const modalRef = useRef();
-  const [view, setView] = useState(null);
+const ViewBrain = ({ slug }: any) => {
+  const modalRef: any = useRef();
+  const containerRef: any = useRef(null);
+  const [view, setView]: any = useState(null);
   const [neurons, setNeurons] = useState([]);
   const [containerWidth, setContainerWidth] = useState(null);
   const [neuron, setNeuron] = useState(null);
   const [editMode, setEditMode] = useState("functions");
-  const containerRef = useRef(null);
 
   const fetchListNeurons = () => {
-    brainList().then((l) => {
+    brainList().then((l: any) => {
       setNeurons(l.Neurons);
     });
   };
@@ -42,7 +42,7 @@ const ViewBrain = ({ slug }) => {
     fetchListNeurons();
   }, []);
 
-  const saveView = (form) => {
+  const saveView = (form: any) => {
     setView({
       ...view,
       ...form,
@@ -63,7 +63,7 @@ const ViewBrain = ({ slug }) => {
     );
   }, [containerRef.current]);
 
-  const onDrop = (layout, layoutItem, _event) => {
+  const onDrop = (layout: any[], layoutItem: any, _event: any) => {
     let i = _event.dataTransfer.getData("text/plain");
 
     saveView({
@@ -77,13 +77,13 @@ const ViewBrain = ({ slug }) => {
     });
   };
 
-  const clickNeuron = (neuron) => {
+  const clickNeuron = (neuron: any) => {
     setNeuron(neuron);
     modalRef.current.showModal();
   };
 
-  const deleteFromLayout = (n) => {
-    let index = view.layout.findIndex((k) => k.i == n.id);
+  const deleteFromLayout = (n: any) => {
+    let index = view.layout.findIndex((k: any) => k.i == n.id);
     if (index !== -1) {
       let newLayout = view.layout.slice(0);
       newLayout.splice(index, 1);
@@ -91,7 +91,7 @@ const ViewBrain = ({ slug }) => {
     }
   };
 
-  const onCreateNeuron = (n) => {
+  const onCreateNeuron = (n: any) => {
     fetchListNeurons();
     setNeuron(n);
     modalRef.current.showModal();
@@ -162,7 +162,7 @@ const ViewBrain = ({ slug }) => {
                   containerPadding={[0, 0]}
                   onDrop={onDrop}
                   isDroppable={editMode === "grid"}
-                  onLayoutChange={(layout) => {
+                  onLayoutChange={(layout: any[]) => {
                     if (layout.find((item) => isNaN(item.i))) {
                       return;
                     }
@@ -177,7 +177,7 @@ const ViewBrain = ({ slug }) => {
                     });
                   }}
                 >
-                  {(view?.layout || []).map((neuron) => (
+                  {(view?.layout || []).map((neuron: any) => (
                     <div
                       key={neuron.i}
                       data-grid={{
@@ -193,7 +193,9 @@ const ViewBrain = ({ slug }) => {
                         editMode={editMode}
                         neuronId={neuron.i}
                         defaultForm={{}}
-                        deleteFromLayout={(neuron) => deleteFromLayout(neuron)}
+                        deleteFromLayout={(neuron: any) =>
+                          deleteFromLayout(neuron)
+                        }
                       />
                     </div>
                   ))}
@@ -211,7 +213,7 @@ const ViewBrain = ({ slug }) => {
               //TODO
             }}
             neuron={neuron}
-            changeColorModal={(color) => {
+            changeColorModal={(color: string) => {
               modalRef.current.changeColorModal(color);
             }}
           />

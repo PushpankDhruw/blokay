@@ -4,17 +4,17 @@ import TyperPrompt from "@/app/components/TyperPrompt";
 import { AppIcon } from "@/app/components/DS/Index";
 import { rewriteFn } from "@/app/services/brain";
 
-const NeuronChat = ({ neuron, reload }) => {
-  const messagesEndRef = useRef();
-  const [form, setForm] = useState({});
-  const [historyChat, setHistoryChat] = useState([]);
+const NeuronChat = ({ neuron, reload }: any) => {
+  const messagesEndRef: any = useRef();
+  const [form, setForm]: any = useState({});
+  const [historyChat, setHistoryChat]: any[] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchRewriteFn = () => {
     setLoading(true);
     setForm({ prompt: "" });
 
-    setHistoryChat((prevArray) => [
+    setHistoryChat((prevArray: any[]) => [
       ...prevArray,
       {
         message: form.prompt,
@@ -27,7 +27,7 @@ const NeuronChat = ({ neuron, reload }) => {
       neuronId: neuron.id,
     })
       .then(() => {
-        setHistoryChat((prevArray) => [
+        setHistoryChat((prevArray: any) => [
           ...prevArray,
           {
             message: "Ok",
@@ -57,7 +57,7 @@ const NeuronChat = ({ neuron, reload }) => {
     <div>
       {historyChat.length > 0 && (
         <div className="h-96 overflow-y-auto">
-          {historyChat.map((chat, k) => (
+          {historyChat.map((chat: any, k: number) => (
             <div
               key={"chat-" + k}
               className="font-light pb-3 border-b border-stone-200 mb-3 flex items-center gap-3"
@@ -114,7 +114,7 @@ const NeuronChat = ({ neuron, reload }) => {
       )}
       <TyperPrompt
         loading={loading}
-        onChange={(val) => {
+        onChange={(val: string) => {
           setForm({ ...form, prompt: val });
         }}
         value={form.prompt}

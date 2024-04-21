@@ -4,12 +4,12 @@ import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
 import { fetchLogin } from "@/app/services/users";
 
 export default function LoginForm() {
-  const [form, setForm] = useState({});
+  const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window != "undefined" && window.localStorage.getItem("token")) {
-      window.location = "/dashboard";
+      window.location.href = "/dashboard";
     }
   }, []);
 
@@ -22,7 +22,7 @@ export default function LoginForm() {
           if (typeof window != "undefined") {
             window.localStorage.setItem("token", result.User.token);
             window.localStorage.setItem("user", JSON.stringify(result.User));
-            window.location = "/dashboard";
+            window.location.href = "/dashboard";
           }
         }
       })
@@ -34,7 +34,7 @@ export default function LoginForm() {
   return (
     <div className="w-96 ">
       <a href="/">
-        <img src="/logo.svg" class="h-10 mb-10 mx-auto" />
+        <img src="/logo.svg" className="h-10 mb-10 mx-auto" />
       </a>
 
       <form action={login} className="flex flex-col gap-5">
@@ -42,7 +42,7 @@ export default function LoginForm() {
           type="text"
           value={form.username}
           label="Usuario"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, username: val });
           }}
         />
@@ -51,7 +51,7 @@ export default function LoginForm() {
           type="password"
           value={form.password}
           label="Contraseña"
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, password: val });
           }}
         />

@@ -1,13 +1,9 @@
 "use client";
 import React from "react";
 
-function RuntimeTemplate({ html }) {
-  const alert = (a) => {
-    window.alert(a);
-  };
-
+function RuntimeTemplate({ html }: any) {
   // NOTA: Esto asume que el HTML es seguro. Ten precaución con contenido de fuentes no confiables.
-  const createMarkup = (htmlString) => {
+  const createMarkup = (htmlString: string) => {
     return { __html: htmlString };
   };
 

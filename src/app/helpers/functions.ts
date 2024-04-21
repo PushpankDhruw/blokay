@@ -1,15 +1,16 @@
-export const money = (n) => {
+export const money = (n: string) => {
   let Currency = {
     decimals: 0,
     prefix: "$",
     suffix: "",
     thousands: ",",
+    decimal: ".",
   };
 
   let c = Currency.decimals,
     d = Currency.decimal,
     t = Currency.thousands,
-    s = n < 0 ? "-" : "",
+    s = +n < 0 ? "-" : "",
     i = String(parseInt((n = Math.abs(Number(n) || 0).toFixed(c)))),
     j = i.length;
 
@@ -20,7 +21,7 @@ export const money = (n) => {
     i.substr(j).replace(/(\d{3})(?=\d)/g, `$1${t}`) +
     (c
       ? d +
-        Math.abs(n - parseInt(i))
+        Math.abs(+n - parseInt(i))
           .toFixed(c)
           .slice(2)
       : "");

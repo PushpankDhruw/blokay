@@ -3,9 +3,9 @@ import { useRef, useState } from "react";
 import { AppModal, AppButton, AppInput } from "@/app/components/DS/Index";
 import { newNeuron } from "@/app/services/brain";
 
-const AddToView = ({ refresh, save, onCreate = null }) => {
-  const modalRef = useRef();
-  const [form, setForm] = useState({});
+const AddToView = ({ refresh, save, onCreate = null }: any) => {
+  const modalRef: any = useRef();
+  const [form, setForm]: any = useState({});
 
   const handleClickNew = () => {
     modalRef.current.showModal();
@@ -44,7 +44,7 @@ const AddToView = ({ refresh, save, onCreate = null }) => {
         }
       >
         <AppInput
-          onChange={(val) => {
+          onChange={(val: string) => {
             setForm({ ...form, name: val });
           }}
           type="text"

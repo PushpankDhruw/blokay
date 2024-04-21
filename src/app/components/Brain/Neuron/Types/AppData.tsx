@@ -10,15 +10,21 @@ import { money } from "@/app/helpers/functions";
 import Neuron from "../Neuron";
 // import { useSelector } from "react-redux";
 
-function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
-  const modalRef = useRef();
-  const [sort, setSort] = useState(null);
+function AppData({
+  data,
+  onReload,
+  onBack,
+  neuronName = "",
+  autoExecuted,
+}: any) {
+  const modalRef: any = useRef();
+  const [sort, setSort]: any = useState(null);
   const [filters, setFilters] = useState({ search: "" });
-  const [table, setVarTable] = useState({ data: [], header: [] });
-  const [originalTable, setOriginalTable] = useState({});
-  const [page, setPage] = useState(null);
+  const [table, setVarTable]: any = useState({ data: [], header: [] });
+  const [originalTable, setOriginalTable] = useState({ header: [], data: [] });
+  const [page, setPage] = useState(1);
   const [PER_PAGE, setPerPage] = useState(10);
-  const [subneuron, setSubneuron] = useState({ neuronId: null, form: {} });
+  const [subneuron, setSubneuron] = useState({ neuronKey: "", form: {} });
 
   useEffect(() => {
     init();
@@ -28,14 +34,14 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
     init();
   }, [data]);
 
-  const setTable = (data) => {
+  const setTable = (data: any) => {
     setPage(1);
     if (data) {
       setVarTable(data);
       setOriginalTable(JSON.parse(JSON.stringify(table)));
     } else {
-      setVarTable({});
-      setOriginalTable({});
+      setVarTable({ data: [], header: [] });
+      setOriginalTable({ header: [], data: [] });
     }
   };
 
@@ -43,8 +49,8 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
     setTable(data);
   };
 
-  const functions = {
-    openNeuron: ({ neuronKey, form }) => {
+  const functions: any = {
+    openNeuron: ({ neuronKey, form }: { neuronKey: string; form: any }) => {
       setSubneuron({ neuronKey, form });
       modalRef.current.showModal();
     },
@@ -55,29 +61,23 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
   //   // Implementa según sea necesario
   // };
 
-  const download = (file, filename) => {
+  const download = (file: any, filename: string) => {
     let blob = new Blob([file], { type: "text/csv;charset=utf-8;" });
-    if (navigator.msSaveBlob) {
-      // IE 10+
-      navigator.msSaveBlob(blob, filename);
-    } else {
-      var link = document.createElement("a");
-      if (link.download !== undefined) {
-        // feature detection
-        // Browsers that support HTML5 download attribute
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", filename);
-        link.style.visibility = "hidden";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
+
+    let link = document.createElement("a");
+    if (link.download !== undefined) {
+      let url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
   const FileExportContent = () => {
-    let data = table.data.map((row) => {
+    let data = table.data.map((row: any[]) => {
       return row.map((col) => {
         if (typeof col == "object") {
           return col.text;
@@ -104,7 +104,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
     if (sort) {
       let criteria = Object.keys(sort)[0];
       let valCriteria = sort[criteria];
-      let sortTypes = (a, b) => {
+      let sortTypes = (a: any, b: any) => {
         if (typeof a == "string" && typeof b == "string") {
           a = a.toLowerCase();
           b = b.toLowerCase();
@@ -117,7 +117,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
         }
         return a - b;
       };
-      content = content.sort((a, b) => {
+      content = content.sort((a: any, b: any) => {
         let val1 =
           typeof a[criteria] == "object" ? a[criteria]?.text : a[criteria];
         let val2 =
@@ -128,7 +128,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
         return sortTypes(val1, val2);
       });
     }
-    let arr = [];
+    let arr: any = [];
     let from = (page - 1) * PER_PAGE;
     let until = from + PER_PAGE;
     for (let i = from; i < until; i++) {
@@ -151,10 +151,10 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
   const footerRow = () => {
     if (!table?.data?.length) return { sum: [] };
     let actived = false;
-    const sumArray = Array(table.header.length).fill();
+    const sumArray: any = Array(table.header.length).fill(null);
     for (let row of table.data) {
       for (let index in row) {
-        let val = row[index];
+        let val: any = row[index];
         if (typeof val != "object") {
           continue;
         }
@@ -163,7 +163,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
           if (!sumArray[index])
             sumArray[index] = { val: 0, fn: val.fn, type: val.type };
           sumArray[index].val += +val.text;
-        } else if (val.fn == "COUNT") {
+        } else if (val.fn === "COUNT") {
           if (!sumArray[index])
             sumArray[index] = { val: 0, fn: val.fn, type: val.type };
           sumArray[index].val += 1;
@@ -173,7 +173,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
 
     if (!actived) return [];
 
-    return sumArray.map((item, index) => {
+    return sumArray.map((item: any, index: number) => {
       if (!item) return null;
       let val = item.val;
       if (item.type == "money") {
@@ -202,7 +202,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
     setVarTable({ ...table, data: arr });
   };
 
-  const footerRowVals = footerRow();
+  const footerRowVals: any = footerRow();
   const tableContentVals = tableContent();
 
   return (
@@ -232,7 +232,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
                   <AppInput
                     type="text"
                     value={filters.search}
-                    onChange={(val) => {
+                    onChange={(val: string) => {
                       setFilters({ ...filters, search: val });
                       search(val);
                     }}
@@ -270,7 +270,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
                         {table.header && (
                           <thead>
                             <tr>
-                              {table.header.map((th, index) => (
+                              {table.header.map((th: any, index: number) => (
                                 <th
                                   key={index}
                                   className="th-sortable"
@@ -304,9 +304,9 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
 
                         {tableContentVals && (
                           <tbody>
-                            {tableContentVals.map((row, index) => (
+                            {tableContentVals.map((row: any, index: number) => (
                               <tr key={index}>
-                                {row.map((td, k) => (
+                                {row.map((td: any, k: number) => (
                                   <td key={k} className="text-sm">
                                     {typeof td == "object" && (
                                       <>
@@ -341,13 +341,15 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
 
                             {footerRowVals?.length > 0 && (
                               <tr>
-                                {footerRowVals.map((item, index) => (
-                                  <td key={index}>
-                                    <span className="text-sm font-bold">
-                                      <span>{item?.val}</span>
-                                    </span>
-                                  </td>
-                                ))}
+                                {footerRowVals.map(
+                                  (item: any, index: number) => (
+                                    <td key={index}>
+                                      <span className="text-sm font-bold">
+                                        <span>{item?.val}</span>
+                                      </span>
+                                    </td>
+                                  )
+                                )}
                               </tr>
                             )}
                           </tbody>
@@ -370,8 +372,8 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
                     <AppSelect
                       label="Por página"
                       value={PER_PAGE}
-                      onChange={(val) => {
-                        setPerPage(val);
+                      onChange={(val: string) => {
+                        setPerPage(+val);
                       }}
                       type="select"
                       mb="0"
@@ -434,7 +436,7 @@ function AppData({ data, onReload, onBack, neuronName = "", autoExecuted }) {
           <Neuron
             neuronKey={subneuron.neuronKey}
             defaultForm={subneuron.form}
-            onExec={(result) => {
+            onExec={(result: any) => {
               if (
                 !result.type ||
                 result.type == "error" ||

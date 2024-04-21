@@ -6,8 +6,8 @@ const NeuronEdit = ({
   neuron,
   deleteFromLayout = null,
   onEditNeuron = null,
-}) => {
-  const modalDeleteRef = useRef();
+}: any) => {
+  const modalDeleteRef: any = useRef();
 
   return (
     <div className="flex mt-2 gap-1 justify-end select-none absolute top-3 right-3 z-20">

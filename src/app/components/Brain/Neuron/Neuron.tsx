@@ -7,8 +7,6 @@ import {
   AppSelect,
   AppLoader,
 } from "@/app/components/DS/Index";
-// import AppData from "./Types/AppData";
-// import AppLine from "./Types/AppLine";
 import NeuronEdit from "./Admin/NeuronEdit";
 import NeuronResponse from "./NeuronResponse";
 
@@ -21,13 +19,13 @@ const Neuron = ({
   editMode = "",
   deleteFromLayout = null,
   onEditNeuron = null,
-}) => {
+}: any) => {
   const [form, setForm] = useState({ ...defaultForm });
-  const [neuron, setNeuron] = useState(null);
+  const [neuron, setNeuron]: any = useState(null);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const getNeuron = ({ neuronId, neuronKey }) => {
+  const getNeuron = ({ neuronId, neuronKey }: any) => {
     if (!neuronId && !neuronKey) return;
     if (loading) return;
     setLoading(true);
@@ -51,7 +49,7 @@ const Neuron = ({
       });
   };
 
-  const execNeuron = (n) => {
+  const execNeuron = (n: any) => {
     if (loading) return;
     setLoading(true);
 
@@ -77,11 +75,11 @@ const Neuron = ({
       {editMode == "functions" && !loading && (
         <div className="hidden group-hover:block">
           <NeuronEdit
-            onEditNeuron={(n) => {
+            onEditNeuron={(n: any) => {
               onEditNeuron && onEditNeuron(n);
             }}
             neuron={neuron}
-            deleteFromLayout={(neuron) => deleteFromLayout(neuron)}
+            deleteFromLayout={(neuron: any) => deleteFromLayout(neuron)}
           />
         </div>
       )}
@@ -111,12 +109,7 @@ const Neuron = ({
                           className="flex gap-3 items-center"
                           onClick={() => onBack()}
                         >
-                          <div
-                            className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-slate-200"
-                            onClick={() => {
-                              setPage(page - 1);
-                            }}
-                          >
+                          <div className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-slate-200">
                             <svg
                               viewBox="0 0 24 24"
                               className="fill-slate-900 w-full h-full"
@@ -134,41 +127,47 @@ const Neuron = ({
 
                     {neuron.filters?.fields && (
                       <div className="grid grid-cols-2 w-full gap-3 mt-5">
-                        {neuron.filters.fields.map((row, index) => (
-                          <div
-                            key={index}
-                            className={`${
-                              row.grid == 6 ? "col-span-1" : "col-span-2"
-                            } `}
-                          >
-                            {row.type == "select" && (
-                              <AppSelect
-                                value={form[row.name]}
-                                onChange={(val) => {
-                                  setForm({ ...form, [row.name]: val });
-                                }}
-                                label={row.label}
-                              >
-                                <option value="">Selecciona una opción</option>
-                                {row.options.map((opt, index) => (
-                                  <option key={index} value={opt.value}>
-                                    {opt.label}
+                        {neuron.filters.fields.map(
+                          (row: any, index: number) => (
+                            <div
+                              key={index}
+                              className={`${
+                                row.grid == 6 ? "col-span-1" : "col-span-2"
+                              } `}
+                            >
+                              {row.type == "select" && (
+                                <AppSelect
+                                  value={form[row.name]}
+                                  onChange={(val: string) => {
+                                    setForm({ ...form, [row.name]: val });
+                                  }}
+                                  label={row.label}
+                                >
+                                  <option value="">
+                                    Selecciona una opción
                                   </option>
-                                ))}
-                              </AppSelect>
-                            )}
-                            {!["select", "hidden"].includes(row.type) && (
-                              <AppInput
-                                type={row.type}
-                                value={form[row.name]}
-                                onChange={(val) => {
-                                  setForm({ ...form, [row.name]: val });
-                                }}
-                                label={row.label}
-                              />
-                            )}
-                          </div>
-                        ))}
+                                  {row.options.map(
+                                    (opt: any, index: number) => (
+                                      <option key={index} value={opt.value}>
+                                        {opt.label}
+                                      </option>
+                                    )
+                                  )}
+                                </AppSelect>
+                              )}
+                              {!["select", "hidden"].includes(row.type) && (
+                                <AppInput
+                                  type={row.type}
+                                  value={form[row.name]}
+                                  onChange={(val: string) => {
+                                    setForm({ ...form, [row.name]: val });
+                                  }}
+                                  label={row.label}
+                                />
+                              )}
+                            </div>
+                          )
+                        )}
                       </div>
                     )}
 

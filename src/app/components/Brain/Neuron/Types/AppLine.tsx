@@ -31,12 +31,12 @@ const colors = [
   "#4f46e5",
   "#c026d3",
 ];
-function AppLine({ data, title = "" }) {
+function AppLine({ data, title = "", onReload = null }: any) {
   const [hover, setHover] = useState(false);
 
   const dataLine = {
     labels: data.labels,
-    datasets: data.datasets.map((row, index) => ({
+    datasets: data.datasets.map((row: any, index: number) => ({
       pointBorderColor: colors[index],
       label: row.label,
       data: row.vals,
@@ -45,7 +45,7 @@ function AppLine({ data, title = "" }) {
     })),
   };
 
-  const options = {
+  const options: any = {
     hoverBorderWidth: "3",
     pointRadius: [0],
     pointHoverRadius: [5],
@@ -67,7 +67,7 @@ function AppLine({ data, title = "" }) {
     },
   };
 
-  const optionsHover = {
+  const optionsHover: any = {
     ...options,
     pointRadius: [3],
   };

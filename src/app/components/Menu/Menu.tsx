@@ -8,7 +8,7 @@ export default function Menu({
   onClickNeuron = null,
   editMode = null,
   neurons = [],
-}) {
+}: any) {
   const [search, setSearch] = useState("");
 
   return (
