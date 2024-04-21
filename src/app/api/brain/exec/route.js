@@ -1,0 +1,154 @@
+import { NextResponse } from "next/server";
+import fetch from "node-fetch";
+import Models from "@/db/index";
+import { getConnection } from "@/db/connection";
+let db = new Models();
+
+const { Neuron, User, Datasource } = db;
+
+export async function POST(req) {
+  const body = await req.json();
+
+  let { neuronId, format, form } = body.data;
+
+  let d1 = Date.now();
+
+  let user = await User.findByToken(body._token);
+
+  const neuron = await Neuron.findOne({
+    where: {
+      id: neuronId,
+      businessId: user.businessId,
+    },
+  });
+
+  // find by type
+  const datasource = await Datasource.findOne({
+    where: {
+      businessId: user.businessId,
+    },
+  });
+
+  const args = {
+    response: {},
+    files: req.files,
+    form: form,
+    query: async (sql, replacements = {}) => {
+      const conn = await getConnection(db, datasource, "read");
+      return await conn.query(sql, { replacements, type: "SELECT" });
+    },
+
+    fetch: async (endpoint, opts = {}) => {
+      let response = await fetch(endpoint, opts);
+      return await response.json();
+    },
+    insert: async (sql, replacements = {}) => {
+      const conn = await getConnection(db, datasource, "write");
+      return await conn.query(sql, { replacements, type: "INSERT" });
+    },
+    update: async (sql, replacements = {}) => {
+      const conn = await getConnection(db, datasource, "write");
+      return await conn.query(sql, { replacements, type: "UPDATE" });
+    },
+    value: async (sql, replacements = {}) => {
+      const conn = await getConnection(db, datasource, "read");
+      let rows = await conn.query(sql, { replacements, type: "SELECT" });
+      if (rows && rows.length > 0) {
+        rows = Object.values(rows[0]);
+        return rows[0];
+      }
+      return rows;
+    },
+    error: (message) => {
+      return { type: "error", content: { message } };
+    },
+    message: (message) => {
+      return { type: "message", content: { message } };
+    },
+
+    table: (result) => {
+      if (!result || !result.length)
+        return { type: "table", content: { data: [], header: [] } };
+      let header = Object.keys(
+        result.reduce((ac, row) => ({ ...ac, ...row }), {})
+      );
+      result = result.map((r) => header.map((h) => r[h] || ""));
+      return { type: "table", content: { data: result, header } };
+    },
+    chartLine: (result) => {
+      if (!result || !result.length) return { datasets: [], labels: [] };
+
+      let labelKey = Object.keys(result[0])[0];
+      let labels = result.map((row) => row[labelKey]);
+      let dataSetsLength = Object.values(result[0]).length - 1;
+      let datasets = [...new Array(dataSetsLength)].map(() => ({
+        label: "",
+        vals: [],
+      }));
+      for (let row of result) {
+        let vals = Object.values(row);
+        let keys = Object.keys(row);
+
+        for (let k in vals) {
+          if (k == 0) continue;
+          let val = vals[k];
+          datasets[k - 1].label = keys[k];
+          datasets[k - 1].vals.push(val);
+        }
+      }
+      return { type: "line", content: { datasets: datasets, labels } };
+    },
+  };
+
+  let content = `${neuron.executable} \n return fn;`;
+  let responsePromise = new Function("args", content)();
+
+  let responseNeuron = await responsePromise(args);
+  /*
+  if (format == "excel" && responseNeuron.content.type == "table") {
+    let content = responseNeuron.content.content;
+    let dataExcel = [
+      content.header,
+      ...content.data.map((row) =>
+        row.map((col) => {
+          let val = null;
+          if (typeof col == "string" || typeof col == "number") {
+            val = col;
+          } else if (col?.text || col?.type) {
+            val = col.text;
+          } else {
+            console.log("TYPE not defined EXCEL GENERATION", col);
+          }
+          return val;
+        })
+      ),
+    ];
+
+    let worksheet = XLSX.utils.aoa_to_sheet(dataExcel);
+    let workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
+
+    const buf = XLSX.write(workbook, { type: "buffer" });
+    res.writeHead(200, {
+      "Content-Type": "application/vnd.ms-excel",
+      "Content-disposition": `attachment;filename=${encodeURIComponent(
+        neuron.description
+      )}.xlsx`,
+      "Content-Length": buf.length,
+    });
+    return res.end(Buffer.from(buf, "binary"));
+  }
+*/
+
+  await neuron.update({
+    executions: db.sequelize.literal(`executions + 1`),
+    timeMs: db.sequelize.literal(`timeMs + ${Date.now() - d1}`),
+  });
+
+  return NextResponse.json({
+    data: {
+      response: responseNeuron,
+      htmlHeader: responseNeuron.htmlHeader,
+    },
+  });
+}

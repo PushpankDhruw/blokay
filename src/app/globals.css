@@ -1,0 +1,378 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* latin-ext */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQspDqW1KX7wmA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQUpDqW1KX4.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQspDqW1KX7wmA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQUpDqW1KX4.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQspDqW1KX7wmA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQUpDqW1KX4.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQspDqW1KX7wmA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQUpDqW1KX4.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQspDqW1KX7wmA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sora/v12/xMQbuFFYT72XzQUpDqW1KX4.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+* {
+  font-family: "Sora", sans-serif;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.menu-responsive li a {
+  @apply p-2 block hover:bg-gray-100 rounded-lg text-gray-600;
+}
+
+.plus {
+  @apply rounded-lg border-gray-200 flex items-center gap-3 md:px-5 px-3 py-2 mr-auto;
+}
+.plus .icon {
+  flex-shrink: 0;
+}
+.plus .icon img {
+  @apply md:w-12 w-10;
+}
+.plus .title {
+  @apply font-bold text-base md:text-xl text-slate-700;
+}
+.plus .description {
+  @apply md:text-sm text-xs font-light text-slate-500;
+}
+.bg-main {
+  @apply bg-yellow-500;
+}
+.bg-pets {
+  @apply bg-slate-100;
+  background-image: url("/bg-pets.png");
+}
+.faq-bg {
+  background-image: url("/faq-bg.png");
+  background-position: 120% 30%;
+  background-repeat: no-repeat;
+  background-size: auto 200%;
+}
+@media (max-width: 600px) {
+  .faq-bg {
+    background-position: 40vw 100px;
+    background-size: auto 100%;
+  }
+  /* .dogsec {
+    background-size: auto 100px;
+  } */
+}
+
+.icon-btn {
+  fill: white;
+}
+.icon-btn.secondary {
+  @apply fill-gray-600;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.car-move {
+  animation: moveCar linear infinite 10s;
+}
+@keyframes moveCar {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes translateinfiniteLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * 50%));
+  }
+}
+@keyframes translateinfiniteRight {
+  0% {
+    transform: translateX(calc(-1 * 50%));
+  }
+  100% {
+    transform: translateX(calc(0));
+  }
+}
+div.highway-slider {
+  @apply flex justify-center w-full;
+}
+
+div.highway-slider div.highway-barrier {
+  @apply overflow-hidden relative py-3 md:py-4;
+  max-width: 100vw;
+}
+
+div.highway-slider .highway-lane {
+  @apply flex h-full;
+}
+
+div.highway-barrier .highway-lane > div {
+  transform: translate3d(0, 0, 0);
+}
+
+div.highway-barrier .highway-lane {
+  width: calc(var(--widthSlide) * 2);
+}
+
+div.highway-barrier .highway-lane.right > div {
+  animation: translateinfiniteRight var(--time) linear infinite;
+}
+
+div.highway-barrier .highway-lane.left > div {
+  animation: translateinfiniteLeft var(--time) linear infinite;
+}
+
+div.highway-barrier .highway-lane > div:hover {
+  animation-play-state: paused;
+}
+
+.page-content .title,
+.page-content h2 {
+  @apply text-2xl mb-5;
+}
+.page-content p,
+.page-content li {
+  @apply font-light mb-5;
+}
+
+.page-content ul {
+  @apply font-light pl-5 mb-5;
+}
+.bg-main-section {
+  background-image: url(https://assets-global.website-files.com/645a9acecda2e0594fac6126/6580a563d237ee85c9237ccb_gradient-noise-purple-azure.png);
+  background-position: center -50vh;
+  background-repeat: no-repeat;
+}
+
+.table {
+  @apply bg-stone-100 p-4 z-0 flex flex-col relative justify-between gap-4 overflow-auto rounded-2xl shadow w-full;
+}
+.table table {
+  @apply w-full text-gray-800;
+}
+.table table thead tr th {
+  @apply px-3 text-xs text-gray-500 bg-gray-200 uppercase h-10;
+}
+.table table thead tr th:first-child {
+  @apply rounded-l-xl;
+}
+.table table thead tr th:last-child {
+  @apply rounded-r-xl;
+}
+
+.table table tbody tr td {
+  @apply p-3;
+}
+
+.table table tbody tr {
+  /* @apply bg-stone-100; */
+}
+.table table tbody tr:first-child {
+  @apply rounded-t-xl;
+}
+.table table tbody tr:last-child {
+  @apply rounded-b-xl;
+}
+
+.table table tbody tr td,
+.table table tbody tr th {
+  @apply font-light;
+}
+
+.table table tbody tr td a {
+  @apply text-sky-600;
+}
+
+.table table tbody button {
+  @apply bg-stone-200 hover:bg-stone-300 text-stone-600 py-1 px-3 text-sm rounded-lg;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  width: 8px;
+  height: 8px;
+  bottom: 6px;
+  right: 7px;
+}
+
+.tabs {
+  @apply flex mb-5 justify-center gap-1 p-2 rounded-xl border-2 border-stone-100 font-light text-stone-600;
+}
+.tabs .tab {
+  @apply px-3 py-1 cursor-pointer rounded-lg   flex  items-center gap-3;
+}
+
+.tabs .tab.active {
+  @apply bg-stone-200;
+}
+.tabs .tab svg {
+  @apply fill-stone-600 size-6;
+}
+
+.tabs .tab:not(.active) {
+  @apply hover:bg-stone-100;
+}
+
+.tabs.dark {
+  @apply border-gray-600 font-light text-slate-200;
+}
+
+.tabs.dark .tab.active {
+  @apply bg-gray-700;
+}
+
+.tabs.dark .tab svg {
+  @apply fill-slate-200;
+}
+
+.tabs.dark .tab:not(.active) {
+  @apply hover:bg-slate-800;
+}
+
+.preview-drag > .node {
+  @apply border-b-2 border-sky-500;
+}

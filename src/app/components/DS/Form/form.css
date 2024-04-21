@@ -1,0 +1,24 @@
+.app-input {
+  @apply pb-1 pt-4 px-5 border-stone-100  outline-none  rounded-xl border-2 w-full text-gray-700 font-medium appearance-none	 focus:bg-gray-100 bg-stone-100;
+}
+.app-input:disabled {
+  @apply bg-gray-200 text-gray-400 border-gray-200;
+}
+.app-input::-webkit-input-placeholder,
+.app-input::placeholder {
+  color: transparent;
+}
+.app-input:focus::-webkit-input-placeholder,
+.app-input:focus::placeholder {
+  @apply text-gray-700;
+  /* color: red;; */
+}
+
+.app-input.error {
+  @apply border-red-500;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
