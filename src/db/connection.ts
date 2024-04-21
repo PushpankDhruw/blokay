@@ -1,8 +1,8 @@
-const connections = {};
+const connections: any = {};
 const dialects = {
   mysql2: require("mysql2"),
 };
-export const getConnection = (db, datasource, profile) => {
+export const getConnection = (db: any, datasource: any, profile: string) => {
   let dataSourceId = datasource.id;
   return new Promise((resolve, reject) => {
     if (connections[dataSourceId]) {
@@ -19,7 +19,7 @@ export const getConnection = (db, datasource, profile) => {
           connections[dataSourceId].lastExec = Date.now();
           return connections[dataSourceId].conn;
         },
-        onReady: async (cb) => {
+        onReady: async (cb: any) => {
           try {
             // if its first time
             if (connections[dataSourceId].status == "connected") {
@@ -34,7 +34,7 @@ export const getConnection = (db, datasource, profile) => {
                 dialectModule: dialects.mysql2,
                 operatorsAliases: db.Op,
                 benchmark: true,
-                logging: (str, time) => {
+                logging: (str: string, time: number) => {
                   if (time > 2000) {
                     db._QueryExecution.create({
                       // name: "LowQuery",
@@ -51,7 +51,7 @@ export const getConnection = (db, datasource, profile) => {
 
               let tailConnections =
                 connections[dataSourceId].tailConnections.slice(0);
-              tailConnections.map((callback) => {
+              tailConnections.map((callback: any) => {
                 callback(conn);
               });
 
@@ -61,7 +61,7 @@ export const getConnection = (db, datasource, profile) => {
             }
             //if it's connecting
             else if (connections[dataSourceId].status == "connecting") {
-              connections[dataSourceId].tailConnections.push((conn) => {
+              connections[dataSourceId].tailConnections.push((conn: any) => {
                 cb(conn);
               });
             }
