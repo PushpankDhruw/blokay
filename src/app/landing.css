@@ -1,0 +1,105 @@
+.guides {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.guides .guides-container {
+  display: grid;
+  position: relative;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.guides .guides-container.isMobile {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  grid: 1fr / repeat(1, 1fr);
+  grid-auto-flow: column;
+}
+
+.guides .guides-container.desktop {
+  grid: 1fr / repeat(3, 1fr);
+  grid-auto-flow: column;
+}
+
+.guides .guides-container .guide {
+  width: 1px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    #d6d3d1,
+    #d6d3d1 50%,
+    transparent 0,
+    transparent
+  );
+  background-size: 1px 8px;
+}
+
+.blur-circle {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(50px);
+  opacity: 0.3;
+}
+
+.card-border-animated {
+  --angle: 0deg;
+  background: linear-gradient(#fff, #fff) padding-box,
+    conic-gradient(from var(--angle), #e5e7eb, #000) border-box;
+  border: 3px solid transparent;
+  animation: rotate-gradient 3s linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@keyframes rotate-gradient {
+  0% {
+    --angle: 0deg;
+  }
+
+  to {
+    --angle: 360deg;
+  }
+}
+
+.scroll-underline {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.m-scroll {
+  overflow: hidden;
+  height: 100%;
+  white-space: nowrap;
+  animation: scrollText 10s infinite linear;
+  margin: 0;
+  font-size: 0;
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+@keyframes scrollText {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
