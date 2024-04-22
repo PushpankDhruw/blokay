@@ -1,8 +1,9 @@
 // import { redirect } from "next/navigation";
 import AppHeader from "@/app/components/UI/AppHeader";
 import AppFooter from "@/app/components/UI/AppFooter";
-import { AppButton } from "./components/DS/Index";
+import { AppButton, AppIcon } from "./components/DS/Index";
 import Underline from "@/app/components/UI/Underline";
+import PageFeatures from "@/app/components/UI/PageFeatures";
 import "./landing.css";
 export default async function Home({}) {
   // redirect("/login");
@@ -10,6 +11,9 @@ export default async function Home({}) {
   return (
     <div className="">
       <div className="min-h-screen relative container px-0">
+        <div className="w-1/3 mx-auto">
+          <div className="bg-landing"></div>
+        </div>
         <AppHeader />
         <div className="guides">
           <div className="guides-container desktop">
@@ -22,13 +26,14 @@ export default async function Home({}) {
 
         <div className="relative z-10">
           <div>
-            <div className="w-full text-center py-20">
+            <div className="w-full text-center pb-20 pt-10">
               <div className="mb-5">
                 <h1 className="text-black font-bold lg:w-full text-3xl md:text-5xl lg:text-7xl tracking-tighter xl:pr-10">
-                  Do you want to hire the best talent?
+                  Dashboards y APIS
+                  <br /> <span className="font-light italic">en segundos</span>
                 </h1>
 
-                <div className="w-1/3 mx-auto overflow-hidden">
+                <div className="w-1/3 mt-5 mx-auto overflow-hidden">
                   <Underline />
                 </div>
               </div>
@@ -40,13 +45,13 @@ export default async function Home({}) {
                 </div>
               </div>
               <div className="font-light">
-                <div className="text-sm mx-auto lg:text-lg md:text-lg mt-5 text-neutral-600 font-light lg:w-2/3 mb-5">
-                  We offer EOR solutions to streamline remote hiring,
-                  simplifying your global expansion.
+                <div className="text-sm mx-auto lg:text-lg md:text-lg mt-5 text-neutral-600 font-light lg:w-1/3 mb-5 px-3">
+                  Create dashboards, backoffices, API endpoints in seconds to
+                  your app
                 </div>
                 <AppButton
                   icon="developer"
-                  text="Start"
+                  text="Join beta"
                   variant="primary"
                   size="lg"
                   className="mx-auto"
@@ -55,9 +60,11 @@ export default async function Home({}) {
             </div>
           </div>
 
+          <PageFeatures />
+
           <div className="grid grid-cols-3 mb-10 text-stone-600">
             <div>
-              <div className="mx-3 px-5 rounded-2xl border-2 border-stone-200 py-10 group hover:shadow-xl transition">
+              <div className="mx-3 px-5 rounded-2xl border-2 hover:bg-white border-stone-200 py-10 group hover:shadow-xl transition">
                 <img
                   src="/website/logo-bemovil.svg"
                   className="grayscale group-hover:grayscale-0 h-8"
@@ -88,7 +95,7 @@ export default async function Home({}) {
               </div>
             </div>
             <div>
-              <div className="mx-3 px-5 rounded-2xl border-2 border-stone-200 py-10 group hover:shadow-xl transition">
+              <div className="mx-3 px-5 rounded-2xl border-2 hover:bg-white border-stone-200 py-10 group hover:shadow-xl transition">
                 <img
                   src="/website/logo-pronty.svg"
                   className="grayscale group-hover:grayscale-0 h-8"
@@ -118,7 +125,7 @@ export default async function Home({}) {
               </div>
             </div>
             <div>
-              <div className="mx-3 px-5 rounded-2xl border-2 border-stone-200 py-10 group hover:shadow-xl transition">
+              <div className="mx-3 px-5 rounded-2xl border-2 hover:bg-white border-stone-200 py-10 group hover:shadow-xl transition">
                 <img
                   src="/website/logo-vexo.svg"
                   className="grayscale group-hover:grayscale-0 h-8"
