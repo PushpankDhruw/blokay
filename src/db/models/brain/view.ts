@@ -7,6 +7,7 @@ const model = (sequelize: any, DataTypes: any) => {
       name: { type: DataTypes.STRING, allowNull: true },
       slug: { type: DataTypes.STRING, allowNull: true },
       businessId: { type: DataTypes.INTEGER, allowNull: true },
+      viewGroupId: { type: DataTypes.INTEGER, allowNull: true },
       layout: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -35,6 +36,12 @@ const model = (sequelize: any, DataTypes: any) => {
       tableName: "views",
     }
   );
+
+  View.associate = function (models: any) {
+    models.View.belongsTo(models.ViewGroup);
+    // models.Neuron.hasMany(models.Neuron);
+    // models.Neuron.belongsTo(models.RolPrivilege);
+  };
 
   return View;
 };

@@ -33,4 +33,4 @@ If you encounter any issues or have any questions, please don't hesitate to [con
 
 ## License
 
-This project is licensed under the [AGPL-3.0 license](LICENSE).
+This project is licensed under the [AGPL-3.0 license](LICENSE.md).

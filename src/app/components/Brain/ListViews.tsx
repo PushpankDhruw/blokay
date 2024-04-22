@@ -43,13 +43,29 @@ function ListViews({}) {
 
   const viewsComputed = () => {
     const s: string = form.search.toLowerCase();
-    return views.filter((view: any) => {
-      return view.name.toLowerCase().includes(s);
-    });
+    return views
+      .map((view: any) => {
+        return {
+          ...view,
+          Views: view.Views.filter((v: any) => {
+            return (
+              (v.name && v.name.toLowerCase().includes(s)) ||
+              (view.name && view.name.toLowerCase().includes(s))
+            );
+          }),
+        };
+      })
+      .filter((view: any) => {
+        return view.Views.length > 0;
+      });
   };
 
   const onLimit = () => {
-    return views.length >= 10;
+    if (views.length <= 0) return false;
+    const created = views.reduce((acc: any, view: any) => {
+      return (acc += view.Views.length);
+    }, 0);
+    return created >= 10;
   };
 
   return (
@@ -91,16 +107,23 @@ function ListViews({}) {
 
             <h2 className="text-stone-800 text-2xl mb-5 ">My views</h2>
 
-            <div className="flex flex-wrap items-center gap-5">
+            <div className="flex flex-col  gap-5">
               {viewsComputed().map((view: any) => (
-                <a
-                  href={"/dashboard/view/" + view.slug}
-                  key={view.id}
-                  className="bg-white shadow-sm border-2 border-transparent transition	 hover:border-stone-600 px-5 py-5 rounded-xl flex items-center gap-3 hover:bg-stone-50"
-                >
-                  {/* <AppIcon icon={view.icon} className="size-8" /> */}
-                  <div className="font-light">{view.name}</div>
-                </a>
+                <div>
+                  {view.name && <h2 className="mb-5 font-bold">{view.name}</h2>}
+                  <div className="flex flex-wrap items-center gap-5">
+                    {view.Views.map((view: any) => (
+                      <a
+                        href={"/dashboard/view/" + view.slug}
+                        key={view.id}
+                        className="bg-white shadow-sm border-2 border-transparent transition	 hover:border-stone-600 px-5 py-5 rounded-xl flex items-center gap-3 hover:bg-stone-50"
+                      >
+                        {/* <AppIcon icon={view.icon} className="size-8" /> */}
+                        <div className="font-light">{view.name}</div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

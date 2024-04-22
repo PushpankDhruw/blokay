@@ -7,6 +7,7 @@ import View from "./models/brain/view";
 import Session from "./models/user/session";
 import User from "./models/user/user";
 import Datasource from "./models/brain/datasource";
+import ViewGroup from "./models/brain/view-group";
 
 class DB {
   [index: string]: any; //index signature
@@ -17,6 +18,7 @@ class DB {
     NeuronGroup,
     Neuron,
     View,
+    ViewGroup,
     Session,
     User,
   };
