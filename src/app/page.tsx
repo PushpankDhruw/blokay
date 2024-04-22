@@ -1,13 +1,11 @@
 // import { redirect } from "next/navigation";
 import AppHeader from "@/app/components/UI/AppHeader";
 import AppFooter from "@/app/components/UI/AppFooter";
-import { AppButton, AppIcon } from "./components/DS/Index";
+import { AppButton } from "./components/DS/Index";
 import Underline from "@/app/components/UI/Underline";
 import PageFeatures from "@/app/components/UI/PageFeatures";
 import "./landing.css";
 export default async function Home({}) {
-  // redirect("/login");
-
   return (
     <div className="">
       <div className="min-h-screen relative container px-0">
@@ -26,7 +24,7 @@ export default async function Home({}) {
 
         <div className="relative z-10">
           <div>
-            <div className="w-full text-center pb-20 pt-10">
+            <div className="w-full text-center pb-10 pt-5 md:pb-20 md:pt-10">
               <div className="mb-5">
                 <h1 className="text-black font-bold lg:w-full text-3xl md:text-5xl lg:text-7xl tracking-tighter xl:pr-10">
                   Dashboards y APIS

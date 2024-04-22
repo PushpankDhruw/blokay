@@ -5,7 +5,7 @@ export default function PageFeatures({}) {
   const [view, setView] = useState("chat");
   return (
     <div
-      className="border mx-3 border-stone-300 rounded-xl pt-10 mb-20 overflow-hidden"
+      className="border mx-3 border-stone-300 rounded-xl pt-5 md:pt-10 mb-20 overflow-hidden"
       style={{
         backgroundImage:
           " linear-gradient(to bottom, #fcf3e6, rgb(215 236 248 / 62%))",
@@ -117,27 +117,27 @@ export default function PageFeatures({}) {
           </div>
         </div>
         <div className="px-3 ml-4 divide-y divide-black/10 row-start-1">
-          <div className="py-5 px-10">
+          <div className="py-3 lg:py-5 px-5 lg:px-10">
             <div>Genera API para tus apps</div>
             <div className="font-light text-sm mt-3">
               Genera con inteligencia artificial tus endpoints y conectate con
               React, Svelte, Vue, JS, etc
             </div>
           </div>
-          <div className="py-5 px-10">
+          <div className="py-3 lg:py-5 px-5 lg:px-10">
             <div>Genera Dashboards</div>
             <div className="font-light text-sm mt-3">
               Construye herramientas prácticas sin escribir una sola linea de
               código
             </div>
           </div>
-          <div className="py-5 px-10">
+          <div className="py-3 lg:py-5 px-5 lg:px-10">
             <div>Controla los privilegios</div>
             <div className="font-light text-sm mt-3">
               Maneja granularmente los accesos a cada herramienta creada
             </div>
           </div>
-          <div className="py-5 px-10">
+          <div className="py-3 lg:py-5 px-5 lg:px-10">
             <div>Versiona tu aplicación</div>
             <div className="font-light text-sm mt-3">
               Cada herramienta construida se guarda como backup en GitHub
