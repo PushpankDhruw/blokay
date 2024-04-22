@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-const AppFAQ = function (props) {
+const AppFAQ = function (props: any) {
   const { title, color, image, children } = props;
 
   const [show, setShow] = useState(false);
@@ -40,16 +40,3 @@ const AppFAQ = function (props) {
 };
 
 export default AppFAQ;
-
-// <style>
-// .image-faq {
-//   background-repeat: no-repeat;
-//   background-position: top left;
-//   background-size: 70px auto;
-// }
-// /* @media (max-width: 600px) {
-//   .image-faq {
-//     background-size: auto 90px;
-//   }
-// } */
-// </style>

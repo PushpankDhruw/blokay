@@ -11,7 +11,7 @@ export default function UpgradePlan() {
       }}
     >
       <div className="lg:w-1/3 min-w-96 rounded-xl bg-slate-900/50 backdrop-blur-md border-slate-800 px-5 py-10 shadow-lg mx-auto">
-        <h2 className="font-bold text-2xl">Upgrade your plan</h2>
+        <h2 className="font-bold text-2xl">Add a credit card</h2>
 
         <div className="mb-5 font-light mt-5">
           <ul className="text-sm flex flex-col gap-3">
@@ -30,7 +30,7 @@ export default function UpgradePlan() {
           </ul>
         </div>
         <AppButton
-          text="Yes, upgrade"
+          text="add a card"
           variant="secondary"
           size="lg"
           className="w-full"

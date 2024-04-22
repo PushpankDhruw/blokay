@@ -1,8 +1,11 @@
 "use client";
 import { forwardRef, useState, useImperativeHandle } from "react";
-import { updateLead } from "../../services/lead";
+// import { updateLead } from "../../services/lead";
 
-const AppStepper = forwardRef(function StepperInside({ steps, onFinish }, ref) {
+const AppStepper = forwardRef(function StepperInside(
+  { steps, onFinish }: any,
+  ref
+) {
   const stepsArray = Object.keys(steps);
   const [stepIndex, setStepIndex] = useState(0);
   const [data, setData] = useState({});
@@ -11,15 +14,15 @@ const AppStepper = forwardRef(function StepperInside({ steps, onFinish }, ref) {
     let newVal = { ...data, ...appendData };
     setData(newVal);
 
-    updateLead({
-      leadToken: window.localStorage.getItem("leadToken") || null,
-      ad: null,
-      callToAction: null,
-      keyword: null,
-      referred: null,
-      location: window.location.href,
-      form: newVal,
-    });
+    // updateLead({
+    //   leadToken: window.localStorage.getItem("leadToken") || null,
+    //   ad: null,
+    //   callToAction: null,
+    //   keyword: null,
+    //   referred: null,
+    //   location: window.location.href,
+    //   form: newVal,
+    // });
   };
 
   const next = (appendData = {}) => {
@@ -37,7 +40,7 @@ const AppStepper = forwardRef(function StepperInside({ steps, onFinish }, ref) {
     }
   };
 
-  const goTo = (k, appendData = {}) => {
+  const goTo = (k: any, appendData = {}) => {
     save(appendData);
     let index = stepsArray.findIndex((el) => el == k);
     if (steps[k] && index) {

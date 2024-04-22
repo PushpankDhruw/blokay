@@ -2,7 +2,7 @@ import ListUsers from "./components/ListUsers";
 import Menu from "@/app/components/Menu/Menu";
 export default function User() {
   return (
-    <div className="min-h-screen  bg-stone-200 pt-8">
+    <div className="min-h-screen   pt-8">
       <div className="mx-auto container">
         <div className="grid grid-cols-12 gap-5">
           <div className="col-span-3">

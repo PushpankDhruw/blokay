@@ -6,7 +6,7 @@ export default function AppLoop({
   time = 20,
   direction = "left",
   children,
-}) {
+}: any) {
   const [width, setWidth] = useState(0);
   useEffect(() => {
     let el = document.getElementById("firstSlot");
@@ -15,21 +15,19 @@ export default function AppLoop({
     }
   }, []);
 
+  const styled = {
+    "--widthSlide": `${width}px`,
+    "--time": `${time}s`,
+    gap: `${separation}px`,
+  };
+
   return (
     <div>
       <section className="slide-option">
         <div className="highway-slider">
           <div className="highway-barrier">
             <div className={`highway-lane ${direction}`}>
-              <div
-                id="firstSlot"
-                className="flex"
-                style={{
-                  "--widthSlide": `${width}px`,
-                  "--time": `${time}s`,
-                  gap: `${separation}px`,
-                }}
-              >
+              <div id="firstSlot" className="flex" style={styled}>
                 {children}
                 {children}
               </div>

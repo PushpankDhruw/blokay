@@ -26,7 +26,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-96 mx-auto ">
+    <div className="w-96 mx-auto bg-white py-10 rounded-xl px-5 shadow-sm border border-stone-300">
       <h2 className="text-lg text-stone-700 font-bold mb-5">
         Agregar una nueva tarjeta
       </h2>

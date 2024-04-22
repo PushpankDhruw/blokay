@@ -33,9 +33,17 @@ export default function Users() {
       {!loading && (
         <div>
           {users.length > 0 && (
-            <div className="bg-white px-5 py-3 rounded-lg shadow-sm border border-stone-300">
+            <div className="bg-white px-3 py-3 flex flex-col gap-4 rounded-lg shadow-sm border border-stone-300">
               {users.map((user: any) => (
-                <div key={user.id}>{user.name}</div>
+                <div
+                  key={user.id}
+                  className="px-5 py-2 rounded-lg hover:bg-stone-100 flex items-center gap-3"
+                >
+                  <div className="size-10 bg-stone-200 flex items-center justify-center rounded-full">
+                    <img src="/logo.svg" className="w-full h-full" />
+                  </div>
+                  <div>{user.name}</div>
+                </div>
               ))}
             </div>
           )}

@@ -2,8 +2,8 @@
 import { useRef } from "react";
 import { AppIcon, AppModal, AppButton } from "../DS/Index";
 
-function AppMenuResponsive({ variant }) {
-  const modalRef = useRef();
+function AppMenuResponsive({ variant }: any) {
+  const modalRef: any = useRef();
   const handleClick = () => {
     modalRef.current.showModal();
   };
