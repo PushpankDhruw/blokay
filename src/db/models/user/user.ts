@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import moment from "moment";
+// import moment from "moment";
 // import speakeasy from "speakeasy";
 
 export default (sequelize: any, DataTypes: any) => {
@@ -161,9 +161,10 @@ export default (sequelize: any, DataTypes: any) => {
     let db = sequelize.models;
     let moreTime = await db.Parameter.findByKey("TWO_FACTOR_ACTIVE");
     let twoFactorCode = Math.floor(100000 + Math.random() * 999999);
-    let twoFactorExpiration = moment()
-      .add(moreTime, "minutes")
-      .format("YYYY-MM-DD HH:mm:ss");
+    // let twoFactorExpiration = moment()
+    //   .add(moreTime, "minutes")
+    //   .format("YYYY-MM-DD HH:mm:ss");
+    let twoFactorExpiration = null;
 
     await this.update({
       twoFactorCode,
@@ -185,7 +186,8 @@ export default (sequelize: any, DataTypes: any) => {
   User.prototype.checkActiveTwoFactor = async function () {
     let db = sequelize.models;
     let moreTime = await db.Parameter.findByKey("TWO_FACTOR_ACTIVE");
-    let difference = moment(this.twoFactorExpiration).diff(moment(), "minutes");
+    // let difference = moment(this.twoFactorExpiration).diff(moment(), "minutes");
+    let difference = 10;
     return difference > moreTime;
   };
   /**
@@ -208,9 +210,10 @@ export default (sequelize: any, DataTypes: any) => {
     let restoreToken = Math.floor(100000 + Math.random() * 900000);
 
     // let restoreToken = Math.random().toString(36).substring();
-    let restoreTokenExpiration = moment()
-      .add(60, "minutes")
-      .format("YYYY-MM-DD HH:mm:ss");
+    // let restoreTokenExpiration = moment()
+    //   .add(60, "minutes")
+    //   .format("YYYY-MM-DD HH:mm:ss");
+    let restoreTokenExpiration = null;
     await this.update({
       restoreToken,
       restoreTokenExpiration,
@@ -231,10 +234,11 @@ export default (sequelize: any, DataTypes: any) => {
   User.prototype.checkActiveRestoreToken = async function () {
     let db = sequelize.models;
     let moreTime = await db.Parameter.findByKey("RESTORE_TOKEN_ACTIVE");
-    let difference = moment(this.restoreTokenExpiration).diff(
-      moment(),
-      "minutes"
-    );
+    // let difference = moment(this.restoreTokenExpiration).diff(
+    //   moment(),
+    //   "minutes"
+    // );
+    let difference = 10;
     return difference > moreTime; // La diferencia es mayor a la limite del parametro
   };
   /**

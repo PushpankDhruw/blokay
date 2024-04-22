@@ -34,7 +34,7 @@ export const POST = async (req: any) => {
     files: req.files,
     form: form,
     query: async (sql: string, replacements = {}) => {
-      const conn = await getConnection(db, datasource, "read");
+      const conn: any = await getConnection(db, datasource, "read");
       return await conn.query(sql, { replacements, type: "SELECT" });
     },
 
@@ -43,15 +43,15 @@ export const POST = async (req: any) => {
       return await response.json();
     },
     insert: async (sql: string, replacements = {}) => {
-      const conn = await getConnection(db, datasource, "write");
+      const conn: any = await getConnection(db, datasource, "write");
       return await conn.query(sql, { replacements, type: "INSERT" });
     },
     update: async (sql: string, replacements = {}) => {
-      const conn = await getConnection(db, datasource, "write");
+      const conn: any = await getConnection(db, datasource, "write");
       return await conn.query(sql, { replacements, type: "UPDATE" });
     },
     value: async (sql: string, replacements = {}) => {
-      const conn = await getConnection(db, datasource, "read");
+      const conn: any = await getConnection(db, datasource, "read");
       let rows = await conn.query(sql, { replacements, type: "SELECT" });
       if (rows && rows.length > 0) {
         rows = Object.values(rows[0]);

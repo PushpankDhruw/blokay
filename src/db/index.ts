@@ -8,38 +8,48 @@ import Session from "./models/user/session";
 import User from "./models/user/user";
 import Datasource from "./models/brain/datasource";
 
-function Models(this: any) {
-  this.models = {
-    Datasource,
-    _QueryExecution,
-    NeuronGroup,
-    Neuron,
-    View,
-    User,
-    Session,
-  };
+class DB {
+  public _QueryExecution: any = null;
+  public Datasource = null;
+  public NeuronGroup = null;
+  public Neuron = null;
+  public View = null;
+  public User = null;
+  public Session = null;
 
-  this.sequelize = null;
-  this.Sequelize = Sequelize;
-  this.Op = Sequelize.Op;
+  public sequelize: any = null;
+  public Sequelize: any = Sequelize;
+  public Op: any = Sequelize.Op;
 
-  this.associate = function () {
-    let names = Object.keys(this.models);
-    for (let i = 0; i < names.length; i++) {
-      let modelData = this.models[names[i]];
-      let model = modelData(this.sequelize, this.Sequelize.DataTypes);
-      this[model.name] = model;
-    }
+  constructor() {
+    this.connect();
+    this.createModels();
+    this.associate();
+  }
 
-    for (var i = 0; i < names.length; i++) {
-      let modelName = names[i];
-      if (this[modelName].associate) {
-        this[modelName].associate(this);
-      }
-    }
-  };
+  createModels() {
+    this.Datasource = Datasource(this.sequelize, this.Sequelize.DataTypes);
+    this.NeuronGroup = NeuronGroup(this.sequelize, this.Sequelize.DataTypes);
+    this.Neuron = Neuron(this.sequelize, this.Sequelize.DataTypes);
+    this.View = View(this.sequelize, this.Sequelize.DataTypes);
+    this.User = User(this.sequelize, this.Sequelize.DataTypes);
+    this.Session = Session(this.sequelize, this.Sequelize.DataTypes);
+    this._QueryExecution = _QueryExecution(
+      this.sequelize,
+      this.Sequelize.DataTypes
+    );
+  }
 
-  this.connect = function () {
+  associate() {
+    // for (var i = 0; i < names.length; i++) {
+    //   let modelName = names[i];
+    //   if (this[modelName].associate) {
+    //     this[modelName].associate(this);
+    //   }
+    // }
+  }
+
+  connect() {
     let SequelizeObj: any = Sequelize;
     this.sequelize = new SequelizeObj(
       process.env.DATABASE_NAME,
@@ -60,7 +70,7 @@ function Models(this: any) {
         },
         timezone: "-05:00",
         dialectModule: require("mysql2"),
-        operatorsAliases: this.operatorsAliases,
+        operatorsAliases: this.Op,
         benchmark: true,
         logging: (str: string, time: number) => {
           if (time > 2000) {
@@ -73,10 +83,7 @@ function Models(this: any) {
         },
       }
     );
-  };
-
-  this.connect();
-  this.associate();
+  }
 }
 
-export default Models;
+export default DB;
