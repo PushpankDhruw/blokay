@@ -11,10 +11,10 @@ export default function PageFeatures({}) {
           " linear-gradient(to bottom, #fcf3e6, rgb(215 236 248 / 62%))",
       }}
     >
-      <div className="grid grid-cols-3 items-end text-stone-600">
-        <div className="col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 items-end text-stone-600">
+        <div className="lg:col-span-2 lg:row-start-1 row-start-2 md:mt-0 mt-10">
           <div
-            className="shadow-[0_10px_60px_0px_rgba(0,0,0,0.3)] pt-10 px-10 rounded-tr-2xl"
+            className="shadow-[0_10px_60px_0px_rgba(0,0,0,0.3)] pt-10 px-5 lg:px-10 rounded-t-2xl lg:rounded-tr-2xl"
             style={{
               backgroundImage: " linear-gradient(45deg, #f4def6, #d7ecf8)",
             }}
@@ -116,7 +116,7 @@ export default function PageFeatures({}) {
             </div>
           </div>
         </div>
-        <div className="px-3 ml-4 divide-y divide-black/10">
+        <div className="px-3 ml-4 divide-y divide-black/10 row-start-1">
           <div className="py-5 px-10">
             <div>Genera API para tus apps</div>
             <div className="font-light text-sm mt-3">

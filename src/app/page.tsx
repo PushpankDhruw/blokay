@@ -16,7 +16,7 @@ export default async function Home({}) {
         </div>
         <AppHeader />
         <div className="guides">
-          <div className="guides-container desktop">
+          <div className={`guides-container `}>
             <div className="guide"></div>
             <div className="guide"></div>
             <div className="guide md:block hidden"></div>
@@ -33,7 +33,7 @@ export default async function Home({}) {
                   <br /> <span className="font-light italic">en segundos</span>
                 </h1>
 
-                <div className="w-1/3 mt-5 mx-auto overflow-hidden">
+                <div className="w-2/3 lg:w-1/3 mt-5 mx-auto overflow-hidden">
                   <Underline />
                 </div>
               </div>
@@ -62,7 +62,7 @@ export default async function Home({}) {
 
           <PageFeatures />
 
-          <div className="grid grid-cols-3 mb-10 text-stone-600">
+          <div className="grid grid-cols-1 md:gap-0 gap-6 md:grid-cols-3 mb-10 text-stone-600">
             <div>
               <div className="mx-3 px-5 rounded-2xl border-2 hover:bg-white border-stone-200 py-10 group hover:shadow-xl transition">
                 <img
