@@ -9,13 +9,17 @@ import User from "./models/user/user";
 import Datasource from "./models/brain/datasource";
 
 class DB {
-  public _QueryExecution: any = null;
-  public Datasource = null;
-  public NeuronGroup = null;
-  public Neuron = null;
-  public View = null;
-  public User = null;
-  public Session = null;
+  [index: string]: any; //index signature
+
+  private models: any = {
+    _QueryExecution,
+    Datasource,
+    NeuronGroup,
+    Neuron,
+    View,
+    Session,
+    User,
+  };
 
   public sequelize: any = null;
   public Sequelize: any = Sequelize;
@@ -28,25 +32,17 @@ class DB {
   }
 
   createModels() {
-    this.Datasource = Datasource(this.sequelize, this.Sequelize.DataTypes);
-    this.NeuronGroup = NeuronGroup(this.sequelize, this.Sequelize.DataTypes);
-    this.Neuron = Neuron(this.sequelize, this.Sequelize.DataTypes);
-    this.View = View(this.sequelize, this.Sequelize.DataTypes);
-    this.User = User(this.sequelize, this.Sequelize.DataTypes);
-    this.Session = Session(this.sequelize, this.Sequelize.DataTypes);
-    this._QueryExecution = _QueryExecution(
-      this.sequelize,
-      this.Sequelize.DataTypes
-    );
+    for (let key in this.models) {
+      this[key] = this.models[key](this.sequelize, this.Sequelize.DataTypes);
+    }
   }
 
   associate() {
-    // for (var i = 0; i < names.length; i++) {
-    //   let modelName = names[i];
-    //   if (this[modelName].associate) {
-    //     this[modelName].associate(this);
-    //   }
-    // }
+    for (let key in this.models) {
+      if (this[key].associate) {
+        this[key].associate(this);
+      }
+    }
   }
 
   connect() {
