@@ -17,6 +17,11 @@ function AppData({
   neuronName = "",
   autoExecuted,
 }: any) {
+  const subneuronDefault: any = {
+    neuronId: null,
+    neuronKey: "",
+    form: {},
+  };
   const modalRef: any = useRef();
   const [sort, setSort]: any = useState(null);
   const [filters, setFilters] = useState({ search: "" });
@@ -24,7 +29,7 @@ function AppData({
   const [originalTable, setOriginalTable] = useState({ header: [], data: [] });
   const [page, setPage] = useState(1);
   const [PER_PAGE, setPerPage] = useState(10);
-  const [subneuron, setSubneuron] = useState({ neuronKey: "", form: {} });
+  const [subneuron, setSubneuron] = useState(subneuronDefault);
 
   useEffect(() => {
     init();
@@ -50,8 +55,16 @@ function AppData({
   };
 
   const functions: any = {
-    openNeuron: ({ neuronKey, form }: { neuronKey: string; form: any }) => {
-      setSubneuron({ neuronKey, form });
+    openNeuron: ({
+      neuronId,
+      neuronKey,
+      form,
+    }: {
+      neuronId: number;
+      neuronKey: string;
+      form: any;
+    }) => {
+      setSubneuron({ neuronId, neuronKey, form });
       modalRef.current.showModal();
     },
   };
@@ -432,22 +445,24 @@ function AppData({
       </div>
 
       <AppModal size="lg" position="center" ref={modalRef}>
-        {subneuron.neuronKey && (
-          <Neuron
-            neuronKey={subneuron.neuronKey}
-            defaultForm={subneuron.form}
-            onExec={(result: any) => {
-              if (
-                !result.type ||
-                result.type == "error" ||
-                result.type == "message"
-              ) {
-                modalRef.current.hideModal();
-                onReload && onReload();
-              }
-            }}
-          />
-        )}
+        {subneuron.neuronKey ||
+          (subneuron.neuronId && (
+            <Neuron
+              neuronId={subneuron.neuronId}
+              neuronKey={subneuron.neuronKey}
+              defaultForm={subneuron.form}
+              onExec={(result: any) => {
+                if (
+                  !result.type ||
+                  result.type == "error" ||
+                  result.type == "message"
+                ) {
+                  modalRef.current.hideModal();
+                  onReload && onReload();
+                }
+              }}
+            />
+          ))}
       </AppModal>
     </div>
   );

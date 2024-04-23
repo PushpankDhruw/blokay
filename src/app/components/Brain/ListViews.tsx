@@ -9,7 +9,10 @@ import {
 } from "@/app/components/DS/Index";
 
 function ListViews({}) {
-  const isAdmin = localStorage.getItem("rol") === "admin";
+  const isAdmin =
+    typeof localStorage != "undefined"
+      ? localStorage.getItem("rol") === "admin"
+      : null;
   const modalRef: any = useRef();
   const [views, setViews] = useState([]);
   const [form, setForm]: any = useState({ search: "" });

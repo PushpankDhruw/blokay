@@ -15,7 +15,10 @@ import Neuron from "../Neuron/Neuron";
 import NeuronAdmin from "../Neuron/Admin/NeuronAdmin";
 
 const ViewBrain = ({ slug }: any) => {
-  const isAdmin = localStorage.getItem("rol") === "admin";
+  const isAdmin =
+    typeof localStorage != "undefined"
+      ? localStorage.getItem("rol") === "admin"
+      : null;
   const modalRef: any = useRef();
   const containerRef: any = useRef(null);
   const [view, setView]: any = useState(null);
