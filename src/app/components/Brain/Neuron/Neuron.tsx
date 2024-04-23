@@ -154,6 +154,7 @@ const Neuron = ({
                               {row.type == "select" && (
                                 <AppSelect
                                   value={form[row.name]}
+                                  error={errors[row.name]}
                                   onChange={(val: string) => {
                                     setForm({ ...form, [row.name]: val });
                                   }}

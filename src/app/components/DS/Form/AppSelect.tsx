@@ -17,7 +17,7 @@ export default function AppSelect({
   value,
   placeholder,
   children,
-  error,
+  error = null,
   ...extraProps
 }: any) {
   const id = genRandomString(10);
@@ -54,6 +54,8 @@ export default function AppSelect({
         >
           {children}
         </select>
+
+        {error && <div className="text-left text-red-500 text-sm">{error}</div>}
       </div>
     </div>
   );
