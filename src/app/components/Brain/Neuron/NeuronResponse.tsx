@@ -1,6 +1,7 @@
 "use client";
 import AppData from "./Types/AppData";
 import AppLine from "./Types/AppLine";
+import AppValue from "./Types/AppValue";
 
 const NeuronResponse = ({
   neuron,
@@ -24,6 +25,13 @@ const NeuronResponse = ({
 
         {response?.type == "line" && (
           <AppLine
+            title={neuron.description}
+            data={response.content}
+            onReload={onReload}
+          />
+        )}
+        {response?.type == "value" && (
+          <AppValue
             title={neuron.description}
             data={response.content}
             onReload={onReload}

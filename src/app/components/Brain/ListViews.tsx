@@ -9,6 +9,7 @@ import {
 } from "@/app/components/DS/Index";
 
 function ListViews({}) {
+  const isAdmin = localStorage.getItem("rol") === "admin";
   const modalRef: any = useRef();
   const [views, setViews] = useState([]);
   const [form, setForm]: any = useState({ search: "" });
@@ -83,7 +84,7 @@ function ListViews({}) {
             label="Buscar vista"
           />
         </div>
-        {!onLimit() && !loading && (
+        {isAdmin && !onLimit() && !loading && (
           <AppButton
             icon="wizard"
             text="Agregar nueva"
@@ -98,7 +99,7 @@ function ListViews({}) {
         {loading && <AppLoader size="md" className="mx-auto" />}
         {!loading && (
           <div>
-            {onLimit() && (
+            {isAdmin && onLimit() && (
               <div className="bg-purple-300 text-purple-900 font-light px-3 py-5 rounded-xl mb-10 flex items-center justify-between gap-5">
                 <div>You've reached the limit on your plan</div>
                 <AppButton text="Upgrade" variant="primary" size="sm" />

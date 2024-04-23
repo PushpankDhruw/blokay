@@ -15,13 +15,14 @@ import Neuron from "../Neuron/Neuron";
 import NeuronAdmin from "../Neuron/Admin/NeuronAdmin";
 
 const ViewBrain = ({ slug }: any) => {
+  const isAdmin = localStorage.getItem("rol") === "admin";
   const modalRef: any = useRef();
   const containerRef: any = useRef(null);
   const [view, setView]: any = useState(null);
   const [neurons, setNeurons] = useState([]);
   const [containerWidth, setContainerWidth] = useState(null);
   const [neuron, setNeuron] = useState(null);
-  const [editMode, setEditMode] = useState("functions");
+  const [editMode, setEditMode] = useState(isAdmin ? "functions" : "");
 
   const fetchListNeurons = () => {
     brainList().then((l: any) => {
@@ -32,7 +33,7 @@ const ViewBrain = ({ slug }: any) => {
   const fetchView = () => {
     viewGet(slug).then((r) => {
       setView(r.View);
-      if (r.View.layout?.length == 0) {
+      if (isAdmin && r.View.layout?.length == 0) {
         setEditMode("grid");
       }
     });
@@ -112,39 +113,41 @@ const ViewBrain = ({ slug }: any) => {
           <div className="relative container mx-auto ">
             <Header view={view} save={saveView} />
 
-            <div className="flex items-center justify-between gap-3 mt-10">
-              <AddToView
-                view={view}
-                save={saveView}
-                refresh={refreshView}
-                onCreate={onCreateNeuron}
-              />
+            {isAdmin && (
+              <div className="flex items-center justify-between gap-3 mt-10">
+                <AddToView
+                  view={view}
+                  save={saveView}
+                  refresh={refreshView}
+                  onCreate={onCreateNeuron}
+                />
 
-              {view?.layout?.length > 0 && (
-                <div className="flex  justify-end ">
-                  <div className="bg-stone-300 flex select-none gap-0.5 items-center text-stone-900 p-1 rounded-lg">
-                    <div
-                      className={`px-2 py-1 text-sm  rounded-md ${
-                        editMode == "functions"
-                          ? "bg-white"
-                          : "hover:bg-stone-200"
-                      }`}
-                      onClick={() => setEditMode("functions")}
-                    >
-                      Functions
-                    </div>
-                    <div
-                      className={`px-2 py-1 text-sm rounded-md ${
-                        editMode == "grid" ? "bg-white" : "hover:bg-stone-200"
-                      }`}
-                      onClick={() => setEditMode("grid")}
-                    >
-                      Grid
+                {view?.layout?.length > 0 && (
+                  <div className="flex  justify-end ">
+                    <div className="bg-stone-300 flex select-none gap-0.5 items-center text-stone-900 p-1 rounded-lg">
+                      <div
+                        className={`px-2 py-1 text-sm  rounded-md ${
+                          editMode == "functions"
+                            ? "bg-white"
+                            : "hover:bg-stone-200"
+                        }`}
+                        onClick={() => setEditMode("functions")}
+                      >
+                        Functions
+                      </div>
+                      <div
+                        className={`px-2 py-1 text-sm rounded-md ${
+                          editMode == "grid" ? "bg-white" : "hover:bg-stone-200"
+                        }`}
+                        onClick={() => setEditMode("grid")}
+                      >
+                        Grid
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
 
             <div
               className={`mt-10 ${editMode == "grid" ? "select-none" : ""}`}

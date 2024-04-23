@@ -44,20 +44,22 @@ export const transpileModule = (code: string): any => {
   // only uses if you need
   type Args = {
     // input vars
+    _businessId: number;
     form: Form; // values filled by the user
     files: Array<File>; // files uploaded by the user
   
     // database methods
-    find: (sql: string, replacements: QueryReplacements) => Promise<Row>;
-    query: (sql: string, replacements: QueryReplacements) => Promise<Rows>;
-    insert: (sql: string, replacements: QueryReplacements) => Promise<void>;
-    update: (sql: string, replacements: QueryReplacements) => Promise<void>;
-  
+    find: (sql: string, replacements?: QueryReplacements) => Promise<Row>;
+    query: (sql: string, replacements?: QueryReplacements) => Promise<Rows>;
+    insert: (sql: string, replacements?: QueryReplacements) => Promise<void>;
+    update: (sql: string, replacements?: QueryReplacements) => Promise<void>;
     // utils methods
     fetch: (url: string, params: FetchParams) => Promise<any>;
-  
+
     // response methods
     table: (rows: Rows) => ResponseNeuron;
+    value: (val: Row) => ResponseNeuron;
+    chartLine: (rows: Rows) => ResponseNeuron;
     message: (message: string) => ResponseNeuron;
     error: (message: string) => ResponseNeuron;
   };

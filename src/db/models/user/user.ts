@@ -1,6 +1,4 @@
 import bcrypt from "bcrypt";
-// import moment from "moment";
-// import speakeasy from "speakeasy";
 
 export default (sequelize: any, DataTypes: any) => {
   const User = sequelize.define(
@@ -9,6 +7,7 @@ export default (sequelize: any, DataTypes: any) => {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: DataTypes.STRING, allowNull: true },
       cellphone: { type: DataTypes.STRING, allowNull: true },
+      rol: { type: DataTypes.STRING, allowNull: true },
       businessId: { type: DataTypes.INTEGER, allowNull: true },
       password: {
         type: DataTypes.STRING,
@@ -313,6 +312,7 @@ export default (sequelize: any, DataTypes: any) => {
       confirmatedCellphone: this.confirmatedCellphone,
       confirmatedMFA: this.confirmatedMFA,
       vinculateMFA: this.mandatory2FA && !this.confirmatedMFA,
+      rol: this.rol,
       // Rol: {
       //   permissions: await this.permissions(),
       // },

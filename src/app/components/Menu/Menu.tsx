@@ -70,7 +70,7 @@ export default function Menu({
           </li>
         </ul>
 
-        {neurons?.length > 0 && (
+        {editMode && neurons?.length > 0 && (
           <Tree
             onClickNeuron={onClickNeuron}
             view={view}

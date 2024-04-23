@@ -22,6 +22,7 @@ export default function LoginForm() {
           if (typeof window != "undefined") {
             window.localStorage.setItem("token", result.User.token);
             window.localStorage.setItem("user", JSON.stringify(result.User));
+            window.localStorage.setItem("rol", result.User.rol);
             window.location.href = "/dashboard";
           }
         }

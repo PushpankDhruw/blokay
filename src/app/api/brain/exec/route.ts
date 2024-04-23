@@ -50,11 +50,10 @@ export const POST = async (req: any) => {
       const conn: any = await getConnection(db, datasource, "write");
       return await conn.query(sql, { replacements, type: "UPDATE" });
     },
-    value: async (sql: string, replacements = {}) => {
+    find: async (sql: string, replacements = {}) => {
       const conn: any = await getConnection(db, datasource, "read");
       let rows = await conn.query(sql, { replacements, type: "SELECT" });
       if (rows && rows.length > 0) {
-        rows = Object.values(rows[0]);
         return rows[0];
       }
       return rows;
@@ -74,6 +73,9 @@ export const POST = async (req: any) => {
       );
       result = result.map((r) => header.map((h) => r[h] || ""));
       return { type: "table", content: { data: result, header } };
+    },
+    value: (result: any) => {
+      return { type: "value", content: result };
     },
     chartLine: (result: any[]) => {
       if (!result || !result.length) return { datasets: [], labels: [] };

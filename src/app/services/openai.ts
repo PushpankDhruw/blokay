@@ -136,18 +136,17 @@ export default class OpenAI {
       files: Array<File>; // files uploaded by the user
     
       // database methods
-      // example sql replacements value = :value 
-      find: (sql: string, replacements: QueryReplacements) => Promise<Row>;
-      query: (sql: string, replacements: QueryReplacements) => Promise<Rows>;
-      insert: (sql: string, replacements: QueryReplacements) => Promise<void>;
-      update: (sql: string, replacements: QueryReplacements) => Promise<void>;
-    
+      find: (sql: string, replacements?: QueryReplacements) => Promise<Row>;
+      query: (sql: string, replacements?: QueryReplacements) => Promise<Rows>;
+      insert: (sql: string, replacements?: QueryReplacements) => Promise<void>;
+      update: (sql: string, replacements?: QueryReplacements) => Promise<void>;
       // utils methods
       fetch: (url: string, params: FetchParams) => Promise<any>;
     
       // response methods
       table: (rows: Rows) => ResponseNeuron;
-      chartLine: (rows: Rows) => ResponseNeuron; // draw a chart line
+      value: (val: Row) => ResponseNeuron;
+      chartLine: (rows: Rows) => ResponseNeuron;
       message: (message: string) => ResponseNeuron;
       error: (message: string) => ResponseNeuron;
     };
