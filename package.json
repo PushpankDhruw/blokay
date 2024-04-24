@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 8082",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:stop": "docker-compose down",
+    "docker:start": " docker-compose up -d",
+    "docker:restart": "npm run docker:stop && npm run docker:start"
   },
   "dependencies": {
     "@minoru/react-dnd-treeview": "^3.4.4",

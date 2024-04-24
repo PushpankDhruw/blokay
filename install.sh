@@ -12,6 +12,7 @@ command_present() {
 if ! command_present wget && command_present yum; then
   sudo yum install wget
 fi
+
 wget -qO- https://get.docker.com/ | sh
 
 # install docker componse

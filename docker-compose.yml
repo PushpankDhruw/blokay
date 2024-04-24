@@ -1,0 +1,17 @@
+services:
+  nextjs:
+    build: .
+    container_name: blokay_agent
+    ports:
+      - "8082:8082"
+    environment:
+      - NODE_ENV=production
+  mysql:
+    image: mysql:latest
+    container_name: blokay_agent_db
+    environment:
+      MYSQL_ROOT_PASSWORD: contraseña_root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
