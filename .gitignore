@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+docker.env
 
 # testing
 /coverage
@@ -13,7 +14,7 @@
 /.next/
 /out/
 /data/
-/data
+/data 
 # production
 /build
 

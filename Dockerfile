@@ -15,8 +15,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 EXPOSE 8082
+EXPOSE 3306
 
 CMD ["npm", "start"]

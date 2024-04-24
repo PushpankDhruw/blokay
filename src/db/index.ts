@@ -52,11 +52,11 @@ class DB {
   connect() {
     let SequelizeObj: any = Sequelize;
     this.sequelize = new SequelizeObj(
-      process.env.DATABASE_NAME,
-      process.env.DATABASE_USERNAME,
-      process.env.DATABASE_PASSWORD,
+      process.env.MYSQL_DATABASE,
+      process.env.MYSQL_USER,
+      process.env.MYSQL_PASSWORD,
       {
-        host: process.env.DATABASE_HOSTNAME,
+        host: process.env.MYSQL_HOST,
         pool: {
           max: 20,
           min: 0,

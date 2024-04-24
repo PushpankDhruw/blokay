@@ -1,3 +1,5 @@
+networks:
+  default:
 services:
   nextjs:
     build: .
@@ -6,12 +8,23 @@ services:
       - "8082:8082"
     environment:
       - NODE_ENV=production
+    networks:
+      - default
+    stdin_open: true
+    tty: true
   mysql:
-    image: mysql:latest
+    platform: linux/x86_64 #enable on ARM
+    image: mysql:5.7
     container_name: blokay_agent_db
+    env_file: ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: contraseña_root
+      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+    expose:
+      - "3306"
     ports:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d/
+    networks:
+      - default
