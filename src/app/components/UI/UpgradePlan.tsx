@@ -1,7 +1,7 @@
 "use client";
 import { AppIcon, AppButton } from "@/app/components/DS/Index";
 
-export default function UpgradePlan() {
+export default function UpgradePlan({ onClick }: any) {
   return (
     <div
       className="mt-10 bg-black pt-20 pb-20 md:pb-20 border-0 border-sky-400 rounded-3xl mb-20 relative overflow-hidden md:bg-cover bg-no-repeat bg-bottom bg-[length:60rem_auto]  text-white"
@@ -31,6 +31,7 @@ export default function UpgradePlan() {
         </div>
         <AppButton
           text="add a card"
+          onClick={onClick}
           variant="secondary"
           size="lg"
           className="w-full"

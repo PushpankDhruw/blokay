@@ -8,7 +8,6 @@ import {
   fetchUpdateUser,
 } from "@/app/services/users";
 import { viewList } from "@/app/services/brain";
-import UpgradePlan from "@/app/components/UI/UpgradePlan";
 import {
   AppCheckbox,
   AppModal,
@@ -133,8 +132,6 @@ export default function Users() {
               ))}
             </div>
           )}
-
-          <UpgradePlan />
         </div>
       )}
 

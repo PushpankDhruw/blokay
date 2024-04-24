@@ -104,8 +104,13 @@ function ListViews({}) {
           <div>
             {isAdmin && onLimit() && (
               <div className="bg-purple-300 text-purple-900 font-light px-3 py-5 rounded-xl mb-10 flex items-center justify-between gap-5">
-                <div>You've reached the limit on your plan</div>
-                <AppButton text="Upgrade" variant="primary" size="sm" />
+                <div>You need to add a credit card to continue building</div>
+                <AppButton
+                  href="/dashboard/billing"
+                  text="Upgrade"
+                  variant="primary"
+                  size="sm"
+                />
               </div>
             )}
 

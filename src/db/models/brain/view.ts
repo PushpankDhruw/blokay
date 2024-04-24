@@ -3,7 +3,7 @@ const model = (sequelize: any, DataTypes: any) => {
     "View",
     {
       id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-      icon: { type: DataTypes.STRING, allowNull: true },
+      // icon: { type: DataTypes.STRING, allowNull: true },
       name: { type: DataTypes.STRING, allowNull: true },
       slug: { type: DataTypes.STRING, allowNull: true },
       businessId: { type: DataTypes.INTEGER, allowNull: true },
