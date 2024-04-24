@@ -9,22 +9,12 @@ export async function POST(req: any) {
 
   let user = await User.findByToken(body._token);
 
-  const result = await User.findAll({
-    where: {
-      businessId: user.businessId,
-    },
+  const userCreated = await User.create({
+    id: body.data.userId,
+    rol: body.data.rol,
   });
 
-  const list = result.map((n: any) => ({
-    id: n.id,
-    name: n.name,
-    username: n.username,
-    rol: n.rol,
-  }));
-
   return NextResponse.json({
-    data: {
-      Users: list,
-    },
+    data: {},
   });
 }

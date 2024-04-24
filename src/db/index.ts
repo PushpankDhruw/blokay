@@ -5,9 +5,10 @@ import Neuron from "./models/brain/neuron";
 import NeuronGroup from "./models/brain/neuron-group";
 import View from "./models/brain/view";
 import Session from "./models/user/session";
-import User from "./models/user/user";
 import Datasource from "./models/brain/datasource";
 import ViewGroup from "./models/brain/view-group";
+import User from "./models/user/user";
+import UserPermission from "./models/user/user-permission";
 
 class DB {
   [index: string]: any; //index signature
@@ -21,6 +22,7 @@ class DB {
     ViewGroup,
     Session,
     User,
+    UserPermission,
   };
 
   public sequelize: any = null;

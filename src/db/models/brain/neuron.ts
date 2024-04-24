@@ -6,12 +6,8 @@ const model = (sequelize: any, DataTypes: any) => {
       executions: { type: DataTypes.INTEGER, allowNull: true },
       timeMs: { type: DataTypes.INTEGER, allowNull: true },
       key: { type: DataTypes.STRING, allowNull: true },
-      // icon: { type: DataTypes.STRING, allowNull: true },
-      // group: { type: DataTypes.STRING, allowNull: true },
       description: { type: DataTypes.STRING, allowNull: true },
       rolPrivilegeId: { type: DataTypes.INTEGER, allowNull: true },
-      // neuronGroupId: { type: DataTypes.INTEGER, allowNull: true },
-      // neuronId: { type: DataTypes.INTEGER, allowNull: true },
       businessId: { type: DataTypes.INTEGER, allowNull: true },
       parentId: { type: DataTypes.INTEGER, allowNull: true },
       filters: {

@@ -14,6 +14,7 @@ function Modal(
     clickBack,
     children,
     footer,
+    onClose = null,
   }: any,
   ref: any
 ) {
@@ -26,7 +27,7 @@ function Modal(
   };
 
   const hideModal = () => {
-    console.log("hide");
+    onClose && onClose();
     setShowing(false);
     setError("");
   };
@@ -125,7 +126,7 @@ function Modal(
                 </div>
               )}
               <div
-                className={`py-5 px-4 overflow-y-auto ${
+                className={`py-5 px-4 overflow-y-auto max-h-[70vh] ${
                   error ? "with-error" : ""
                 }`}
               >
