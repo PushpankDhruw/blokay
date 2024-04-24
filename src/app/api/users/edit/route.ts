@@ -10,13 +10,23 @@ export async function POST(req: any) {
 
   let user = await User.findByToken(body._token);
 
-  const userCreated = await User.create({
-    id: body.data.userId,
-    username: body.data.username,
-    password: body.data.password,
-    name: body.data.name,
+  const userToEdit = await User.findOne({
+    where: {
+      id: body.data.userId,
+      businessId: user.businessId,
+    },
+  });
+
+  await userToEdit.update({
     rol: body.data.rol,
-    businessId: user.businessId,
+    name: body.data.name,
+  });
+
+  // clear all the permissions
+  await UserPermission.destroy({
+    where: {
+      userId: userToEdit.id,
+    },
   });
 
   const viewIds = Object.keys(permissions).filter((v) => permissions[v]);
@@ -32,7 +42,7 @@ export async function POST(req: any) {
   for (let view of views) {
     bulkCreate.push({
       viewId: view.id,
-      userId: userCreated.id,
+      userId: userToEdit.id,
     });
   }
   if (bulkCreate.length > 0) {

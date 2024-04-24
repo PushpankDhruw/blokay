@@ -31,3 +31,19 @@ export const fetchUser = async function (userId: number) {
 
   return result.data;
 };
+
+export const fetchAddUser = async function (form: any) {
+  let data = { ...form };
+
+  let result = await postRequest("users/add", data, { token });
+
+  return result.data;
+};
+
+export const fetchUpdateUser = async function (form: any) {
+  let data = { ...form };
+
+  let result = await postRequest("users/edit", data, { token });
+
+  return result.data;
+};

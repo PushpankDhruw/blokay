@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { AppLoader } from "@/app/components/DS/Index";
-import { fetchUsers, fetchUser } from "@/app/services/users";
+import {
+  fetchUsers,
+  fetchUser,
+  fetchAddUser,
+  fetchUpdateUser,
+} from "@/app/services/users";
 import { viewList } from "@/app/services/brain";
 import UpgradePlan from "@/app/components/UI/UpgradePlan";
 import {
@@ -9,6 +14,7 @@ import {
   AppModal,
   AppButton,
   AppSelect,
+  AppInput,
 } from "@/app/components/DS/Index";
 
 export default function Users() {
@@ -17,6 +23,7 @@ export default function Users() {
   const [views, setViews] = useState([]);
   const [form, setForm]: any = useState({ permissions: {}, rol: "admin" });
   const [loading, setLoading] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
 
   const listViews = () => {
     viewList().then((result) => {
@@ -36,14 +43,47 @@ export default function Users() {
       });
   };
 
-  const handleClickUser = (user: any) => {
+  const handleClickSubmitNewUser = () => {
     setLoading(true);
-    fetchUser(user.id)
+    fetchAddUser(form)
       .then((result: any) => {
-        setForm(result.User);
+        modalRef.current.hideModal();
+        getUsers();
       })
       .finally(() => {
         setLoading(false);
+      });
+  };
+
+  const handleClickSubmitUpdateUser = () => {
+    setLoading(true);
+    fetchUpdateUser({
+      ...form,
+      userId: form.id,
+    })
+      .then((result: any) => {
+        modalRef.current.hideModal();
+        getUsers();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const createNewUser = () => {
+    setForm({ permissions: {}, rol: "admin" });
+    setLoadingUser(false);
+    modalRef.current.showModal();
+  };
+
+  const handleClickUser = (user: any) => {
+    setLoadingUser(true);
+    fetchUser(user.id)
+      .then((result: any) => {
+        setForm({ ...form, ...result.User });
+      })
+      .finally(() => {
+        setLoadingUser(false);
       });
 
     modalRef.current.showModal();
@@ -63,6 +103,17 @@ export default function Users() {
       )}
       {!loading && (
         <div>
+          <div className="justify-end flex items-center gap-2 mb-5">
+            <AppButton
+              text="Agergar nuevo usuario"
+              onClick={() => createNewUser()}
+              variant="primary"
+              icon="add"
+              className="ml-auto"
+              size="md"
+            />
+          </div>
+
           {users.length > 0 && (
             <div className="bg-white px-3 py-3 flex flex-col gap-4 rounded-lg shadow-sm border border-stone-300">
               {users.map((user: any) => (
@@ -92,76 +143,120 @@ export default function Users() {
         footer={
           <AppButton
             text="Guardar"
-            // onClick={() => handleSaveView()}
+            onClick={() =>
+              form.id
+                ? handleClickSubmitUpdateUser()
+                : handleClickSubmitNewUser()
+            }
             variant="primary"
             className="w-full"
             size="md"
+            loading={loading}
           />
         }
         size="sm"
         ref={modalRef}
       >
-        <AppSelect
-          value={form.rol}
-          label="Rol"
-          className="mb-5"
-          onChange={(val: string) => {
-            setForm({ ...form, rol: val });
-          }}
-        >
-          <option value="admin">Admin</option>
-          <option value="editor">Editor</option>
-          <option value="user">Usuario</option>
-        </AppSelect>
+        {loadingUser && (
+          <div className=" flex items-center justify-center">
+            <AppLoader size="md" />
+          </div>
+        )}
+        {!loadingUser && (
+          <div className="flex gap-5 flex-col">
+            <AppSelect
+              value={form.rol}
+              label="Rol"
+              onChange={(val: string) => {
+                setForm({ ...form, rol: val });
+              }}
+            >
+              <option value="admin">Admin</option>
+              <option value="editor">Editor</option>
+              <option value="user">Usuario</option>
+            </AppSelect>
 
-        {form.rol != "admin" && (
-          <div className="gap-5 flex flex-col">
-            {views.map((c: any) => (
-              <div>
-                <div className="items-center gap-2 flex mb-3">
-                  <AppCheckbox
-                    type="text"
-                    value={
-                      c.Views.length ==
-                      c.Views.filter((v: any) => !!form.permissions[v.id])
-                        .length
-                    }
-                    onChange={() => {
-                      let newForm: any = {};
-                      for (let index in c.Views) {
-                        let item: any = c.Views[index];
-                        newForm[item.id] = true;
-                      }
-                      setForm({
-                        ...form,
-                        permissions: { ...form.permissions, ...newForm },
-                      });
-                    }}
-                  />
-                  <h2>{c.name}</h2>
-                </div>
-                <div className="flex flex-col gap-1 pl-3">
-                  {c.Views.map((v: any) => (
-                    <div key={"view" + v.id}>
+            <AppInput
+              type="text"
+              value={form.name}
+              label="Nombre"
+              onChange={(val: string) => {
+                setForm({ ...form, name: val });
+              }}
+            />
+
+            {!form.id && (
+              <>
+                <AppInput
+                  type="text"
+                  value={form.username}
+                  label="Usuario"
+                  onChange={(val: string) => {
+                    setForm({ ...form, username: val });
+                  }}
+                />
+
+                <AppInput
+                  type="password"
+                  value={form.password}
+                  label="Contraseña"
+                  onChange={(val: string) => {
+                    setForm({ ...form, password: val });
+                  }}
+                />
+              </>
+            )}
+
+            {form.rol != "admin" && (
+              <div className="gap-5 flex flex-col">
+                {views.map((c: any) => (
+                  <div>
+                    <div className="items-center gap-2 flex mb-3">
                       <AppCheckbox
                         type="text"
-                        value={form.permissions[v.id]}
-                        label={v.name}
+                        value={
+                          c.Views.length ==
+                          c.Views.filter((v: any) => !!form.permissions[v.id])
+                            .length
+                        }
                         onChange={() => {
+                          let newForm: any = {};
+                          for (let index in c.Views) {
+                            let item: any = c.Views[index];
+                            newForm[item.id] = true;
+                          }
                           setForm({
                             ...form,
-                            permissions: {
-                              ...form.permissions,
-                              [v.id]: !form.permissions[v.id],
-                            },
+                            permissions: { ...form.permissions, ...newForm },
                           });
                         }}
                       />
+                      <h2>{c.name}</h2>
                     </div>
-                  ))}
-                </div>
+                    <div className="flex flex-col gap-1 pl-3">
+                      {c.Views.map((v: any) => (
+                        <div key={"view" + v.id}>
+                          <AppCheckbox
+                            type="text"
+                            value={form.permissions[v.id]}
+                            label={v.name}
+                            onChange={() => {
+                              setForm({
+                                ...form,
+                                permissions: {
+                                  ...form.permissions,
+                                  [v.id]: !form.permissions[v.id],
+                                },
+                              });
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         )}
       </AppModal>
