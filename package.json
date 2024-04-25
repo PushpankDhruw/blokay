@@ -9,7 +9,7 @@
     "lint": "next lint",
     "docker:stop": "docker-compose down",
     "docker:start": " docker-compose up -d",
-    "docker:restart": "npm run docker:stop && npm run docker:start"
+    "docker:restart": "docker-compose restart"
   },
   "dependencies": {
     "@minoru/react-dnd-treeview": "^3.4.4",

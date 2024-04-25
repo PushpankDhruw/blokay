@@ -124,8 +124,7 @@ CREATE TABLE `sessions` (
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
-  KEY `token` (`token`),
-  CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+  KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

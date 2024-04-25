@@ -12,13 +12,13 @@ services:
       - default
     stdin_open: true
     tty: true
-  mysql:
-    platform: linux/x86_64 #enable on ARM
-    image: mysql:5.7
+  db:
+    image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    # platform: linux/x86_64 #enable on ARM
     container_name: blokay_agent_db
     env_file: ./.env
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+
     expose:
       - "3306"
     ports:
