@@ -13,10 +13,10 @@ export default function SettingsView() {
       <Datasources />
 
       <AppModal
-        title="Agregar tarjeta"
+        title="Add card"
         footer={
           <AppButton
-            text="Guardar tarjeta"
+            text="Save card"
             icon="account"
             type="submit"
             variant="primary"
@@ -33,7 +33,7 @@ export default function SettingsView() {
             <AppInput
               type="text"
               value={form.creditCardNumber}
-              label="Tarjeta de crédito"
+              label="Credit card number"
               onChange={(val: string) => {
                 setForm({ ...form, creditCardNumber: val });
               }}
@@ -42,7 +42,7 @@ export default function SettingsView() {
             <AppInput
               type="text"
               value={form.creditCardPlaceHolder}
-              label="Nombre en la tarjeta de crédito"
+              label="Credit card label"
               onChange={(val: string) => {
                 setForm({ ...form, creditCardPlaceHolder: val });
               }}
@@ -53,7 +53,7 @@ export default function SettingsView() {
                 <AppInput
                   type="text"
                   value={form.creditCardYear}
-                  label="Año"
+                  label="Year"
                   onChange={(val: string) => {
                     setForm({ ...form, creditCardYear: val });
                   }}
@@ -63,7 +63,7 @@ export default function SettingsView() {
                 <AppInput
                   type="text"
                   value={form.creditCardExpiryMonth}
-                  label="Mes"
+                  label="Month"
                   onChange={(val: string) => {
                     setForm({ ...form, creditCardExpiryMonth: val });
                   }}

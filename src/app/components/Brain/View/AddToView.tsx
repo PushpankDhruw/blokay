@@ -26,16 +26,16 @@ const AddToView = ({ refresh, save, onCreate = null }: any) => {
         icon="add"
         variant="primary"
         size="sm"
-        text="Agregar"
+        text="Add new"
       />
 
       <AppModal
         size="sm"
-        title="Agregar bloque"
+        title="Add new"
         ref={modalRef}
         footer={
           <AppButton
-            text="Agregar nuevo"
+            text="Add new"
             onClick={() => handleClickCreateNewNeuron()}
             variant="primary"
             className="w-full"

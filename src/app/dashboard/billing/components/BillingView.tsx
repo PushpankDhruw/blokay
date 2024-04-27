@@ -36,7 +36,7 @@ export default function BillingView() {
       />
 
       <AppModal
-        title="Agregar tarjeta"
+        title="Add card"
         footer={
           <AppButton
             text="Guardar tarjeta"

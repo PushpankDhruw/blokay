@@ -35,7 +35,7 @@ export default function Menu({
               className="items-center py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between"
               href="/dashboard"
             >
-              <div>Inicio</div>
+              <div>Home</div>
               <AppIcon icon="right" className="size-5 fill-stone-700" />
             </a>
           </li>
@@ -45,7 +45,7 @@ export default function Menu({
               className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
               href="/dashboard/users"
             >
-              <div>Usuarios</div>
+              <div>Users</div>
               <AppIcon icon="right" className="size-5 fill-stone-700" />
             </a>
           </li>
@@ -55,7 +55,7 @@ export default function Menu({
               className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
               href="/dashboard/billing"
             >
-              <div>Facturación</div>
+              <div>Billing</div>
               <AppIcon icon="right" className="size-5 fill-stone-700" />
             </a>
           </li>
@@ -64,7 +64,7 @@ export default function Menu({
               className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
               href="/dashboard/settings"
             >
-              <div>Configuraciones</div>
+              <div>Settings</div>
               <AppIcon icon="right" className="size-5 fill-stone-700" />
             </a>
           </li>

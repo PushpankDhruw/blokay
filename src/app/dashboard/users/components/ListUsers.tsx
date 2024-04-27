@@ -104,7 +104,7 @@ export default function Users() {
         <div>
           <div className="justify-end flex items-center gap-2 mb-5">
             <AppButton
-              text="Agregar nuevo usuario"
+              text="Add new user"
               onClick={() => createNewUser()}
               variant="primary"
               icon="add"

@@ -68,25 +68,25 @@ export default function Header({ view, save }: any) {
           onClick={clickShare}
           className="border-2 border-stone-600 rounded-lg text-sm text-stone-600 px-5 py-2 ml-3 hover:bg-white"
         >
-          Compartir
+          Share
         </div>
       </div>
 
       <AppModal
         size="sm"
         position="center"
-        title="Compartir vista"
+        title="Share page"
         ref={modalRef}
         footer={
           <div className="flex items-center justify-between">
             <AppButton
-              text="Copiar link"
+              text="Copy link"
               // onClick={() => handleClickCreateNew()}
               variant="primary"
               size="md"
             />
             <AppButton
-              text="Cerrar"
+              text="Close"
               // onClick={() => handleClickCreateNew()}
               variant="secondary"
               size="md"

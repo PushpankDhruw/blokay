@@ -42,7 +42,7 @@ export default function LoginForm() {
         <AppInput
           type="text"
           value={form.username}
-          label="Usuario"
+          label="Username"
           onChange={(val: string) => {
             setForm({ ...form, username: val });
           }}
@@ -51,14 +51,14 @@ export default function LoginForm() {
         <AppInput
           type="password"
           value={form.password}
-          label="Contraseña"
+          label="Password"
           onChange={(val: string) => {
             setForm({ ...form, password: val });
           }}
         />
 
         <AppButton
-          text="Iniciar sesión"
+          text="Sign in"
           icon="account"
           type="submit"
           variant="primary"
@@ -71,11 +71,11 @@ export default function LoginForm() {
       <div></div>
       <div className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 mt-5">
         <AppIcon icon="account" className="fill-stone-600 size-5" />
-        <div>Iniciar con Google</div>
+        <div>Login with Google</div>
       </div>
 
       <div className="text-stone-600 mt-5 font-light text-sm text-center">
-        ¿Tienes problemas para iniciar sesión?
+        ¿Any problem to login?
       </div>
     </div>
   );

@@ -84,13 +84,13 @@ function ListViews({}) {
             }}
             icon="search"
             className="w-full"
-            label="Buscar vista"
+            label="Search"
           />
         </div>
         {isAdmin && !onLimit() && !loading && (
           <AppButton
             icon="wizard"
-            text="Agregar nueva"
+            text="Add new"
             onClick={() => handleClickCreateNew()}
             variant="primary"
             size="md"
@@ -140,10 +140,10 @@ function ListViews({}) {
       </div>
 
       <AppModal
-        title="Agregar vista"
+        title="Add new"
         footer={
           <AppButton
-            text="Agregar nueva"
+            text="Add new"
             onClick={() => handleSaveView()}
             variant="primary"
             className="w-full"

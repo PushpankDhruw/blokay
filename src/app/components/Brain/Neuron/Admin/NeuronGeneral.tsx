@@ -82,9 +82,9 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
 
       <div className="mt-5 pt-5 border-t border-stone-300">
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-bold text-stone-700 ">Datos de entrada</h2>
+          <h2 className="font-bold text-stone-700 ">Input data</h2>
           <AppButton
-            text="Agregar"
+            text="Add field"
             onClick={addField}
             icon="add"
             variant="secondary"
@@ -159,7 +159,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
         <AppInput
           type="text"
           value={form.filters.button}
-          label="Texto del botòn"
+          label="Button Text"
           onChange={(val: string) => {
             setForm({
               ...form,
@@ -173,7 +173,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
 
         <div className="mt-10 pt-3 border-t flex justify-between border-stone-200">
           <AppButton
-            text="Eliminar bloque"
+            text="Delete this"
             onClick={() => {
               modalDeleteRef.current.showModal();
             }}
@@ -184,7 +184,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
 
           <AppButton
             loading={loading}
-            text="Guardar"
+            text="Save"
             onClick={() => saveChanges()}
             icon="save"
             variant="primary"
@@ -194,18 +194,18 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
       </div>
 
       <AppModal
-        title="Eliminar neurona"
+        title="Delete function"
         footer={
           <div className="flex items-center gap-5">
             <AppButton
-              text="No, cancelar"
+              text="No, cancel"
               onClick={() => modalDeleteRef.current.hideModal()}
               variant="secondary"
               className="w-full"
               size="md"
             />
             <AppButton
-              text="Si, eliminar"
+              text="Yes, delete"
               onClick={() => {
                 modalDeleteRef.current.hideModal();
                 // deleteFromLayout(neuron);
@@ -213,7 +213,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
               variant="primary"
               className="w-full"
               size="md"
-              disabled={form.textDeleteNeuron != "si, eliminar"}
+              disabled={form.textDeleteNeuron != "yes, delete"}
             />
           </div>
         }
@@ -223,7 +223,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
         <AppInput
           type="text"
           value={form.textDeleteNeuron}
-          label="Escribe (si, eliminar)"
+          label="Write (yes, delete)"
           className="mb-3"
           onChange={(val: string) => {
             setForm({ ...form, textDeleteNeuron: val });
