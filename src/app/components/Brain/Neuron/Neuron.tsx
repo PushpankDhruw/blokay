@@ -94,8 +94,9 @@ const Neuron = ({
             onEditNeuron={(n: any) => {
               onEditNeuron && onEditNeuron(n);
             }}
+            neuronId={neuronId}
             neuron={neuron}
-            deleteFromLayout={(neuron: any) => deleteFromLayout(neuron)}
+            deleteFromLayout={(neuronId: any) => deleteFromLayout(neuronId)}
           />
         </div>
       )}
@@ -113,6 +114,11 @@ const Neuron = ({
               editMode === "grid" ? "opacity-70 grayscale" : ""
             }`}
           >
+            {!neuron?.id && (
+              <div className="text-center text-stone-600 text-lg">
+                This doesn't exists
+              </div>
+            )}
             {neuron &&
               !response &&
               (neuron.filters.autoExec == false ||

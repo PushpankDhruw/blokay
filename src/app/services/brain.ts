@@ -65,6 +65,16 @@ export const updateNeuron = async function (form: any) {
   return result.data.Result;
 };
 
+export const deleteNeuron = async function (form: any) {
+  let data = {
+    ...form,
+  };
+
+  let result = await postRequest("brain/deleteNeuron", data, { token });
+
+  return result.data;
+};
+
 export const rewriteFn = async function (form: any) {
   let data = {
     ...form,

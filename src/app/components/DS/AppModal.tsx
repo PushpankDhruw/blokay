@@ -80,7 +80,7 @@ function Modal(
             ></div>
 
             <section
-              className={`relative z-50 transition-all duration-100 ease-in-out text-black  rounded-3xl  overflow-auto ${sizeClass()} ${positionClass()} ${size} ${classSection}`}
+              className={`relative z-50 transition-all duration-100 ease-in-out text-black  rounded-3xl   ${sizeClass()} ${positionClass()} ${size} ${classSection}`}
               style={{ maxHeight: "90vh", backgroundColor: bgColor }}
             >
               {title && (
@@ -126,9 +126,10 @@ function Modal(
                 </div>
               )}
               <div
-                className={`py-5 px-4 overflow-y-auto max-h-[70vh] ${
+                className={`py-5 px-4 overflow-y-auto ${
                   error ? "with-error" : ""
                 }`}
+                style={{ maxHeight: "calc(100vh - 60px)" }}
               >
                 {children}
               </div>

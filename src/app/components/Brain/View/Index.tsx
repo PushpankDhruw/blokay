@@ -86,8 +86,8 @@ const ViewBrain = ({ slug }: any) => {
     modalRef.current.showModal();
   };
 
-  const deleteFromLayout = (n: any) => {
-    let index = view.layout.findIndex((k: any) => k.i == n.id);
+  const deleteFromLayout = (neuronId: any) => {
+    let index = view.layout.findIndex((k: any) => k.i == neuronId);
     if (index !== -1) {
       let newLayout = view.layout.slice(0);
       newLayout.splice(index, 1);
@@ -199,8 +199,8 @@ const ViewBrain = ({ slug }: any) => {
                         editMode={editMode}
                         neuronId={neuron.i}
                         defaultForm={{}}
-                        deleteFromLayout={(neuron: any) =>
-                          deleteFromLayout(neuron)
+                        deleteFromLayout={(neuronId: any) =>
+                          deleteFromLayout(neuronId)
                         }
                       />
                     </div>

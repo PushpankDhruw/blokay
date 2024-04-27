@@ -8,7 +8,7 @@ import {
   AppButton,
   AppCheckbox,
 } from "@/app/components/DS/Index";
-import { updateNeuron } from "@/app/services/brain";
+import { updateNeuron, deleteNeuron } from "@/app/services/brain";
 
 const NeuronGeneral = ({ neuron, reload }: any) => {
   const modalDeleteRef: any = useRef();
@@ -42,6 +42,20 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
       },
     })
       .then((result) => {
+        reload && reload();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleDelete = (id: string) => {
+    setLoading(true);
+    deleteNeuron({
+      neuronId: neuron.id,
+    })
+      .then((result) => {
+        modalDeleteRef.current.hideModal();
         reload && reload();
       })
       .finally(() => {
@@ -206,10 +220,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
             />
             <AppButton
               text="Yes, delete"
-              onClick={() => {
-                modalDeleteRef.current.hideModal();
-                // deleteFromLayout(neuron);
-              }}
+              onClick={handleDelete}
               variant="primary"
               className="w-full"
               size="md"

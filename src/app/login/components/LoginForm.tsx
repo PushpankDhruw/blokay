@@ -69,10 +69,13 @@ export default function LoginForm() {
       </form>
 
       <div></div>
-      <div className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 mt-5">
-        <AppIcon icon="account" className="fill-stone-600 size-5" />
-        <div>Login with Google</div>
-      </div>
+
+      {process.env.GOOGLE_ID && (
+        <div className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 mt-5">
+          <AppIcon icon="account" className="fill-stone-600 size-5" />
+          <div>Login with Google</div>
+        </div>
+      )}
 
       <div className="text-stone-600 mt-5 font-light text-sm text-center">
         ¿Any problem to login?
