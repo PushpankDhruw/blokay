@@ -117,7 +117,7 @@ const ViewBrain = ({ slug }: any) => {
           />
         </div>
         <div className="lg:col-span-9 pb-10">
-          <div className="relative container mx-auto ">
+          <div className="relative  ">
             <Header view={view} save={saveView} />
 
             {!isMobile && isAdmin && (
@@ -157,7 +157,7 @@ const ViewBrain = ({ slug }: any) => {
             )}
 
             <div
-              className={`mt-10 ${editMode == "grid" ? "select-none" : ""}`}
+              className={`lg:mt-10 ${editMode == "grid" ? "select-none" : ""}`}
               ref={containerRef}
             >
               {containerWidth && (

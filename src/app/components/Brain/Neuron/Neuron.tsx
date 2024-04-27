@@ -124,7 +124,7 @@ const Neuron = ({
               (neuron.filters.autoExec == false ||
                 neuron.filters?.fields?.length > 0) && (
                 <div className="py-10 h-full flex items-center justify-center ">
-                  <div className=" lg:max-w-96 lg:min-w-96 bg-white shadow-md rounded-3xl px-5 pb-5 pt-10">
+                  <div className=" lg:max-w-96 lg:min-w-96 min-w-[90%] bg-white shadow-md rounded-3xl px-5 pb-5 pt-10">
                     <div className="flex items-center gap-3">
                       {onBack && (
                         <div
