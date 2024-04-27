@@ -1,4 +1,6 @@
 import { Sequelize } from "sequelize";
+import crypto from "crypto";
+
 const model = (sequelize: any, DataTypes: any) => {
   const Datasource = sequelize.define(
     "Datasource",
@@ -7,28 +9,42 @@ const model = (sequelize: any, DataTypes: any) => {
       type: { type: DataTypes.STRING, allowNull: true },
       name: { type: DataTypes.STRING, allowNull: true },
       businessId: { type: DataTypes.INTEGER, allowNull: true },
+      lastUseAt: { type: DataTypes.DATE, allowNull: true },
       config: {
         type: DataTypes.TEXT,
         allowNull: true,
         get() {
           let objThis: any = this;
 
-          let json = objThis.getDataValue("config");
-          json = json || "{}";
+          let encodedText = objThis.getDataValue("config");
           try {
+            const key: string = process.env.ENCRYPTION_KEY || "";
+            const algorithm = "aes256";
+            const decipher = crypto.createDecipher(algorithm, key);
+            const decrypted =
+              decipher.update(encodedText, "hex", "utf8") +
+              decipher.final("utf8");
+
+            let json: any = decrypted || "{}";
             return JSON.parse(json);
           } catch (err) {
-            console.error(
-              "neuron config error parse: " + objThis.getDataValue("id"),
-              err
-            );
-            return {};
+            let json: any = objThis.getDataValue("config") || "{}";
+            return JSON.parse(json);
           }
         },
         set(value: any) {
           let objThis: any = this;
 
-          objThis.setDataValue("config", JSON.stringify(value));
+          const key: string = process.env.ENCRYPTION_KEY || "";
+
+          const algorithm = "aes256";
+
+          const cipher = crypto.createCipher(algorithm, key);
+          const encrypted =
+            cipher.update(JSON.stringify(value), "utf8", "hex") +
+            cipher.final("hex");
+
+          objThis.setDataValue("config", encrypted);
         },
       },
 

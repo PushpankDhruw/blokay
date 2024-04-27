@@ -4,7 +4,7 @@ import Models from "@/db/index";
 import { getConnection } from "@/db/connection";
 let db = new Models();
 
-const { Neuron, User, Datasource }: any = db;
+const { Neuron, User, Datasource, NeuronExecution }: any = db;
 
 export const POST = async (req: any) => {
   const body = await req.json();
@@ -28,6 +28,17 @@ export const POST = async (req: any) => {
       businessId: user.businessId,
     },
   });
+  datasource.update({ lastUseAt: Date.now() });
+
+  const dataLog = {
+    userId: user.id,
+    dataSourceId: datasource.id,
+    neuronId: neuron.id,
+    businessId: user.businessId,
+    data: JSON.stringify(form),
+    finishAt: null,
+  };
+  let neuronLog = await NeuronExecution.create(dataLog);
 
   const args = {
     response: {},
@@ -143,9 +154,15 @@ export const POST = async (req: any) => {
   }
 */
 
+  let timeMs = Date.now() - d1;
   await neuron.update({
     executions: db.sequelize.literal(`executions + 1`),
-    timeMs: db.sequelize.literal(`timeMs + ${Date.now() - d1}`),
+    timeMs: db.sequelize.literal(`timeMs + ${timeMs}`),
+  });
+
+  await neuronLog.update({
+    timeMs,
+    finishAt: Date.now(),
   });
 
   return NextResponse.json({

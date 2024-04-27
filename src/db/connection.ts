@@ -27,8 +27,6 @@ export const getConnection = (db: any, datasource: any, profile: string) => {
             } else if (connections[dataSourceId].status == "created") {
               connections[dataSourceId].status = "connecting";
 
-              console.log("opened");
-
               const conn = new db.Sequelize({
                 ...datasource.config.database,
                 dialectModule: dialects.mysql2,
@@ -37,7 +35,7 @@ export const getConnection = (db: any, datasource: any, profile: string) => {
                 logging: (str: string, time: number) => {
                   if (time > 2000) {
                     db._QueryExecution.create({
-                      // name: "LowQuery",
+                      dataSourceId: datasource.id,
                       sql: str,
                       ms: time,
                       type: "alert_register",

@@ -1,39 +1,16 @@
 "use client";
 import { useState, useRef } from "react";
 import { AppInput, AppButton, AppModal } from "@/app/components/DS/Index";
-import { fetchLogin } from "@/app/services/users";
-import UpgradePlan from "@/app/components/UI/UpgradePlan";
+import Datasources from "./Datasources";
 
-export default function BillingView() {
+export default function SettingsView() {
   const modalRef: any = useRef();
   const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
 
-  const login = () => {
-    setLoading(true);
-    fetchLogin(form.username, form.password)
-      .then((result) => {
-        if (result.User) {
-          setForm({});
-          if (typeof window != "undefined") {
-            window.localStorage.setItem("token", result.User.token);
-            window.localStorage.setItem("user", JSON.stringify(result.User));
-            window.location.href = "/dashboard";
-          }
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   return (
     <div>
-      <UpgradePlan
-        onClick={() => {
-          modalRef.current.showModal();
-        }}
-      />
+      <Datasources />
 
       <AppModal
         title="Agregar tarjeta"
@@ -52,7 +29,7 @@ export default function BillingView() {
         ref={modalRef}
       >
         <div className="0">
-          <form action={login} className="flex flex-col gap-5">
+          <form className="flex flex-col gap-5">
             <AppInput
               type="text"
               value={form.creditCardNumber}
