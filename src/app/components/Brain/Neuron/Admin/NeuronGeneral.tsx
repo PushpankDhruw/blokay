@@ -78,7 +78,7 @@ const NeuronGeneral = ({ neuron, reload }: any) => {
         type="text"
         disabled={true}
         value={form.key}
-        label="Identificador"
+        label="ID"
         className="mb-3"
         onChange={(val: string) => {
           setForm({ ...form, description: val });

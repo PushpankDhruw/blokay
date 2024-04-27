@@ -13,8 +13,10 @@ import Menu from "@/app/components/Menu/Menu";
 import AddToView from "./AddToView";
 import Neuron from "../Neuron/Neuron";
 import NeuronAdmin from "../Neuron/Admin/NeuronAdmin";
+import { useScreenDetector } from "@/app/hooks/user-screen-detector";
 
 const ViewBrain = ({ slug }: any) => {
+  const { isMobile } = useScreenDetector();
   const isAdmin =
     typeof localStorage != "undefined"
       ? localStorage.getItem("rol") === "admin"
@@ -25,7 +27,9 @@ const ViewBrain = ({ slug }: any) => {
   const [neurons, setNeurons] = useState([]);
   const [containerWidth, setContainerWidth] = useState(null);
   const [neuron, setNeuron] = useState(null);
-  const [editMode, setEditMode] = useState(isAdmin ? "functions" : "");
+  const [editMode, setEditMode] = useState(
+    !isMobile && isAdmin ? "functions" : ""
+  );
 
   const fetchListNeurons = () => {
     brainList().then((l: any) => {
@@ -103,8 +107,8 @@ const ViewBrain = ({ slug }: any) => {
 
   return (
     <div className="container mx-auto pt-8">
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="lg:col-span-3">
           <Menu
             view={view}
             onClickNeuron={clickNeuron}
@@ -112,11 +116,11 @@ const ViewBrain = ({ slug }: any) => {
             neurons={neurons}
           />
         </div>
-        <div className="col-span-9 pb-10">
+        <div className="lg:col-span-9 pb-10">
           <div className="relative container mx-auto ">
             <Header view={view} save={saveView} />
 
-            {isAdmin && (
+            {!isMobile && isAdmin && (
               <div className="flex items-center justify-between gap-3 mt-10">
                 <AddToView
                   view={view}

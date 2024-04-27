@@ -89,24 +89,24 @@ const NeuronChat = ({ neuron, reload }: any) => {
           }}
         >
           <div className="text-sm">
-            Puedes solicitar directamente a nuestra inteligencia artificial que
-            construya los bloques por ti, esta es capaz de hacer conexiones con
-            bases de datos, editar valores, conectar APIS:
+            You can directly request our artificial intelligence to build the
+            blocks for you. It's capable of making connections with databases,
+            editing values, and connecting APIs.
           </div>
           <ul className="font-bold pl-5 mt-5 flex flex-col gap-3">
             <li className="flex gap-1 items-center">
               <AppIcon icon="right" className="size-5 fill-black" />
-              <div>Crear reporte de usuarios inactivos</div>
+              <div>Create a report of inactive users.</div>
             </li>
             <li className="flex gap-1 items-center">
               <AppIcon icon="right" className="size-5 fill-black" />
-              <div>Crear gráfica de ventas</div>
+              <div>Create a sales graph.</div>
             </li>
             <li className="flex gap-1 items-center">
               <AppIcon icon="right" className="size-5 fill-black" />
               <div>
-                Conecta el API de la pokedex de internet y muestra los
-                resultados en una tabla
+                Connect to the internet's Pokédex API and display the results in
+                a table.
               </div>
             </li>
           </ul>

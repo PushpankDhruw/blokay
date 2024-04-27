@@ -116,16 +116,16 @@ function ListViews({}) {
 
             <h2 className="text-stone-800 text-2xl mb-5 ">My views</h2>
 
-            <div className="flex flex-col  gap-5">
+            <div className="flex flex-col gap-3 lg:gap-5">
               {viewsComputed().map((view: any) => (
                 <div>
                   {view.name && <h2 className="mb-5 font-bold">{view.name}</h2>}
-                  <div className="flex flex-wrap items-center gap-5">
+                  <div className="flex flex-wrap items-center gap-3 lg:gap-5">
                     {view.Views.map((view: any) => (
                       <a
                         href={"/dashboard/view/" + view.slug}
                         key={view.id}
-                        className="bg-white shadow-sm border-2 border-transparent transition	 hover:border-stone-600 px-5 py-5 rounded-xl flex items-center gap-3 hover:bg-stone-50"
+                        className="bg-white shadow-sm border-2 border-transparent transition	 hover:border-stone-600 p-3 lg:p-5 rounded-xl flex items-center gap-3 hover:bg-stone-50"
                       >
                         {/* <AppIcon icon={view.icon} className="size-8" /> */}
                         <div className="font-light">{view.name}</div>

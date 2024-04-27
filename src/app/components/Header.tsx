@@ -51,7 +51,7 @@ export default function Header({ view, save }: any) {
         />
       </div>
 
-      <div className="flex gap-1 items-center select-none">
+      <div className="hidden lg:flex gap-1 items-center select-none ">
         {namesComputed().map((obj, index) => (
           <div
             key={"people-" + index}
