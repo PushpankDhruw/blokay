@@ -16,7 +16,6 @@ fi
 wget -qO- https://get.docker.com/ | sh
 
 # install docker componse
-
 if command -v docker-compose &> /dev/null ; then
     echo "docker-compose is already installed..."
     echo "skipping docker-compose installation..."
