@@ -2,12 +2,7 @@
 SET NAMES utf8mb4;
 
 
-# Dump of table _query_executions
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `_query_executions`;
-
-CREATE TABLE `_query_executions` (
+CREATE TABLE IF NOT EXISTS `_query_executions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `sql` text,
   `ms` int(10) unsigned DEFAULT NULL,
@@ -19,13 +14,7 @@ CREATE TABLE `_query_executions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table businesses
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `businesses`;
-
-CREATE TABLE `businesses` (
+CREATE TABLE IF NOT EXISTS `businesses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
@@ -38,13 +27,7 @@ CREATE TABLE `businesses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table datasources
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `datasources`;
-
-CREATE TABLE `datasources` (
+CREATE TABLE IF NOT EXISTS `datasources` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -58,13 +41,7 @@ CREATE TABLE `datasources` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table neuron_groups
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `neuron_groups`;
-
-CREATE TABLE `neuron_groups` (
+CREATE TABLE IF NOT EXISTS `neuron_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
@@ -74,13 +51,7 @@ CREATE TABLE `neuron_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table neurons
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `neurons`;
-
-CREATE TABLE `neurons` (
+CREATE TABLE IF NOT EXISTS `neurons` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parentId` int(11) unsigned DEFAULT NULL,
   `executions` int(11) unsigned DEFAULT '0',
@@ -100,13 +71,7 @@ CREATE TABLE `neurons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table sessions
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `sessions`;
-
-CREATE TABLE `sessions` (
+CREATE TABLE IF NOT EXISTS `sessions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `withExpiration` tinyint(4) DEFAULT '1',
   `userId` int(10) unsigned DEFAULT NULL,
@@ -128,13 +93,7 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table user_permissions
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_permissions`;
-
-CREATE TABLE `user_permissions` (
+CREATE TABLE IF NOT EXISTS `user_permissions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `viewId` int(11) unsigned DEFAULT NULL,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -145,13 +104,7 @@ CREATE TABLE `user_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table users
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
@@ -169,13 +122,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table view_groups
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `view_groups`;
-
-CREATE TABLE `view_groups` (
+CREATE TABLE IF NOT EXISTS `view_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `businessId` int(11) unsigned DEFAULT NULL,
@@ -186,13 +133,7 @@ CREATE TABLE `view_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Dump of table views
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `views`;
-
-CREATE TABLE `views` (
+CREATE TABLE IF NOT EXISTS `views` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `icon` varchar(100) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -206,3 +147,17 @@ CREATE TABLE `views` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE IF NOT EXISTS `neuron_executions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `timeMs` int(11) unsigned DEFAULT NULL,
+  `neuronId` int(11) unsigned DEFAULT NULL,
+  `userId` int(11) unsigned DEFAULT NULL,
+  `businessId` int(11) unsigned DEFAULT NULL,
+  `dataSourceId` int(11) unsigned DEFAULT NULL,
+  `data` text,
+  `finishAt` datetime DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
