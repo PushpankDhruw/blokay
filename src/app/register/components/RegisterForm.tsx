@@ -107,8 +107,15 @@ export default function RegisterForm() {
         />
 
         <div className="text-sm text-stone-500 font-light border-t border-stone-300 mt-3 pt-3">
-          By using Blokay, you are agreeing to our privacy policy and terms of
-          service.
+          By using Blokay, you are agreeing to our{" "}
+          <a
+            href="https://blokay.com/privacy"
+            className="underline "
+            target="_blank"
+          >
+            privacy policy
+          </a>{" "}
+          and terms of service.
         </div>
 
         <AppButton
