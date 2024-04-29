@@ -23,6 +23,7 @@ function AppData({
     form: {},
   };
   const modalRef: any = useRef();
+  const modalShowTextRef: any = useRef();
   const [sort, setSort]: any = useState(null);
   const [filters, setFilters] = useState({ search: "" });
   const [table, setVarTable]: any = useState({ data: [], header: [] });
@@ -30,6 +31,7 @@ function AppData({
   const [page, setPage] = useState(1);
   const [PER_PAGE, setPerPage] = useState(10);
   const [subneuron, setSubneuron] = useState(subneuronDefault);
+  const [textAll, setTextAll] = useState("");
 
   useEffect(() => {
     init();
@@ -198,6 +200,7 @@ function AppData({
   };
 
   const search = (toSearch = "") => {
+    setPage(1);
     toSearch = toSearch.toLowerCase();
     let arr = [];
     let content = data.data;
@@ -346,7 +349,28 @@ function AppData({
                                       </>
                                     )}
 
-                                    {typeof td != "object" && <>{td}</>}
+                                    {typeof td != "object" && (
+                                      <>
+                                        {td.length > 50 ? (
+                                          <div>
+                                            <div>
+                                              {("" + td).substring(0, 50)}...
+                                            </div>
+                                            <div
+                                              className="underline font-bold text-stone-600 text-xs cursor-pointer"
+                                              onClick={() => {
+                                                setTextAll(td);
+                                                modalShowTextRef.current.showModal();
+                                              }}
+                                            >
+                                              Show all
+                                            </div>
+                                          </div>
+                                        ) : (
+                                          td
+                                        )}
+                                      </>
+                                    )}
                                   </td>
                                 ))}
                               </tr>
@@ -398,11 +422,23 @@ function AppData({
                       <option value={50}>50</option>
                       <option value={100}>100</option>
                     </AppSelect>
+
+                    <div
+                      className="flex items-center bg-stone-200 hover:bg-stone-300 rounded-xl size-12 justify-center shrink-0 "
+                      onClick={() => {
+                        onReload && onReload();
+                      }}
+                    >
+                      <AppIcon
+                        icon="refresh"
+                        className="size-8 fill-stone-600"
+                      />
+                    </div>
                   </div>
                   <div className="flex ml-auto gap-2 items-center">
                     {page > 1 && (
                       <div
-                        className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-stone-50"
+                        className="size-8 p-1 cursor-pointer hover:bg-stone-300 rounded-full bg-stone-50"
                         onClick={() => {
                           setPage(page - 1);
                         }}
@@ -423,7 +459,7 @@ function AppData({
 
                     {page < pagesCount() && (
                       <div
-                        className="size-8 p-1 cursor-pointer hover:bg-slate-300 rounded-full bg-stone-50"
+                        className="size-8 p-1 cursor-pointer hover:bg-stone-300 rounded-full bg-stone-50"
                         onClick={() => {
                           setPage(page + 1);
                         }}
@@ -462,6 +498,12 @@ function AppData({
             }}
           />
         )}
+      </AppModal>
+
+      <AppModal size="lg" position="center" ref={modalShowTextRef}>
+        <div>
+          <pre>{textAll}</pre>
+        </div>
       </AppModal>
     </div>
   );
