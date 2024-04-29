@@ -371,7 +371,7 @@ function AppData({
                     )}
 
                     {!table.header?.length && !table.data?.length && (
-                      <div className="bg-gray-100 text-center py-10 text-2xl text-gray-700 rounded-2xl">
+                      <div className=" text-center py-10 text-2xl text-stone-700 ">
                         Sin resultados para mostrar
                       </div>
                     )}
@@ -445,24 +445,23 @@ function AppData({
       </div>
 
       <AppModal size="lg" position="center" ref={modalRef}>
-        {subneuron.neuronKey ||
-          (subneuron.neuronId && (
-            <Neuron
-              neuronId={subneuron.neuronId}
-              neuronKey={subneuron.neuronKey}
-              defaultForm={subneuron.form}
-              onExec={(result: any) => {
-                if (
-                  !result.type ||
-                  result.type == "error" ||
-                  result.type == "message"
-                ) {
-                  modalRef.current.hideModal();
-                  onReload && onReload();
-                }
-              }}
-            />
-          ))}
+        {(subneuron.neuronKey || subneuron.neuronId) && (
+          <Neuron
+            neuronId={subneuron.neuronId}
+            neuronKey={subneuron.neuronKey}
+            defaultForm={subneuron.form}
+            onExec={(result: any) => {
+              if (
+                !result.type ||
+                result.type == "error" ||
+                result.type == "message"
+              ) {
+                modalRef.current.hideModal();
+                onReload && onReload();
+              }
+            }}
+          />
+        )}
       </AppModal>
     </div>
   );

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
-import OpenAI from "@/app/services/openai";
-import { transpileModule } from "./ts-js";
+import CoreAPI from "@/app/services/core";
+import { transpileModule } from "../updateNeuron/ts-js";
 
 let db = new Models();
 const { Neuron, User, Datasource }: any = db;
@@ -12,7 +12,7 @@ export async function POST(req: any) {
 
   let user = await User.findByToken(body._token);
 
-  let openai = new OpenAI();
+  let coreApi = new CoreAPI();
 
   const datasource = await Datasource.findOne({
     where: {
@@ -33,20 +33,27 @@ export async function POST(req: any) {
     },
   });
 
-  let result = await openai.getFn(
+  let fields = neuron.filters?.fields || [];
+  // only send needed data Neuron
+  let neuronsList = neurons.map((n: any) => ({
+    id: n.id,
+    key: n.key,
+    description: n.description,
+  }));
+  let result = await coreApi.getFn(
     neuron.description,
     neuron.synapse,
     data.prompt || "",
-    neuron.filters?.fields || [],
-    datasource.structure,
-    neurons
+    fields,
+    datasource.structure, // We Only share the database metadata (never your credentials or data)
+    neuronsList
   );
 
-  let js = transpileModule(result);
+  let js = transpileModule(result.synapse);
 
   if (result) {
     let toUpdate: any = {
-      synapse: result,
+      synapse: result.synapse,
       executable: js.code,
       history: [
         ...neuron.history,
@@ -55,7 +62,7 @@ export async function POST(req: any) {
       ],
     };
     if (!neuron.description) {
-      toUpdate.description = await openai.descriptionFn(result);
+      toUpdate.description = result.description;
     }
     neuron = await neuron.update(toUpdate);
   }

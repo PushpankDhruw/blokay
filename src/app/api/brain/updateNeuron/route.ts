@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
-import { transpileModule } from "../rewriteFn/ts-js";
+import { transpileModule } from "./ts-js";
 let db = new Models();
 const { Neuron, User }: any = db;
 

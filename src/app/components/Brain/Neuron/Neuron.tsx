@@ -25,6 +25,7 @@ const Neuron = ({
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors]: any = useState({});
+  const [autoexecuted, setAutoxecuted]: any = useState(false);
 
   const getNeuron = ({ neuronId, neuronKey }: any) => {
     if (!neuronId && !neuronKey) return;
@@ -32,14 +33,16 @@ const Neuron = ({
     setLoading(true);
     brainGet({ neuronId, neuronKey })
       .then((result) => {
-        let autoExec = result.Neuron.filters.autoExec;
         let n = result.Neuron;
+        let autoExec =
+          (result.Neuron.filters.autoExec == undefined ||
+            result.Neuron.filters.autoExec) &&
+          !n.filters?.fields?.length;
+
+        setAutoxecuted(autoExec);
         setNeuron(n);
 
-        if (
-          (autoExec === undefined || autoExec) &&
-          !n.filters?.fields?.length
-        ) {
+        if (autoExec) {
           return execNeuron(n);
         } else {
           setLoading(false);
@@ -217,9 +220,13 @@ const Neuron = ({
                   execNeuron(neuron);
                 }}
                 autoExecuted={neuron.filters.autoExec}
-                onBack={() => {
-                  setResponse(null);
-                }}
+                onBack={
+                  !autoexecuted
+                    ? () => {
+                        setResponse(null);
+                      }
+                    : null
+                }
               />
             )}
           </div>
