@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
-import { fetchLogin } from "@/app/services/users";
+import { fetchLogin } from "@/app/services/auth";
 
 export default function LoginForm() {
   const [form, setForm]: any = useState({});
@@ -79,6 +79,19 @@ export default function LoginForm() {
 
       <div className="text-stone-600 mt-5 font-light text-sm text-center">
         ¿Any problem to login?
+      </div>
+
+      <div className=" mx-auto mt-10  ">
+        <a
+          href="/register"
+          className="border-stone-300 dark:border-stone-950 border-2 text-stone-700 px-5 py-3 rounded-2xl shadow-2xl shadow-stone-400 dark:shadow-black dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-950 flex items-center gap-5"
+        >
+          <AppIcon icon="account" className="size-10 fill-stone-500" />
+          <div>
+            <span className="font-bold">¿Need a new workspace? </span>
+            <div className="font-light text-sm">Sign up</div>
+          </div>
+        </a>
       </div>
     </div>
   );

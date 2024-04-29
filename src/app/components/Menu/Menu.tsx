@@ -69,6 +69,16 @@ export default function Menu({
                 <AppIcon icon="right" className="size-5 fill-stone-700" />
               </a>
             </li>
+
+            <li>
+              <a
+                className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
+                href="/logout"
+              >
+                <div>Logout</div>
+                <AppIcon icon="right" className="size-5 fill-stone-700" />
+              </a>
+            </li>
           </ul>
 
           <div className="lg:block hidden">

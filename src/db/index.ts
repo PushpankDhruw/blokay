@@ -8,6 +8,7 @@ import View from "./models/brain/view";
 import Session from "./models/user/session";
 import Datasource from "./models/brain/datasource";
 import ViewGroup from "./models/brain/view-group";
+import Business from "./models/user/business";
 import User from "./models/user/user";
 import UserPermission from "./models/user/user-permission";
 
@@ -23,6 +24,7 @@ class DB {
     View,
     ViewGroup,
     Session,
+    Business,
     User,
     UserPermission,
   };

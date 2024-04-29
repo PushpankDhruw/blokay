@@ -5,17 +5,6 @@ if (typeof window != "undefined") {
   token = window.localStorage.getItem("token");
 }
 
-export const fetchLogin = async function (username: string, password: string) {
-  let data = {
-    username,
-    password,
-  };
-
-  let result = await postRequest("users/login", data);
-
-  return result.data;
-};
-
 export const fetchUsers = async function () {
   let data = {};
 

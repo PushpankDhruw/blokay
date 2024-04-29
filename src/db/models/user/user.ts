@@ -146,6 +146,16 @@ export default (sequelize: any, DataTypes: any) => {
     let user = await User.findOne(queryBuilder);
     return user;
   };
+
+  User.findByUsername = async function (username: string) {
+    let queryBuilder = {
+      where: {
+        username,
+      },
+    };
+    let user = await User.findOne(queryBuilder);
+    return user;
+  };
   /**
    *Compare two passwords
    *@return if they correspond or not
