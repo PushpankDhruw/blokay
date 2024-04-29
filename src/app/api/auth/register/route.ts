@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
+import CoreAPI from "@/app/services/core";
 
 let db = new Models();
 const { User, Session, Business }: any = db;
 
 export async function POST(req: any) {
   const body = await req.json();
-
-  let { username, password, email, companyName, name } = body.data;
+  let coreApi = new CoreAPI("");
+  let { username, password, email, companyName, companySize, name } = body.data;
 
   const currentUser = await User.findByUsername(username);
   if (currentUser) {
@@ -18,9 +19,11 @@ export async function POST(req: any) {
     });
   }
 
+  let result = await coreApi.newBusiness(name, companyName, companySize, email);
+
   const business = await Business.create({
     name: companyName,
-    coreToken: "",
+    coreToken: result.coreToken,
   });
 
   const user = await User.create({

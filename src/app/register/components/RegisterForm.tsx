@@ -65,8 +65,8 @@ export default function RegisterForm() {
           <option value="me">Only me</option>
           <option value="1-5">1-5</option>
           <option value="6-20">6-20</option>
-          <option value="21-100">6-10</option>
-          <option value="101-1000">6-10</option>
+          <option value="21-100">21-100</option>
+          <option value="101-1000">101-1000</option>
           <option value="1001-infinite">1001-Infinite</option>
         </AppSelect>
 

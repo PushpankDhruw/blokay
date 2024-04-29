@@ -44,7 +44,7 @@ export default (sequelize: any, DataTypes: any) => {
   );
 
   User.associate = function (models: any) {
-    // models.User.belongsTo(models.Business);
+    models.User.belongsTo(models.Business);
     // models.User.belongsTo(models.Commerce);
     // models.User.belongsTo(models.Country);
     // models.User.belongsTo(models.Rol);

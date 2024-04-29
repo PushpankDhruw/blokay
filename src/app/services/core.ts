@@ -1,7 +1,11 @@
 import fetch from "node-fetch";
 
 export default class Core {
-  private secretKey = process.env.BLOKAY_API_KEY;
+  private secretKey = "";
+
+  constructor(coreToken: string) {
+    this.secretKey = coreToken;
+  }
 
   async fetchCore(path: string, data: any) {
     const endpoint = process.env.CORE_URL || "https://blokay.com";
@@ -44,6 +48,26 @@ export default class Core {
     return {
       description: result.description,
       synapse: result.synapse,
+    };
+  }
+
+  async newBusiness(
+    personName: string,
+    companyName: string,
+    companySize: string,
+    email: string
+  ) {
+    let result = await this.fetchCore("/api/core/newBusiness", {
+      personName,
+      companyName,
+      companySize,
+      email,
+    });
+
+    result = result.data.Result;
+
+    return {
+      coreToken: result.coreToken,
     };
   }
 }

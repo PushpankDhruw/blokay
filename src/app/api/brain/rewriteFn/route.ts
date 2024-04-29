@@ -11,8 +11,9 @@ export async function POST(req: any) {
   const data = body.data;
 
   let user = await User.findByToken(body._token);
+  let business = await user.getBusiness();
 
-  let coreApi = new CoreAPI();
+  let coreApi = new CoreAPI(business.coreToken);
 
   const datasource = await Datasource.findOne({
     where: {
