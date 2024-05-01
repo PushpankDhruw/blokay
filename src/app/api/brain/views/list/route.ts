@@ -2,14 +2,14 @@ import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { View, ViewGroup, User }: any = db;
+const { View, ViewGroup, User, UserPermission }: any = db;
 
 export async function POST(req: any) {
   const body = await req.json();
 
   let user = await User.findByToken(body._token);
 
-  const result = await View.findAll({
+  let queryBuilder = {
     include: [
       {
         model: ViewGroup,
@@ -19,7 +19,23 @@ export async function POST(req: any) {
     where: {
       businessId: user.businessId,
     },
-  });
+  };
+  let result = await View.findAll(queryBuilder);
+
+  if (user.rol !== "admin") {
+    let queryBuilderPermissions = {
+      where: {
+        userId: user.id,
+      },
+    };
+    const permissions = await UserPermission.findAll(queryBuilderPermissions);
+    const permissionsMap = permissions.reduce((acc: any, permission: any) => {
+      acc[permission.viewId] = permission;
+      return acc;
+    }, {});
+
+    result = result.filter((view: any) => permissionsMap[view.id]);
+  }
 
   const list = result.reduce((ac: any, n: any) => {
     if (!ac[n.viewGroupId]) {

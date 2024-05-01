@@ -118,7 +118,7 @@ const ViewBrain = ({ slug }: any) => {
         </div>
         <div className="lg:col-span-9 pb-10">
           <div className="relative  ">
-            <Header view={view} save={saveView} />
+            <Header view={view} save={saveView} isAdmin={isAdmin} />
 
             {!isMobile && isAdmin && (
               <div className="flex items-center justify-between gap-3 mt-10">

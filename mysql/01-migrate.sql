@@ -14,17 +14,18 @@ CREATE TABLE IF NOT EXISTS `_query_executions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS `businesses` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `website` varchar(100) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  `ownerId` int(11) unsigned DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
-  `deletedAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS⁠ businesses ⁠ (
+  ⁠ id ⁠ int(11) unsigned NOT NULL AUTO_INCREMENT,
+  ⁠ name ⁠ varchar(100) DEFAULT NULL,
+  ⁠ website ⁠ varchar(100) DEFAULT NULL,
+  ⁠ logo ⁠ varchar(255) DEFAULT NULL,
+  ⁠ ownerId ⁠ int(11) unsigned DEFAULT NULL,
+  ⁠ coreToken ⁠ varchar(255) DEFAULT NULL,
+  ⁠ createdAt ⁠ datetime DEFAULT NULL,
+  ⁠ updatedAt ⁠ datetime DEFAULT NULL,
+  ⁠ deletedAt ⁠ datetime DEFAULT NULL,
+  PRIMARY KEY (⁠ id ⁠)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS `datasources` (
@@ -34,11 +35,12 @@ CREATE TABLE IF NOT EXISTS `datasources` (
   `businessId` int(11) unsigned DEFAULT NULL,
   `config` text,
   `structure` longtext,
+  `lastUseAt` datetime DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS `neuron_groups` (

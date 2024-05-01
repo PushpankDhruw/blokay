@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AppIcon, AppModal, AppButton } from "@/app/components/DS/Index";
 
-export default function Header({ view, save }: any) {
+export default function Header({ view, save, isAdmin }: any) {
   const modalRef: any = useRef();
   const [title, setTitle] = useState("Untitled view");
 
@@ -41,14 +41,17 @@ export default function Header({ view, save }: any) {
         </a>
         {view?.icon && <AppIcon icon={view.icon} className="size-6" />}
 
-        <input
-          className="text-stone-800 text-2xl bg-transparent focus:outline-none"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-            save({ name: e.target.value });
-          }}
-        />
+        {isAdmin && (
+          <input
+            className="text-stone-800 text-2xl bg-transparent focus:outline-none"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              save({ name: e.target.value });
+            }}
+          />
+        )}
+        {!isAdmin && <h2 className="text-2xl text-stone-800">{title}</h2>}
       </div>
 
       <div className="hidden lg:flex gap-1 items-center select-none ">

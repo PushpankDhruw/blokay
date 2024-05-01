@@ -9,6 +9,10 @@ export default function Menu({
   editMode = null,
   neurons = [],
 }: any) {
+  const isAdmin =
+    typeof localStorage != "undefined"
+      ? localStorage.getItem("rol") === "admin"
+      : null;
   const [search, setSearch] = useState("");
 
   return (
@@ -60,15 +64,18 @@ export default function Menu({
                 <AppIcon icon="right" className="size-5 fill-stone-700" />
               </a>
             </li>
-            <li>
-              <a
-                className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
-                href="/dashboard/settings"
-              >
-                <div>Settings</div>
-                <AppIcon icon="right" className="size-5 fill-stone-700" />
-              </a>
-            </li>
+
+            {isAdmin && (
+              <li>
+                <a
+                  className="py-1 text-sm hover:bg-stone-100 rounded-lg px-1.5 flex justify-between items-center"
+                  href="/dashboard/settings"
+                >
+                  <div>Settings</div>
+                  <AppIcon icon="right" className="size-5 fill-stone-700" />
+                </a>
+              </li>
+            )}
 
             <li>
               <a
