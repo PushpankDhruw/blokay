@@ -136,10 +136,10 @@ export default function Users() {
       )}
 
       <AppModal
-        title="Asignar permisos"
+        title="Assign permissions"
         footer={
           <AppButton
-            text="Guardar"
+            text="Save"
             onClick={() =>
               form.id
                 ? handleClickSubmitUpdateUser()
@@ -170,13 +170,13 @@ export default function Users() {
             >
               <option value="admin">Admin</option>
               <option value="editor">Editor</option>
-              <option value="user">Usuario</option>
+              <option value="user">User</option>
             </AppSelect>
 
             <AppInput
               type="text"
               value={form.name}
-              label="Nombre"
+              label="Name"
               onChange={(val: string) => {
                 setForm({ ...form, name: val });
               }}
@@ -186,17 +186,17 @@ export default function Users() {
               <>
                 <AppInput
                   type="text"
-                  value={form.username}
-                  label="Usuario"
+                  value={form.email}
+                  label="Email"
                   onChange={(val: string) => {
-                    setForm({ ...form, username: val });
+                    setForm({ ...form, email: val });
                   }}
                 />
 
                 <AppInput
                   type="password"
                   value={form.password}
-                  label="Contraseña"
+                  label="Password"
                   onChange={(val: string) => {
                     setForm({ ...form, password: val });
                   }}

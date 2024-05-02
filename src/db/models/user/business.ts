@@ -22,5 +22,9 @@ export default (sequelize: any, DataTypes: any) => {
     });
   };
 
+  Business.findById = async function (id: string) {
+    return await Business.findByPk(id);
+  };
+
   return Business;
 };

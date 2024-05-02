@@ -11,7 +11,7 @@ export const POST = withUser(async function ({ user, req }: any) {
 
   const userCreated = await User.create({
     id: body.data.userId,
-    username: body.data.username,
+    email: body.data.email,
     password: body.data.password,
     name: body.data.name,
     rol: body.data.rol,

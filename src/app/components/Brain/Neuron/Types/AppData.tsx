@@ -100,7 +100,7 @@ function AppData({
         return col;
       });
     });
-    return [originalTable.header, ...data];
+    return [table.header, ...data];
   };
 
   const generateCSV = () => {
@@ -110,7 +110,7 @@ function AppData({
       let row = rowArray.join(",");
       csvContent += row + "\r\n";
     });
-    download(csvContent, "Descarga.csv");
+    download(csvContent, `${encodeURIComponent(neuronName)}.csv`);
   };
 
   const tableContent = () => {

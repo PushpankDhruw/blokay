@@ -11,7 +11,7 @@ export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
   const data = body.data;
 
-  let business = await Business.getById(user.businessId);
+  let business = await Business.findById(user.businessId);
 
   let coreApi = new CoreAPI(business.coreToken);
 
