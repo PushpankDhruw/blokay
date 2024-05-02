@@ -12,14 +12,32 @@ export default function LoginForm() {
   const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
 
-  const login = async () => {
-    await signIn("credentials", {
+  const login = () => {
+    setLoading(true);
+    signIn("credentials", {
       redirect: false,
       email: form.email,
       password: form.password,
     })
-      .then((response) => {
-        router.replace("/dashboard");
+      .then((response: any) => {
+        if (response.ok) {
+          setLoading(false);
+          router.replace("/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loginThird = (third: string) => {
+    setLoading(true);
+    signIn(third)
+      .then((response: any) => {
+        setLoading(false);
+        if (response.ok) {
+          router.replace("/dashboard");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -72,7 +90,7 @@ export default function LoginForm() {
           <div
             className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 "
             onClick={() => {
-              signIn("google");
+              loginThird("google");
             }}
           >
             <AppIcon icon="google" className="fill-stone-600 size-5" />
@@ -84,7 +102,7 @@ export default function LoginForm() {
           <div
             className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 "
             onClick={() => {
-              signIn("github");
+              loginThird("github");
             }}
           >
             <AppIcon icon="github" className="fill-stone-600 size-5" />
