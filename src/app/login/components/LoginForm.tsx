@@ -2,16 +2,29 @@
 import { useState } from "react";
 import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
 // import { fetchLogin } from "@/app/services/auth";
-import { useFormState, useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function LoginForm() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
-  // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-  const { pending } = useFormStatus();
+
+  const login = async () => {
+    await signIn("credentials", {
+      redirect: false,
+      email: form.email,
+      password: form.password,
+    })
+      .then((response) => {
+        router.replace("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="w-96 ">
@@ -20,16 +33,26 @@ export default function LoginForm() {
         <img src="/logo.svg" className="h-10 mb-10 mx-auto" />
       </a>
 
-      <form className="flex flex-col gap-5">
-        {/* {errorMessage && (
-          <>
-            <p className="text-sm text-red-500">{errorMessage}</p>
-          </>
-        )} */}
+      <form action={login} className="flex flex-col gap-5">
+        <AppInput
+          type="text"
+          label="Email"
+          name="email"
+          value={form.email}
+          onChange={(val: string) => {
+            setForm({ ...form, email: val });
+          }}
+        />
 
-        <AppInput type="text" label="Username" name="username" />
-
-        <AppInput type="password" name="password" label="Password" />
+        <AppInput
+          type="password"
+          name="password"
+          label="Password"
+          value={form.password}
+          onChange={(val: string) => {
+            setForm({ ...form, password: val });
+          }}
+        />
 
         <AppButton
           text="Sign in"
@@ -39,7 +62,6 @@ export default function LoginForm() {
           className="w-full"
           size="lg"
           loading={loading}
-          disabled={pending}
         />
       </form>
 
