@@ -1,19 +1,18 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import fetch from "node-fetch";
 import Models from "@/db/index";
 import { getConnection } from "@/db/connection";
 let db = new Models();
 
-const { Neuron, User, Datasource, NeuronExecution }: any = db;
+const { Neuron, Datasource, NeuronExecution }: any = db;
 
-export const POST = async (req: any) => {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
 
   let { neuronId, format, form } = body.data;
 
   let d1 = Date.now();
-
-  let user = await User.findByToken(body._token);
 
   const neuron = await Neuron.findOne({
     where: {
@@ -171,4 +170,4 @@ export const POST = async (req: any) => {
       htmlHeader: responseNeuron.htmlHeader,
     },
   });
-};
+});

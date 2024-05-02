@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
-
+import { withUser } from "@/lib/withUser";
 let db = new Models();
-const { View, ViewGroup, User, UserPermission }: any = db;
+const { View, ViewGroup, UserPermission }: any = db;
 
-export async function POST(req: any) {
-  const body = await req.json();
-
-  let user = await User.findByToken(body._token);
-
+export const POST = withUser(async function ({ req, user }: any) {
   let queryBuilder = {
     include: [
       {
@@ -60,4 +56,4 @@ export async function POST(req: any) {
       Views: Object.values(list),
     },
   });
-}
+});

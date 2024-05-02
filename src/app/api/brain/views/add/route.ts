@@ -1,14 +1,14 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { View, User }: any = db;
+const { View }: any = db;
 
 function string_to_slug(str: string) {
   str = str.replace(/^\s+|\s+$/g, ""); // trim
   str = str.toLowerCase();
 
-  // remove accents, swap ñ for n, etc
   var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
   var to = "aaaaeeeeiiiioooouuuunc------";
   for (var i = 0, l = from.length; i < l; i++) {
@@ -23,11 +23,9 @@ function string_to_slug(str: string) {
   return str;
 }
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
   const data = body.data;
-
-  let user = await User.findByToken(body._token);
 
   let view = await View.create({
     businessId: user.businessId,
@@ -41,4 +39,4 @@ export async function POST(req: any) {
       id: view.id,
     },
   });
-}
+});

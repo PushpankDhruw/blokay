@@ -1,8 +1,9 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { Neuron, User }: any = db;
+const { Neuron }: any = db;
 
 function stringtoKey(str: string) {
   str = str.replace(/^\s+|\s+$/g, ""); // trim
@@ -20,11 +21,9 @@ function stringtoKey(str: string) {
   return str;
 }
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
   const data = body.data;
-
-  let user = await User.findByToken(body._token);
 
   let neuron = await Neuron.create({
     businessId: user.businessId,
@@ -42,4 +41,4 @@ export async function POST(req: any) {
       },
     },
   });
-}
+});

@@ -1,17 +1,17 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 import CoreAPI from "@/app/services/core";
 import { transpileModule } from "../updateNeuron/ts-js";
 
 let db = new Models();
-const { Neuron, User, Datasource }: any = db;
+const { Neuron, Datasource, Business }: any = db;
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
   const data = body.data;
 
-  let user = await User.findByToken(body._token);
-  let business = await user.getBusiness();
+  let business = await Business.getById(user.businessId);
 
   let coreApi = new CoreAPI(business.coreToken);
 
@@ -75,4 +75,4 @@ export async function POST(req: any) {
       },
     },
   });
-}
+});

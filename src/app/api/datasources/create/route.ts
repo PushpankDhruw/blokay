@@ -1,12 +1,12 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
 const { User, Datasource }: any = db;
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
-  let user = await User.findByToken(body._token);
 
   await Datasource.create({
     type: body.data.type,
@@ -20,4 +20,4 @@ export async function POST(req: any) {
   return NextResponse.json({
     data: {},
   });
-}
+});

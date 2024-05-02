@@ -1,14 +1,13 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
 const { User, UserPermission, View }: any = db;
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ user, req }: any) {
   const body = await req.json();
   let permissions = body.data.permissions;
-
-  let user = await User.findByToken(body._token);
 
   const userToEdit = await User.findOne({
     where: {
@@ -52,4 +51,4 @@ export async function POST(req: any) {
   return NextResponse.json({
     data: {},
   });
-}
+});

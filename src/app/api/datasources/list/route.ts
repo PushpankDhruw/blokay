@@ -1,13 +1,11 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
-const { User, Datasource }: any = db;
+const { Datasource }: any = db;
 
-export async function POST(req: any) {
-  const body = await req.json();
-  let user = await User.findByToken(body._token);
-
+export const POST = withUser(async function ({ user }: any) {
   const result = await Datasource.findAll({
     where: {
       businessId: user.businessId,
@@ -27,4 +25,4 @@ export async function POST(req: any) {
       Datasource: list,
     },
   });
-}
+});

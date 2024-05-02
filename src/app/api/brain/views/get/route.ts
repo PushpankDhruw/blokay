@@ -1,14 +1,13 @@
+import { withUser } from "@/lib/withUser";
 import { NextResponse } from "next/server";
 import Models from "@/db/index";
 
 let db = new Models();
 
-const { View, User }: any = db;
+const { View }: any = db;
 
-export async function POST(req: any) {
+export const POST = withUser(async function ({ req, user }: any) {
   const body = await req.json();
-
-  let user = await User.findByToken(body._token);
 
   let { slug } = body.data;
 
@@ -30,4 +29,4 @@ export async function POST(req: any) {
       },
     },
   });
-}
+});
