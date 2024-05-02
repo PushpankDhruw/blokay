@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
@@ -11,41 +11,28 @@ export default function LoginForm() {
   const [form, setForm]: any = useState({});
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/dashboard");
+    }
+  }, [session]);
+
   const login = () => {
     setLoading(true);
     signIn("credentials", {
-      redirect: false,
+      callbackUrl: "/dashboard",
       email: form.email,
       password: form.password,
-    })
-      .then((response: any) => {
-        if (response.ok) {
-          setLoading(false);
-          router.replace("/dashboard");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    });
   };
 
   const loginThird = (third: string) => {
     setLoading(true);
-    signIn(third)
-      .then((response: any) => {
-        setLoading(false);
-        if (response.ok) {
-          router.replace("/dashboard");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    signIn(third, { callbackUrl: "/dashboard" });
   };
 
   return (
     <div className="w-96 ">
-      {JSON.stringify(session)}
       <a href="/">
         <img src="/logo.svg" className="h-10 mb-10 mx-auto" />
       </a>

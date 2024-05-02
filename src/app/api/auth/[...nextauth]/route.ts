@@ -46,14 +46,12 @@ export const authOptions: any = {
         return null;
       }
       return {
-        session: {
-          user: {
-            id: userData.id,
-            businessId: userData.businessId,
-            name: userData.name,
-            email: userData.email,
-            rol: userData.rol,
-          },
+        user: {
+          id: userData.id,
+          businessId: userData.businessId,
+          name: userData.name,
+          email: userData.email,
+          rol: userData.rol,
         },
       };
     },
