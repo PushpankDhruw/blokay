@@ -72,7 +72,7 @@ export default function LoginForm() {
       <div></div>
 
       <div className="mt-5 flex flex-col gap-3">
-        {(true || process.env.GOOGLE_ID) && (
+        {process.env.NEXT_PUBLIC_GOOGLE_LOGIN && (
           <div
             className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 "
             onClick={() => {
@@ -84,7 +84,7 @@ export default function LoginForm() {
           </div>
         )}
 
-        {(true || process.env.GITHUB_ID) && (
+        {process.env.NEXT_PUBLIC_GITHUB_LOGIN && (
           <div
             className="border-2 border-stone-300 rounded-lg flex gap-3 items-center text-stone-600 px-3 py-2 font-light hover:bg-stone-300 "
             onClick={() => {
