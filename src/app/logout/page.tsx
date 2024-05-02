@@ -1,7 +1,10 @@
 "use client";
+import { signOut } from "next-auth/react";
+
 export default async function LogoutPage({}) {
-  if (typeof window !== "undefined") {
-    window.localStorage.removeItem("token");
-    window.location.href = "/login";
-  }
+  const logout = () => {
+    signOut({ callbackUrl: "/login" });
+  };
+
+  logout();
 }

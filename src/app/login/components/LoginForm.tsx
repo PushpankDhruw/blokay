@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import { AppInput, AppButton, AppIcon } from "@/app/components/DS/Index";
-// import { fetchLogin } from "@/app/services/auth";
 import { useRouter } from "next/navigation";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 export default function LoginForm() {
   const { data: session } = useSession();
